@@ -139,19 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="date.cpp" />
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="member.cpp" />
-    <ClCompile Include="page.cpp" />
-    <ClCompile Include="status.cpp" />
-    <ClCompile Include="time.cpp" />
+    <ClCompile Include="Member.cpp" />
+    <ClCompile Include="Page.cpp" />
+    <ClCompile Include="Status.cpp" />
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="date.h" />
-    <ClInclude Include="member.h" />
-    <ClInclude Include="page.h" />
-    <ClInclude Include="status.h" />
-    <ClInclude Include="time.h" />
+    <ClInclude Include="Date.h" />
+    <ClInclude Include="Member.h" />
+    <ClInclude Include="Page.h" />
+    <ClInclude Include="Status.h" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

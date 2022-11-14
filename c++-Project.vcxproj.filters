@@ -18,36 +18,36 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="member.cpp">
+    <ClCompile Include="Member.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="status.cpp">
+    <ClCompile Include="Status.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="date.cpp">
+    <ClCompile Include="Date.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="time.cpp">
+    <ClCompile Include="Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="page.cpp">
+    <ClCompile Include="Page.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="member.h">
+    <ClInclude Include="Member.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="status.h">
+    <ClInclude Include="Status.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="date.h">
+    <ClInclude Include="Date.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="time.h">
+    <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="page.h">
+    <ClInclude Include="Page.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
