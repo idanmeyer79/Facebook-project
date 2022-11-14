@@ -1,5 +1,8 @@
-#ifndef __DATE_H
-#define __DATE_H
+#include <iostream>
+using namespace std;
+
+#ifndef __DATE_H__
+#define __DATE_H__
 
 class Date
 {
@@ -12,9 +15,16 @@ public:
 	void show() const;
 };
 
-Date::Date(int d, int m, int y) {
+Date::Date(int d, int m, int y)
+{
 	day = d;
-
+	month = m;
+	year = y;
 }
 
-#endif __DATE_H
+void Date::show() const
+{
+	cout << day << "/" << month << "/" << year << " ";
+}
+
+#endif __DATE_H__
