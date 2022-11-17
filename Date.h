@@ -15,16 +15,6 @@ public:
 	void show() const;
 };
 
-Date::Date(int d, int m, int y)
-{
-	day = d;
-	month = m;
-	year = y;
-}
 
-void Date::show() const
-{
-	cout << day << "/" << month << "/" << year << " ";
-}
 
 #endif __DATE_H__
