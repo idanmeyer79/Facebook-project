@@ -3,6 +3,9 @@
 #include"member.h"
 #include"status.h"
 #include"Date.h"
+
+static int NumOfMembers = 0;
+
 class Member
 {
 private:
