@@ -14,7 +14,8 @@ public:
 
 Date::Date(int d, int m, int y) {
 	day = d;
-
+	month = m;
+	year = y;
 }
 
 #endif __DATE_H
