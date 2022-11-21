@@ -1,18 +1,18 @@
 #include "page.h"
 
 
-page::page(char* name) : name(name)
+FanPage::FanPage(char* name) : name(name)
 {
 	
 }
 
-bool page::setName(char* name) 
+bool FanPage::setName(char* name) 
 {
 	this->name = name;
 	return true;
 }
 
-void page::addFan(Member* fan)
+void FanPage::addFan(Member* fan)
 {
 	Member** res = new Member * [numOfFans + 1];
 
@@ -28,7 +28,7 @@ void page::addFan(Member* fan)
 	delete[]res;
 }
 
-void page::removeFan(Member* fan)
+void FanPage::removeFan(Member* fan)
 {
 	Member** res = new Member * [numOfFans-1];
 	for (int i = 0; i < numOfFans; i++)
@@ -49,7 +49,7 @@ void page::removeFan(Member* fan)
 	numOfFans--;
 }
 
-void page::printFans()
+void FanPage::printFans()
 {
 	for (int i = 0; i < numOfFans; i++)
 	{
@@ -57,7 +57,7 @@ void page::printFans()
 	}
 }
 
-void page::printAllStatuses()
+void FanPage::printAllStatuses()
 {
 	for (int i = 0; i < numOfStatuses; i++)
 	{
@@ -65,7 +65,7 @@ void page::printAllStatuses()
 	}
 }
 
-void page::addStatus(char* text)
+void FanPage::addStatus(char* text)
 {
 	status** res = new status * [numOfStatuses + 1];
 	status* newStatus = new status(text);

@@ -4,7 +4,7 @@
 #include"status.h"
 
 
-class page
+class FanPage
 {
 private:
 	char* name;
@@ -15,7 +15,7 @@ private:
 
 
 public:
-	page(char* name);
+	FanPage(char* name);
 	bool setName(char* name);
 	char* getName() { return name; }
 	void addFan(Member* fan);

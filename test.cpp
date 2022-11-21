@@ -31,7 +31,7 @@ int main()
 	avi.setName("avi");
 	yosi.setName("yosi");
 	dani.setName("dani");
-	page test(strptr);
+	FanPage test(strptr);
 
 	cout<<test.getName()<<endl;
 	
@@ -48,8 +48,8 @@ int main()
 	test.addStatus(strptr);
 	test.printAllStatuses();
 
-	page page1(str1);
-	page page2(str2);
+	FanPage page1(str1);
+	FanPage page2(str2);
 
 	Pages.addPage(page1);
 

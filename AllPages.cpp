@@ -1,8 +1,8 @@
 #include "AllPages.h"
 
-void AllPages::addPage(page& p)
+void AllPages::addPage(FanPage& p)
 {
-	page** tmp = new page * [numOfPages + 1];
+	FanPage** tmp = new FanPage * [numOfPages + 1];
 
 	for (int i = 0; i < numOfPages; i++)
 		tmp[i] = allPages[i];

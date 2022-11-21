@@ -6,7 +6,7 @@
 class AllPages
 {
 private:
-	page** allPages;
+	FanPage** allPages;
 	int numOfPages=0;
 
 public:
