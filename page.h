@@ -2,19 +2,19 @@
 #define __PAGE_H__
 #include"member.h"
 #include"status.h"
-class page
+class FanPage
 {
 private:
-	char* name;
+	char* pageName;
 	Member* fans;
-	status* statuses;
+	Status* statuses;
 	int numOfStatuses = 0;
 	int numOfFans = 0;
 
 
 public:
 	bool setName();
-	char* getName() { return name; }
+	char* getName() { return pageName; }
 	void addFan(Member fan);
 	void printFans();
 	void removeFan(Member fan);

@@ -15,6 +15,9 @@ public:
 	void show() const;
 };
 
+Date::Date(int d, int m, int y) {
+	day = d;
 
+}
 
 #endif __DATE_H__

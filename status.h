@@ -5,7 +5,7 @@
 #pragma warning(disable: 4996)
 using namespace std;
 
-class status
+class Status
 {
 private:
 	char* text;
