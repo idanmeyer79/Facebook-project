@@ -1,5 +1,8 @@
-#ifndef __DATE_H
-#define __DATE_H
+#include <iostream>
+using namespace std;
+
+#ifndef __DATE_H__
+#define __DATE_H__
 
 class Date
 {
@@ -14,8 +17,7 @@ public:
 
 Date::Date(int d, int m, int y) {
 	day = d;
-	month = m;
-	year = y;
+
 }
 
-#endif __DATE_H
+#endif __DATE_H__
