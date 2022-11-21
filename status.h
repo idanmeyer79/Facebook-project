@@ -14,6 +14,7 @@ private:
 public:
 	status(char* text);
 	status();
+	~status();
 	void printStatus();
 
 };

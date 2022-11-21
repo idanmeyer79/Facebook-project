@@ -8,8 +8,8 @@ static int NumOfMembers = 0;
 
 class Member
 {
-private:
-	char* name;
+public: //for test
+	char name[20];
 	Date dateOfBirth;
 	Member* friends;
 	status* statuses;
@@ -18,8 +18,8 @@ private:
 
 
 public:
-	Member(char* name, Date dateOfBirth);
-	bool setName();
+	Member() {}
+	void setName(const char* username) { strcpy(name, username); }
 	char* getName() { return name; }
 	void addFriend(Member Friend);
 	void printFriends();
