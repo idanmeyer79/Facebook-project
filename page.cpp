@@ -3,7 +3,13 @@
 
 page::page(char* name) : name(name)
 {
-	numOfPages++;
+	
+}
+
+bool page::setName(char* name) 
+{
+	this->name = name;
+	return true;
 }
 
 void page::addFan(Member* fan)
@@ -57,4 +63,21 @@ void page::printAllStatuses()
 	{
 		statuses[i]->printStatus();
 	}
+}
+
+void page::addStatus(char* text)
+{
+	status** res = new status * [numOfStatuses + 1];
+	status* newStatus = new status(text);
+
+	for (int i = 0; i < numOfStatuses; i++)
+	{
+		res[i] = statuses[i];
+	}
+
+	res[numOfStatuses] = newStatus;
+	statuses = res;
+	numOfStatuses++;
+	res = nullptr;
+	delete[]res;
 }

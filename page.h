@@ -3,7 +3,6 @@
 #include"member.h"
 #include"status.h"
 
-static int numOfPages = 0;
 
 class page
 {
@@ -17,13 +16,13 @@ private:
 
 public:
 	page(char* name);
-	bool setName();
+	bool setName(char* name);
 	char* getName() { return name; }
 	void addFan(Member* fan);
 	void printFans();
 	void removeFan(Member* fan);
 	void printAllStatuses();
-	void addStatus();
+	void addStatus(char* text);
 
 
 };
