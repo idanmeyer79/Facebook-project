@@ -12,9 +12,9 @@ private:
 	char* date_and_time;
 
 public:
-	status(char* text);
-	status();
-	~status();
+	Status(char* text);
+	Status();
+	~Status();
 	void printStatus();
 
 };

@@ -1,14 +1,15 @@
 #include "page.h"
 
 
-FanPage::FanPage(char* name) : name(name)
+
+FanPage::FanPage(char* name) : pageName(name)
 {
 	
 }
 
 bool FanPage::setName(char* name) 
 {
-	this->name = name;
+	this->pageName = name;
 	return true;
 }
 
@@ -67,8 +68,8 @@ void FanPage::printAllStatuses()
 
 void FanPage::addStatus(char* text)
 {
-	status** res = new status * [numOfStatuses + 1];
-	status* newStatus = new status(text);
+	Status** res = new Status * [numOfStatuses + 1];
+	Status* newStatus = new Status(text);
 
 	for (int i = 0; i < numOfStatuses; i++)
 	{

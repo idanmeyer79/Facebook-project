@@ -4,6 +4,8 @@ using namespace std;
 #ifndef __DATE_H__
 #define __DATE_H__
 
+bool checkdate(int m, int d, int y);
+
 class Date
 {
 private: 
@@ -11,13 +13,8 @@ private:
 
 public:
 	Date(int d=1, int m=1, int y=1970);
-
+	bool setDate(int d, int m, int y);
 	void show() const;
 };
-
-Date::Date(int d, int m, int y) {
-	day = d;
-
-}
 
 #endif __DATE_H__

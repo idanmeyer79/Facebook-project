@@ -1,6 +1,6 @@
 #include "status.h"
 
-status::status(char* text) // c'tor with text
+Status::Status(char* text) // c'tor with text
 {
 	time_t curr_time;
 	curr_time = time(NULL);
@@ -8,7 +8,7 @@ status::status(char* text) // c'tor with text
 	this->text = text;
 }
 
-status::status() //default c'tor
+Status::Status() //default c'tor
 {
 	time_t curr_time;
 	curr_time = time(NULL);
@@ -16,12 +16,12 @@ status::status() //default c'tor
 	this->text = nullptr;
 }
 
-status::~status() //d'tor
+Status::~Status() //d'tor
 {
 	delete[]text;
 }
 
-void status::printStatus()
+void Status::printStatus()
 {
 	cout << date_and_time << text<<endl;
 }

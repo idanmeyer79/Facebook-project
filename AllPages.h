@@ -10,7 +10,7 @@ private:
 	int numOfPages=0;
 
 public:
-	void addPage(page& p);
+	void addPage(FanPage& p);
 	void printAllPages();
 
 };

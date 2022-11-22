@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AllMembers.cpp" />
     <ClCompile Include="AllPages.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllMembers.h" />
     <ClInclude Include="AllPages.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Member.h" />

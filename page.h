@@ -6,14 +6,15 @@ class FanPage
 {
 private:
 	char* pageName;
-	Member* fans;
-	Status* statuses;
+	Member** fans;
+	Status** statuses;
 	int numOfStatuses = 0;
 	int numOfFans = 0;
 
 
 public:
-	bool setName();
+	FanPage(char* name);
+	bool setName(char* name);
 	char* getName() { return pageName; }
 	void addFan(Member* fan);
 	void printFans();

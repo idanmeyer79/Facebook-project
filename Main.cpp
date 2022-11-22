@@ -1,4 +1,6 @@
 #include <iostream>
+#include"AllPages.h"
+#include"date.h"
 #pragma warning(disable: 4996)
 using namespace std;
 
@@ -67,12 +69,14 @@ int main()
 void createMember()
 {
 	Date date;
+	int day, month, year;
+	char slash_dummy;
 	char* name = new char[20];
 
 	cout << "Please enter a name - max 20 letters" << endl;
 	cin >> name;
 	cout << "Please enter date of birth" << endl;
-	cin >> date;
+	cin >> day >> slash_dummy >> month >> slash_dummy >> year;
 
 	
 }
