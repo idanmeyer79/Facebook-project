@@ -15,10 +15,11 @@ private:
 public:
 	bool setName();
 	char* getName() { return pageName; }
-	void addFan(Member fan);
+	void addFan(Member* fan);
 	void printFans();
-	void removeFan(Member fan);
+	void removeFan(Member* fan);
 	void printAllStatuses();
+	void addStatus(char* text);
 
 
 };

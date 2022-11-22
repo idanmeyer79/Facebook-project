@@ -10,7 +10,7 @@ private:
 	int day, month, year;
 
 public:
-	Date(int d, int m, int y);
+	Date(int d=1, int m=1, int y=1970);
 
 	void show() const;
 };

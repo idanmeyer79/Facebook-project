@@ -139,14 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AllPages.cpp" />
     <ClCompile Include="Date.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllPages.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Member.h" />
     <ClInclude Include="Page.h" />
