@@ -16,11 +16,31 @@ void AllMembers::addMember(Member& m)
 
 }
 
-
 void AllMembers::printAllMembers()
 {
 	for (int i = 0; i < numOfMembers; i++)
 	{
 		cout << allMembers[i]->getName() << endl;
+	}
+}
+
+Member* AllMembers::findMember(char* name)
+{
+	Member* theFoundMember = nullptr;
+
+	while (theFoundMember == nullptr) {
+		for (int i = 0; i < numOfMembers; i++)
+		{
+			if (!strcmp(allMembers[i]->getName(), name))
+				{
+					theFoundMember = allMembers[i];
+					return theFoundMember;
+				}
+		}
+		cout << "The member not found Please enter anothe name" << endl;
+		char* newname = new char[20];
+		cin >> newname;
+		strcpy(name, newname);
+		delete[] newname;
 	}
 }

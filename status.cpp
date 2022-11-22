@@ -1,4 +1,4 @@
-#include "status.h"
+#include "Status.h"
 
 Status::Status(char* text) // c'tor with text
 {
@@ -6,14 +6,6 @@ Status::Status(char* text) // c'tor with text
 	curr_time = time(NULL);
 	date_and_time = ctime(&curr_time);
 	this->text = text;
-}
-
-Status::Status() //default c'tor
-{
-	time_t curr_time;
-	curr_time = time(NULL);
-	date_and_time = ctime(&curr_time);
-	this->text = nullptr;
 }
 
 Status::~Status() //d'tor

@@ -1,11 +1,19 @@
 #include <iostream>
 #include"AllPages.h"
-#include"date.h"
+#include "AllMembers.h"
+#include "Date.h"
+#include"Status.h"
+#include "Page.h"
+#include "Member.h"
 #pragma warning(disable: 4996)
 using namespace std;
 
+Member& createMember();
+
 int main()
 {
+	AllMembers allMembers;
+
 	int action;
 
 	do
@@ -24,11 +32,12 @@ int main()
 		cout << "10 - show all acounts and fan pages" << endl;
 		cout << "11 - show all friends/fans" << endl;
 		cout << "12 - exit" << endl;
+		cout << "_______________________" << endl;
 		cin >> action;
 
 		switch (action) {
 		case 1:
-			createMember();
+			allMembers.addMember(createMember());
 			break;
 		case 2:
 
@@ -62,11 +71,12 @@ int main()
 			break;
 		}
 
+		allMembers.printAllMembers();
 
 	} while (action != 12);
 }
 
-void createMember()
+Member& createMember()
 {
 	Date date;
 	int day, month, year;
@@ -75,8 +85,9 @@ void createMember()
 
 	cout << "Please enter a name - max 20 letters" << endl;
 	cin >> name;
-	cout << "Please enter date of birth" << endl;
+	cout << "Please enter date of birth - format dd/mm/yyyy" << endl;
 	cin >> day >> slash_dummy >> month >> slash_dummy >> year;
-
-	
+	date.setDate(day, month, year);
+	Member member(name, date);
+	return member;
 }

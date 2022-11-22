@@ -1,11 +1,15 @@
-#include "page.h"
-
-
+#include "Page.h"
 
 FanPage::FanPage(char* name) : pageName(name)
 {
 	
 }
+
+char* FanPage::getName()
+{ 
+	return pageName; 
+}
+
 
 bool FanPage::setName(char* name) 
 {

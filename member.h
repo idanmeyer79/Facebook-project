@@ -1,10 +1,13 @@
 #ifndef __MEMBER_H__
 #define __MEMBER_H__
-#include "status.h"
+#include "Status.h"
 #include "Date.h"
-#include "page.h"
+#include "Page.h"
+#include <iostream>
+#pragma warning(disable: 4996)
+using namespace std;
 
-static int NumOfMembers = 0;
+class FanPage;
 
 class Member
 {
@@ -34,7 +37,6 @@ public:
 	void showMyStatuses();
 	void addFanPage(FanPage* fanPage, Member* member1);
 	FanPage** fanPageRealloc(FanPage** arrOfPFanPages, int memberFanPages);
-	Member* findMember(char* name);
 	void Show10LastStatuses(Member* member);
 };
 

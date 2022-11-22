@@ -1,6 +1,6 @@
 #include "Member.h"
-#include <iostream>
 #include <cmath>
+#include <iostream>
 #pragma warning(disable: 4996)
 using namespace std;
 
@@ -8,6 +8,7 @@ Member::Member(char* Name, Date date)
 {
 	strcpy(memberName, Name);
 	dateOfBirth = date;
+	//שיש שדות לא מאותחלים פה
 }
 
 void Member :: setName(char* Name)
@@ -92,7 +93,7 @@ void Member::showFriends()
 void Member :: addStatus()
 {
 	numOfStatusesOfMember++;
-	Status* newStatus;
+	Status* newStatus = nullptr;
 	memberStatuses = statusRealloc(memberStatuses, numOfStatusesOfMember);
 	memberStatuses[numOfStatusesOfMember] = newStatus;
 }
@@ -142,27 +143,6 @@ FanPage** Member::fanPageRealloc(FanPage** arrOfPFanPages, int numOfFanPagesOfMe
 	}
 	delete[] arrOfPFanPages;
 	return newFanPages;
-}
-
-Member* Member::findMember(char* name)
-{
-	Member* theFoundMember = nullptr;
-
-	while (theFoundMember == nullptr) {
-		for (int i = 0; i < NumOfMembers; i++)
-		{
-			/*if (!strcmp(allmembers[i]->name, name))
-				{
-					theFoundMember = allmembers[i]->name;
-					return theFoundMember;
-				}*/
-		}
-		cout << "The member not found Please enter anothe name" << endl;
-		char* newname = new char[20];
-		cin >> newname;
-		strcpy(name, newname);
-		delete[] newname;
-	}
 }
 
 void Member::Show10LastStatuses(Member* member)

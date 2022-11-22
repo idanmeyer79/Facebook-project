@@ -1,4 +1,5 @@
 #include <iostream>
+#pragma warning(disable: 4996)
 using namespace std;
 
 #ifndef __TIME_H__

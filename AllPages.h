@@ -1,6 +1,8 @@
 #ifndef __AllPages_H__
 #define __AllPages_H__
-
+#include <iostream>
+#pragma warning(disable: 4996)
+using namespace std;
 #include"page.h"
 
 class AllPages

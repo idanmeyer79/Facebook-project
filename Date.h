@@ -1,8 +1,8 @@
-#include <iostream>
-using namespace std;
-
 #ifndef __DATE_H__
 #define __DATE_H__
+#include <iostream>
+using namespace std;
+#pragma warning(disable: 4996)
 
 bool checkdate(int m, int d, int y);
 
