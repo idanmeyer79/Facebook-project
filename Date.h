@@ -12,9 +12,10 @@ private:
 	int day, month, year;
 
 public:
-	Date(int d=1, int m=1, int y=1970);
+	Date(int d, int, int y);
 	bool setDate(int d, int m, int y);
 	void show() const;
+	bool checkdate();
 };
 
 #endif __DATE_H__

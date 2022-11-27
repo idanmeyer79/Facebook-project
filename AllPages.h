@@ -9,12 +9,15 @@ class AllPages
 {
 private:
 	FanPage** allPages;
-	int numOfPages=0;
+	int numOfPages = 0;
+	int numOfMaxPages = 1;
 
 public:
-	void addPage(FanPage& p);
+	void addPage(FanPage* p);
+	//~AllPages();
+	AllPages();
 	void printAllPages();
-
+	bool checkIfNameExist(char* name);
 };
 
 

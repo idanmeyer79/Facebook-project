@@ -1,93 +1,39 @@
 #include <iostream>
-#include"AllPages.h"
-#include "AllMembers.h"
-#include "Date.h"
-#include"Status.h"
-#include "Page.h"
-#include "Member.h"
+#include"Admin.h"
 #pragma warning(disable: 4996)
 using namespace std;
 
-Member& createMember();
-
 int main()
 {
-	AllMembers allMembers;
+	Admin admin;
 
-	int action;
+	/*Status staus1((char*)"Hey its Boaz");
+	Status staus2((char*)"Hey its Romina");
+	Status staus3((char*)"Hey its Arie");
+	Status staus4((char*)"welcome to Mondial 2022");
+	Status staus5((char*)"welcome to re'evim beravcha");
+	Status staus6((char*)"welcome to keren kalif fans");
+	Status staus7((char*)"Boaz 2");
+	Status staus8((char*)"Romina 2");
+	Status staus9((char*)" Arie 2");
+	Status staus10((char*)"Mondial 2022 2");
+	Status staus11((char*)"re'evim beravcha 2");
+	Status staus12((char*)"keren kalif fans 2");
 
-	do
-	{
-		cout << "Wellcome to facebook!" << endl;
-		cout << "Please choose an action:" << endl;
-		cout << "1 - create an acount" << endl;
-		cout << "2 - create a fan page" << endl;
-		cout << "3 - add status to a fan page/member" << endl;
-		cout << "4 - show all fan page/member statuses" << endl;
-		cout << "5 - show 10 new statuses" << endl;
-		cout << "6 - add a friend" << endl;
-		cout << "7 - delete friendship" << endl;
-		cout << "8 - add fan page" << endl;
-		cout << "9 - delete fan page" << endl;
-		cout << "10 - show all acounts and fan pages" << endl;
-		cout << "11 - show all friends/fans" << endl;
-		cout << "12 - exit" << endl;
-		cout << "_______________________" << endl;
-		cin >> action;
+	Member member1((char*)"Boaz", Date(1, 1, 2000));
+	Member member2((char*)"Romina", Date(2, 2, 2000));
+	Member member3((char*)"Arie", Date(3, 3, 2000));
 
-		switch (action) {
-		case 1:
-			allMembers.addMember(createMember());
-			break;
-		case 2:
+	FanPage fanPage1((char*)"Mondial 2022");
+	FanPage fanPage2((char*)"re'evim beravcha");
+	FanPage fanPage3((char*)"keren kalif fans");
 
-			break;
-		case 3:
+	admin.getusers().addMember(&member1);
+	admin.getusers().addMember(&member2);
+	admin.getusers().addMember(&member3);
+    admin.getFanPages().addPage(&fanPage1);
+	admin.getFanPages().addPage(&fanPage2);
+	admin.getFanPages().addPage(&fanPage3);*/
 
-			break;
-		case 4:
-
-			break;
-		case 5:
-
-			break;
-		case 6:
-
-			break;
-		case 7:
-
-			break;
-		case 8:
-
-			break;
-		case 9:
-
-			break;
-		case 10:
-
-			break;
-		case 11:
-
-			break;
-		}
-
-		allMembers.printAllMembers();
-
-	} while (action != 12);
-}
-
-Member& createMember()
-{
-	Date date;
-	int day, month, year;
-	char slash_dummy;
-	char* name = new char[20];
-
-	cout << "Please enter a name - max 20 letters" << endl;
-	cin >> name;
-	cout << "Please enter date of birth - format dd/mm/yyyy" << endl;
-	cin >> day >> slash_dummy >> month >> slash_dummy >> year;
-	date.setDate(day, month, year);
-	Member member(name, date);
-	return member;
+	admin.menu();
 }

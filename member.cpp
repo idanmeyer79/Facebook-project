@@ -4,10 +4,10 @@
 #pragma warning(disable: 4996)
 using namespace std;
 
-Member::Member(char* Name, Date date)
+Member::Member(char* name, Date date) : dateOfBirth(date)
 {
-	strcpy(memberName, Name);
-	dateOfBirth = date;
+	memberName = new char[strlen(name) + 1];
+	strcpy(memberName, name);
 	//שיש שדות לא מאותחלים פה
 }
 

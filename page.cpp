@@ -1,8 +1,9 @@
 #include "Page.h"
 
-FanPage::FanPage(char* name) : pageName(name)
+FanPage::FanPage(char* name) 
 {
-	
+	pageName = new char[strlen(name) + 1];
+	strcpy(pageName, name);
 }
 
 char* FanPage::getName()
@@ -58,7 +59,7 @@ void FanPage::printFans()
 {
 	for (int i = 0; i < numOfFans; i++)
 	{
-		cout <<i+1<<"#:"<< fans[i]->getName() << endl;
+		cout <<i+1<<"# "<< fans[i]->getName() << endl;
 	}
 }
 

@@ -1,26 +1,48 @@
 #include "AllMembers.h"
 
-void AllMembers::addMember(Member& m)
+AllMembers:: AllMembers()
 {
-	Member** tmp = new Member * [numOfMembers + 1];
+	allMembers = new Member * [numOfMaxMembers];
+}
 
+bool AllMembers::checkIfNameExist(char* name)
+{
 	for (int i = 0; i < numOfMembers; i++)
-		tmp[i] = allMembers[i];
+	{
+		if (!strcmp(name, allMembers[i]->getName()))
+		{
+			cout << "Name already taken, please enter another name." << endl;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
 
-	tmp[numOfMembers] = &m;
+void AllMembers::addMember(Member* m)
+{
+	if (numOfMaxMembers == numOfMembers) {
+		numOfMaxMembers = numOfMaxMembers * 2;
+		Member** tmp = new Member * [numOfMaxMembers];
+		for (int i = 0; i < numOfMembers; i++)
+			tmp[i] = allMembers[i];
+		allMembers = tmp;
+		tmp = nullptr;
+		delete[] tmp;
+	}
 
-	allMembers = tmp;
-	tmp = nullptr;
-	delete[]tmp;
+	allMembers[numOfMembers] = m;
 	numOfMembers++;
-
 }
 
 void AllMembers::printAllMembers()
 {
+	cout << "All the members:" << endl;
 	for (int i = 0; i < numOfMembers; i++)
 	{
-		cout << allMembers[i]->getName() << endl;
+		cout << "#" << i+1  << " " << allMembers[i]->getName() << endl;
 	}
 }
 
@@ -37,10 +59,20 @@ Member* AllMembers::findMember(char* name)
 					return theFoundMember;
 				}
 		}
-		cout << "The member not found Please enter anothe name" << endl;
+		cout << "The member not found Please enter another name" << endl;
 		char* newname = new char[20];
 		cin >> newname;
 		strcpy(name, newname);
 		delete[] newname;
 	}
 }
+
+//AllMembers :: ~AllMembers()
+//{
+//	for(int i=0;i<numOfMembers;i++)
+//	{
+//		delete allMembers[i];
+//	}
+//	delete[]allMembers;
+//}
+
