@@ -1,15 +1,16 @@
-#include "AllMembers.h"
+#include "MembersArray.h"
+using namespace std;
 
-AllMembers:: AllMembers()
+MembersArray:: MembersArray()
 {
-	allMembers = new Member * [numOfMaxMembers];
+	membersArray = new Member * [numOfMaxMembers];
 }
 
-bool AllMembers::checkIfNameExist(char* name)
+bool MembersArray::checkIfNameExist(char* name)
 {
 	for (int i = 0; i < numOfMembers; i++)
 	{
-		if (!strcmp(name, allMembers[i]->getName()))
+		if (!strcmp(name, membersArray[i]->getName()))
 		{
 			cout << "Name already taken, please enter another name." << endl;
 			return true;
@@ -21,41 +22,41 @@ bool AllMembers::checkIfNameExist(char* name)
 	}
 }
 
-void AllMembers::addMember(Member* m)
+void MembersArray::addMember(Member* m)
 {
 	if (numOfMaxMembers == numOfMembers) {
 		numOfMaxMembers = numOfMaxMembers * 2;
 		Member** tmp = new Member * [numOfMaxMembers];
 		for (int i = 0; i < numOfMembers; i++)
-			tmp[i] = allMembers[i];
-		allMembers = tmp;
+			tmp[i] = membersArray[i];
+		membersArray = tmp;
 		tmp = nullptr;
 		delete[] tmp;
 	}
 
-	allMembers[numOfMembers] = m;
+	membersArray[numOfMembers] = m;
 	numOfMembers++;
 }
 
-void AllMembers::printAllMembers()
+void MembersArray::printAllMembers()
 {
 	cout << "All the members:" << endl;
 	for (int i = 0; i < numOfMembers; i++)
 	{
-		cout << "#" << i+1  << " " << allMembers[i]->getName() << endl;
+		cout << "#" << i+1  << " " << membersArray[i]->getName() << endl;
 	}
 }
 
-Member* AllMembers::findMember(char* name)
+Member* MembersArray::findMember(char* name)
 {
 	Member* theFoundMember = nullptr;
 
 	while (theFoundMember == nullptr) {
 		for (int i = 0; i < numOfMembers; i++)
 		{
-			if (!strcmp(allMembers[i]->getName(), name))
+			if (!strcmp(membersArray[i]->getName(), name))
 				{
-					theFoundMember = allMembers[i];
+					theFoundMember = membersArray[i];
 					return theFoundMember;
 				}
 		}

@@ -1,9 +1,9 @@
 #include "Admin.h"
+using namespace std;
 
 void Admin:: printMenu() 
 {
 	cout << "\n";
-	cout << "Wellcome to facebook!" << endl;
 	cout << "Please choose an action:" << endl;
 	cout << "1 - create a memeber" << endl;
 	cout << "2 - create a fan page" << endl;
@@ -24,7 +24,7 @@ void Admin:: printMenu()
 void Admin:: menu()
 {
 	int action;
-
+	cout << "Wellcome to facebook!" << endl;
 	do
 	{
 		printMenu();
@@ -38,10 +38,10 @@ void Admin:: menu()
 			createFanPage();
 			break;
 		case 3:
-
+			addStatusToFanPageOrMember();
 			break;
 		case 4:
-
+			showAllStatusesOfMemberOrFanPage();
 			break;
 		case 5:
 
@@ -117,4 +117,65 @@ FanPage* Admin::getDetailsForPage()
 
 	FanPage* fanPage = new FanPage(name);
 	return fanPage;
+}
+
+void Admin::addStatusToFanPageOrMember() {
+	int choice;
+	char name[20];
+
+	do {
+		cout << "If you want to add status to member enter 1, if you want to add status to a fan page enter 2" << endl;
+		cin >> choice;
+
+		if (choice == 1) //to member
+		{
+			cout << "Please enter the name of the member you want" << endl;
+			cin.ignore();
+			cin.getline(name, 20);
+			Member* tmpMember = users.findMember(name);
+			tmpMember->addStatus();
+			return;
+		}
+		else //to fan page
+		{
+			cout << "Please enter the name of the page you want" << endl;
+			cin.ignore();
+			cin.getline(name, 20);
+			FanPage* tmpPage = fanPages.findPage(name);
+			tmpPage->addStatus();
+			return;
+		}
+	} while ((choice != 1) || (choice != 2));
+}
+
+
+void Admin::showAllStatusesOfMemberOrFanPage()
+{
+	int choice;
+	char name[20];
+
+	do {
+		cout << "If you want to add status to member enter 1, if you want to add status to a fan page enter 2" << endl;
+		cin >> choice;
+
+		if (choice == 1) //to member
+		{
+			cout << "Please enter the name of the member you want" << endl;
+			cin.ignore();
+			cin.getline(name, 20);
+			Member* tmpMember = users.findMember(name);
+			tmpMember->showMyStatuses();
+			return;
+		}
+		else  //to fan page
+		{
+			cout << "Please enter the name of the member you want" << endl;
+			cin.ignore();
+			cin.getline(name, 20);
+			FanPage* tmpPage = fanPages.findPage(name);
+			tmpPage->showMyStatuses();
+			return;
+		}
+	} while ((choice != 1) || (choice != 2));
+
 }

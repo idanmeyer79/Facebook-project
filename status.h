@@ -3,7 +3,6 @@
 #include <ctime>
 #include<iostream>
 #pragma warning(disable: 4996)
-using namespace std;
 
 class Status
 {
@@ -15,6 +14,7 @@ public:
 	Status(char* text);
 	Status();
 	~Status();
+
 	void printStatus();
 
 };

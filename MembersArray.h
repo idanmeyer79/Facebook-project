@@ -2,19 +2,20 @@
 #define __AllMembers__
 #include <iostream>
 #pragma warning(disable: 4996)
-using namespace std;
 #include"Member.h"
 
-class AllMembers
+class Member;
+
+class MembersArray
 {
 private:
-	Member** allMembers;
+	Member** membersArray;
 	int numOfMembers = 0;
 	int numOfMaxMembers = 1;
 
 public:
-	AllMembers();
-	//~AllMembers();
+	MembersArray();
+	//~MembersArray();
 	bool checkIfNameExist(char* name);
 	void addMember(Member* p);
 	void printAllMembers();

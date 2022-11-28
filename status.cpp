@@ -1,11 +1,16 @@
 #include "Status.h"
+using namespace std;
 
-Status::Status(char* text) // c'tor with text
+Status::Status(char* t) // c'tor with text
 {
+	this->text = new char[strlen(t) + 1];
+	strcpy(this->text, t);
+
 	time_t curr_time;
 	curr_time = time(NULL);
-	date_and_time = ctime(&curr_time);
-	this->text = text;
+	char* tm = ctime(&curr_time);
+	this->date_and_time = new char[strlen(tm) + 1];
+	strcpy(date_and_time, tm);
 }
 
 Status::~Status() //d'tor
@@ -15,5 +20,5 @@ Status::~Status() //d'tor
 
 void Status::printStatus()
 {
-	cout << date_and_time << text<<endl;
+	cout << "The status created at: " << date_and_time << "The status is: " << text << endl;
 }

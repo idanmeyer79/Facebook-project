@@ -1,6 +1,5 @@
 #include <iostream>
 #pragma warning(disable: 4996)
-using namespace std;
 
 #ifndef __TIME_H__
 #define __TIME_H__
@@ -22,9 +21,9 @@ Time::Time(int h, int m)
 	minutes = m;
 }
 
-void Time::show() const
-{
-	cout << hours << ":" << minutes << " ";
-}
+//void Time::show() const
+//{
+//	cout << hours << ":" << minutes << " ";
+//}
 
 #endif __TIME_H__

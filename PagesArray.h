@@ -2,21 +2,23 @@
 #define __AllPages_H__
 #include <iostream>
 #pragma warning(disable: 4996)
-using namespace std;
-#include"page.h"
+#include"FanPage.h"
 
-class AllPages
+class FanPage;
+
+class PagesArray
 {
 private:
-	FanPage** allPages;
+	FanPage** pagesArray;
 	int numOfPages = 0;
 	int numOfMaxPages = 1;
 
 public:
 	void addPage(FanPage* p);
 	//~AllPages();
-	AllPages();
+	PagesArray();
 	void printAllPages();
+	FanPage* findPage(char* name);
 	bool checkIfNameExist(char* name);
 };
 

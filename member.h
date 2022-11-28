@@ -1,25 +1,23 @@
 #ifndef __MEMBER_H__
 #define __MEMBER_H__
-#include "Status.h"
+#include "MembersArray.h"
+#include "StatusesArray.h"
 #include "Date.h"
-#include "Page.h"
+#include "PagesArray.h"
 #include <iostream>
 #pragma warning(disable: 4996)
-using namespace std;
 
-class FanPage;
+class PagesArray;
+class MembersArray;
 
 class Member
 {
 private:
 	char* memberName;
 	Date dateOfBirth;
-	Member** memberFriends;
-	Status** memberStatuses;
-	FanPage** memberFanPages;
-	int numOfStatusesOfMember = 0;
-	int numOfFriendsOfMember = 0;
-	int numOfFanPagesOfMember = 0;
+	MembersArray* memberFriends;
+	StatusesArray memberStatuses;
+	PagesArray* memberFanPages;
 
 public:
 	Member(char* name, Date dateOfBirth);
@@ -27,17 +25,18 @@ public:
 	char* getName();
 	void setDate(Date date);
 	Date getDate();
-	void addFriend(Member* member1, Member* member2);
+	/*void addFriend(Member* member1, Member* member2);
 	Member** membersRealloc(Member** arrOfPFriends, int numOfNewFriends);
 	void removeFriend(Member* member1, Member* member2);
-	void showFriends();
+	void showFriends();*/
 	void addStatus();
-	Status** statusRealloc(Status** arrOfPStatuses, int numOfStatusesOfMember);
-	void showFanPage();
+	void addStatus(Status& status);
+	//Status** statusRealloc(Status** arrOfPStatuses, int numOfStatusesOfMember);
+	/*void showFanPage();*/
 	void showMyStatuses();
-	void addFanPage(FanPage* fanPage, Member* member1);
+	/*void addFanPage(FanPage* fanPage, Member* member1);
 	FanPage** fanPageRealloc(FanPage** arrOfPFanPages, int memberFanPages);
-	void Show10LastStatuses(Member* member);
+	void Show10LastStatuses(Member* member);*/
 };
 
 #endif // !__MEMBER_H__

@@ -1,22 +1,22 @@
 #ifndef __ADMIN_H__
 #define __ADMIN_H__
-#include"AllPages.h"
-#include "AllMembers.h"
+#include"PagesArray.h"
+#include "MembersArray.h"
 #include "Date.h"
 #include"Status.h"
-#include "Page.h"
+#include "FanPage.h"
 #include "Member.h"
 #include <iostream>
 #pragma warning(disable: 4996)
-using namespace std;
 
 class Admin
 {
 private:
-	AllPages fanPages;
-	AllMembers users;
+	
 
 public:
+	PagesArray fanPages;
+	MembersArray users;
 	//צריך לבדוק
 	//AllPages getFanPages()  {return fanPages ;}
 	//AllMembers getusers() { return users; }
@@ -26,6 +26,9 @@ public:
 	Member* getDetailsForMember();
 	FanPage* getDetailsForPage();
 	void createMember();
+	void addStatusToFanPageOrMember();
+	void showAllStatusesOfMemberOrFanPage();
+	Member selectMember();
 };
 
 #endif // !__ADMIN_H__

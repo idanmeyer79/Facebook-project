@@ -30,19 +30,22 @@
     <ClCompile Include="Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Page.cpp">
+    <ClCompile Include="FanPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AllPages.cpp">
+    <ClCompile Include="PagesArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AllMembers.cpp">
+    <ClCompile Include="MembersArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Admin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusesArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,16 +62,19 @@
     <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Page.h">
+    <ClInclude Include="FanPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AllPages.h">
+    <ClInclude Include="PagesArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AllMembers.h">
+    <ClInclude Include="MembersArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Admin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusesArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

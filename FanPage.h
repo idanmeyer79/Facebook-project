@@ -1,19 +1,21 @@
 #ifndef __PAGE_H__
 #define __PAGE_H__
 #include"Member.h"
+#include"MembersArray.h"
 #include"Status.h"
+#include"StatusesArray.h"
 #include <iostream>
 #pragma warning(disable: 4996)
-using namespace std;
 
+class MembersArray;
 class Member;
 
 class FanPage
 {
 private:
 	char* pageName;
-	Member** fans;
-	Status** statuses;
+	MembersArray* fans;
+	StatusesArray statuses;
 	int numOfStatuses = 0;
 	int numOfFans = 0;
 
@@ -24,8 +26,10 @@ public:
 	void addFan(Member* fan);
 	void printFans();
 	void removeFan(Member* fan);
-	void printAllStatuses();
-	void addStatus(char* text);
+	void showMyStatuses();
+	void addStatus(Status& s);
+	void addStatus();
+
 };
 
 #endif // !__PAGE_H__
