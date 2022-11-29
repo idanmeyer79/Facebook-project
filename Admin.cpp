@@ -47,7 +47,7 @@ void Admin:: menu()
 
 			break;
 		case 6:
-
+			makeFriendship();
 			break;
 		case 7:
 
@@ -63,7 +63,7 @@ void Admin:: menu()
 			fanPages.printAllPages();
 			break;
 		case 11:
-
+			printAllFriends();
 			break;
 		}
 
@@ -122,6 +122,8 @@ FanPage* Admin::getDetailsForPage()
 void Admin::addStatusToFanPageOrMember() {
 	int choice;
 	char name[20];
+	char ch;
+	Member* tmpMember= nullptr;
 
 	do {
 		cout << "If you want to add status to member enter 1, if you want to add status to a fan page enter 2" << endl;
@@ -129,10 +131,19 @@ void Admin::addStatusToFanPageOrMember() {
 
 		if (choice == 1) //to member
 		{
-			cout << "Please enter the name of the member you want" << endl;
-			cin.ignore();
-			cin.getline(name, 20);
-			Member* tmpMember = users.findMember(name);
+			users.printAllMembers();
+			getchar(); //clear the buffer 
+			do
+			{
+				cout << "Please enter the name of the member from the list" << endl;
+				cin.getline(name, 20);
+				tmpMember = users.getMember(name);
+				if (tmpMember == nullptr)
+				{
+					cout << "The member not found Please enter another name" << endl;
+				}
+			} while (tmpMember == nullptr);
+
 			tmpMember->addStatus();
 			return;
 		}
@@ -148,11 +159,11 @@ void Admin::addStatusToFanPageOrMember() {
 	} while ((choice != 1) || (choice != 2));
 }
 
-
 void Admin::showAllStatusesOfMemberOrFanPage()
 {
 	int choice;
 	char name[20];
+	Member* tmpMember= nullptr;
 
 	do {
 		cout << "If you want to add status to member enter 1, if you want to add status to a fan page enter 2" << endl;
@@ -160,10 +171,18 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 
 		if (choice == 1) //to member
 		{
-			cout << "Please enter the name of the member you want" << endl;
-			cin.ignore();
-			cin.getline(name, 20);
-			Member* tmpMember = users.findMember(name);
+			users.printAllMembers();
+			getchar(); //clear the buffer 
+			do
+			{
+				cout << "Please enter the name of the member from the list" << endl;
+				cin.getline(name, 20);
+				tmpMember = users.getMember(name);
+				if (tmpMember == nullptr)
+				{
+					cout << "The member not found Please enter another name" << endl;
+				}
+			} while (tmpMember == nullptr);
 			tmpMember->showMyStatuses();
 			return;
 		}
@@ -178,4 +197,85 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 		}
 	} while ((choice != 1) || (choice != 2));
 
+}
+
+void Admin::makeFriendship()
+{
+	char name1[20];
+	char name2[20];
+	Member* member1;
+	Member* member2 = nullptr;
+
+	users.printAllMembers();
+	do
+	{
+		do {
+			cout << "Please Choose the first member" << endl;
+			cin.ignore();
+			cin.getline(name1, 20);
+			member1 = users.getMember(name1);
+		} while (member1 == nullptr);
+
+		do {
+			cout << "Please Choose the second member" << endl;
+			cin.ignore();
+			cin.getline(name2, 20);
+			if (!(strcmp(name1, name2)))
+			{
+				cout << "Its the same member as the first one, please enter another one" << endl;
+			}
+			else
+			{
+				member2 = users.getMember(name1);
+			}
+		} while ((member2 == nullptr) || !(strcmp(name1,name2)));
+
+		if ((!member1->checkFriendship(name2)))
+		{
+			member1->addFriend(member2);
+		}
+		else
+		{
+			cout << "They are already friends";
+		}
+
+	} while (!member1->checkFriendship(name2));
+}
+
+void Admin:: makeFriendship(Member member1, Member member2)
+{
+	member1.addFriend(&member2);
+}
+
+void Admin::printAllFriends()
+{
+	int choice;
+
+	do {
+		cout << "If you want to watch all friends of member enter 1, if you want to watch all fans of a fan page enter 2" << endl;
+		cin >> choice;
+
+		if (choice == 1) //to member
+		{
+			char name[20];
+			Member* member;
+			users.printAllMembers();
+			getchar(); //clear the buffer 
+			do
+			{
+				cout << "Please enter the name of the member from the list" << endl;
+				cin.getline(name, 20);
+				member = users.getMember(name);
+				if (member == nullptr)
+				{
+					cout << "The member not found Please enter another name" << endl;
+				}
+			} while (member == nullptr);
+			member->showFriends();
+		}
+		else //to fan page
+		{
+			
+		}
+	} while ((choice != 1) || (choice != 2));
 }

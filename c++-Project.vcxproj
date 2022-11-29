@@ -145,7 +145,6 @@
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StatusesArray.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="FanPage.cpp" />
     <ClCompile Include="Status.cpp" />

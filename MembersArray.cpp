@@ -47,26 +47,42 @@ void MembersArray::printAllMembers()
 	}
 }
 
-Member* MembersArray::findMember(char* name)
+//Member* MembersArray::getMember(char* name)
+//{
+//	Member* theFoundMember = nullptr;
+//
+//	while (theFoundMember == nullptr) {
+//		for (int i = 0; i < numOfMembers; i++)
+//		{
+//			if (!strcmp(membersArray[i]->getName(), name))
+//				{
+//					theFoundMember = membersArray[i];
+//					return theFoundMember;
+//				}
+//		}
+//		cout << "The member not found Please enter another name" << endl;
+//		char* newname = new char[20];
+//		cin >> newname;
+//		strcpy(name, newname);
+//		delete[] newname;
+//	}
+//}
+
+Member* MembersArray::getMember(char* name)
 {
 	Member* theFoundMember = nullptr;
 
-	while (theFoundMember == nullptr) {
-		for (int i = 0; i < numOfMembers; i++)
+	for (int i = 0; i < numOfMembers; i++)
+	{
+		if (!strcmp(membersArray[i]->getName(), name))
 		{
-			if (!strcmp(membersArray[i]->getName(), name))
-				{
-					theFoundMember = membersArray[i];
-					return theFoundMember;
-				}
+			theFoundMember = membersArray[i];
+			return theFoundMember;
 		}
-		cout << "The member not found Please enter another name" << endl;
-		char* newname = new char[20];
-		cin >> newname;
-		strcpy(name, newname);
-		delete[] newname;
 	}
+	return theFoundMember;
 }
+
 
 //AllMembers :: ~AllMembers()
 //{

@@ -28,7 +28,9 @@ public:
 	void createMember();
 	void addStatusToFanPageOrMember();
 	void showAllStatusesOfMemberOrFanPage();
-	Member selectMember();
+	void makeFriendship();
+	void makeFriendship(Member member1, Member member2);
+	void printAllFriends();
 };
 
 #endif // !__ADMIN_H__

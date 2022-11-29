@@ -33,18 +33,12 @@ Date Member :: getDate()
 	return dateOfBirth; 
 }
 
-//void Member :: addFriend(Member* member1, Member* member2)
-//{
-//	member1->numOfFriendsOfMember++;
-//	member2->numOfFriendsOfMember++;
-//
-//	member1->memberFriends = membersRealloc(member1->memberFriends, member1->numOfFriendsOfMember);
-//	member1->memberFriends[member1->numOfFriendsOfMember] = member2;
-//
-//	member2->memberFriends = membersRealloc(member2->memberFriends, member2->numOfFriendsOfMember);
-//	member2->memberFriends[member2->numOfFriendsOfMember] = member1;
-//}
-//
+void Member :: addFriend(Member* member)
+{
+	memberFriends->addMember(member);
+	member->memberFriends->addMember(this);
+}
+
 //Member** Member :: membersRealloc (Member** arrOfPFriends, int numOfNewFriends)
 //{
 //	Member** newFriends = new Member*[numOfNewFriends];
@@ -84,13 +78,10 @@ Date Member :: getDate()
 //	}
 //}
 //
-//void Member::showFriends() 
-//{
-//	for (int i = 0; i < numOfFriendsOfMember; i++)
-//	{
-//		cout << memberFriends[i]->getName() << endl;
-//	}
-//}
+void Member::showFriends() 
+{
+	memberFriends->printAllMembers();
+}
 
 void Member :: addStatus()
 {
@@ -132,6 +123,10 @@ void Member::showMyStatuses()
 	memberStatuses.printAllStatuses();
 }
  
+bool Member::checkFriendship(char* name)
+{
+	return memberFriends->getMember(name);
+}
 //void Member::addFanPage(FanPage* fanPage, Member* member1)
 //{
 //	member1->numOfFanPagesOfMember++;

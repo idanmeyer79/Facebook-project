@@ -48,8 +48,8 @@ int main()
 	fanPage3.addStatus(status11);
 	fanPage3.addStatus(status12);
 
-	/*admin.getusers().addMember(&member1);
-	admin.getusers().addMember(&member2);
+	admin.makeFriendship(member1, member2);
+	/*admin.getusers().addMember(&member2);
 	admin.getusers().addMember(&member3);
     admin.getFanPages().addPage(&fanPage1);
 	admin.getFanPages().addPage(&fanPage2);

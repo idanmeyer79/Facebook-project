@@ -19,7 +19,7 @@ public:
 	bool checkIfNameExist(char* name);
 	void addMember(Member* p);
 	void printAllMembers();
-	Member* findMember(char* name);
+	Member* getMember(char* name);
 	int getNumOfUsres() { return numOfMembers; }
 };
 

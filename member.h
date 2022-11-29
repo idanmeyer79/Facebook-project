@@ -25,10 +25,10 @@ public:
 	char* getName();
 	void setDate(Date date);
 	Date getDate();
-	/*void addFriend(Member* member1, Member* member2);
-	Member** membersRealloc(Member** arrOfPFriends, int numOfNewFriends);
-	void removeFriend(Member* member1, Member* member2);
-	void showFriends();*/
+	void addFriend(Member* member);
+	/*Member** membersRealloc(Member** arrOfPFriends, int numOfNewFriends);
+	void removeFriend(Member* member1, Member* member2);*/
+	void showFriends();
 	void addStatus();
 	void addStatus(Status& status);
 	//Status** statusRealloc(Status** arrOfPStatuses, int numOfStatusesOfMember);
@@ -37,6 +37,7 @@ public:
 	/*void addFanPage(FanPage* fanPage, Member* member1);
 	FanPage** fanPageRealloc(FanPage** arrOfPFanPages, int memberFanPages);
 	void Show10LastStatuses(Member* member);*/
+	bool checkFriendship(char* name);
 };
 
 #endif // !__MEMBER_H__
