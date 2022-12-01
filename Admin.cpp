@@ -263,57 +263,57 @@ void Admin::ConnectFanToPage(Member member, FanPage page) //new!
 	member.followPage(&page);
 }
 
-void Admin::ConnectFanToPage(Member member, FanPage page) //need to check this
-{
-	char name1[20];
-	char name2[20];
-	Member* member1 = nullptr;
-	FanPage* page1 = nullptr;
-
-	users.printAllMembers();
-	getchar(); //clear the buffer 
-
-	do
-	{
-		do {
-			cout << "Please Choose the member" << endl;
-			//cin.ignore();
-			cin.getline(name1, 20);
-			member1 = users.getMember(name1);
-			if (member1 == nullptr)
-				cout << "No such user please try again" << endl;
-
-		} while (member1 == nullptr);
-
-		do {
-			cout << "Please Choose the fan page" << endl;
-			//cin.ignore();
-			cin.getline(name2, 20);
-			if (!(strcmp(name1, name2)))
-			{
-				cout << "Its the same member as the first one, please enter another one" << endl;
-			}
-			else
-			{
-				page1 = fanPages.findPage(name2);
-			}
-
-			if (page1 == nullptr)
-				cout << "No such page please try again" << endl;
-
-		} while ((page1 == nullptr));
-
-		if ((!member1->checkFriendship(name2)))//need to write for pages
-		{
-			member1->followPage(page1);
-		}
-		else
-		{
-			cout << "They are already connected";
-		}
-
-	} while (!member1->checkFriendship(name2));
-}
+//void Admin::ConnectFanToPage(Member member, FanPage page) //need to check this
+//{
+//	char name1[20];
+//	char name2[20];
+//	Member* member1 = nullptr;
+//	FanPage* page1 = nullptr;
+//
+//	users.printAllMembers();
+//	getchar(); //clear the buffer 
+//
+//	do
+//	{
+//		do {
+//			cout << "Please Choose the member" << endl;
+//			//cin.ignore();
+//			cin.getline(name1, 20);
+//			member1 = users.getMember(name1);
+//			if (member1 == nullptr)
+//				cout << "No such user please try again" << endl;
+//
+//		} while (member1 == nullptr);
+//
+//		do {
+//			cout << "Please Choose the fan page" << endl;
+//			//cin.ignore();
+//			cin.getline(name2, 20);
+//			if (!(strcmp(name1, name2)))
+//			{
+//				cout << "Its the same member as the first one, please enter another one" << endl;
+//			}
+//			else
+//			{
+//				page1 = fanPages.findPage(name2);
+//			}
+//
+//			if (page1 == nullptr)
+//				cout << "No such page please try again" << endl;
+//
+//		} while ((page1 == nullptr));
+//
+//		if ((!member1->checkFriendship(name2)))//need to write for pages
+//		{
+//			member1->followPage(page1);
+//		}
+//		else
+//		{
+//			cout << "They are already connected";
+//		}
+//
+//	} while (!member1->checkFriendship(name2));
+//}
 
 void Admin::printAllFriends()
 {
