@@ -38,13 +38,27 @@ void MembersArray::addMember(Member* m)
 	numOfMembers++;
 }
 
+void MembersArray:: deleteMember(Member* member)
+{
+	for (int i = 0; i < numOfMembers; i++)
+	{
+		if (!strcmp(membersArray[i]->getName(), member->getName()))
+		{
+			membersArray[i] = membersArray[numOfMembers-1];
+			membersArray[numOfMembers - 1] = nullptr;
+			numOfMembers--;
+		}
+	}
+}
+
+
 void MembersArray::printAllMembers()
 {
 	cout << "All the members:" << endl;
 
 	if (numOfMembers == 0)
 	{
-		cout << "None";
+		cout << "None"<<endl;
 		return;
 	}
 
@@ -53,27 +67,6 @@ void MembersArray::printAllMembers()
 		cout << "#" << i+1  << " " << membersArray[i]->getName() << endl;
 	}
 }
-
-//Member* MembersArray::getMember(char* name)
-//{
-//	Member* theFoundMember = nullptr;
-//
-//	while (theFoundMember == nullptr) {
-//		for (int i = 0; i < numOfMembers; i++)
-//		{
-//			if (!strcmp(membersArray[i]->getName(), name))
-//				{
-//					theFoundMember = membersArray[i];
-//					return theFoundMember;
-//				}
-//		}
-//		cout << "The member not found Please enter another name" << endl;
-//		char* newname = new char[20];
-//		cin >> newname;
-//		strcpy(name, newname);
-//		delete[] newname;
-//	}
-//}
 
 Member* MembersArray::getMember(char* name)
 {
@@ -90,13 +83,12 @@ Member* MembersArray::getMember(char* name)
 	return theFoundMember;
 }
 
+void MembersArray::showLast10StatusesOfEach()
+{
+	for (int i = 0; i < numOfMembers; i++)
+	{
+		membersArray[i]->printMyLast10Statuses();
+	}
+}
 
-//AllMembers :: ~AllMembers()
-//{
-//	for(int i=0;i<numOfMembers;i++)
-//	{
-//		delete allMembers[i];
-//	}
-//	delete[]allMembers;
-//}
 

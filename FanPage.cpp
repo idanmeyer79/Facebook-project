@@ -13,7 +13,6 @@ char* FanPage::getName()
 	return pageName; 
 }
 
-
 bool FanPage::setName(char* name) 
 {
 	this->pageName = name;
@@ -24,42 +23,16 @@ void FanPage::addFan(Member* fan)
 {
 	fans->addMember(fan);
 }
-//void FanPage::addFan(Member* fan)
-//{
-//	Member** res = new Member * [numOfFans + 1];
-//
-//	for (int i = 0; i < numOfFans; i++)
-//	{
-//		res[i] = fans[i];
-//	}
-//
-//	res[numOfFans] = fan;
-//	fans = res;
-//	numOfFans++;
-//	res = nullptr;
-//	delete[]res;
-//}
 
-//void FanPage::removeFan(Member* fan)
-//{
-//	Member** res = new Member * [numOfFans-1];
-//	for (int i = 0; i < numOfFans; i++)
-//	{
-//		if (strcmp(fan->getName(), fans[i]->getName()) == 0)
-//		{
-//			fans[i] = fans[numOfFans - 1];
-//		}
-//
-//		if (i<numOfFans-1)
-//		{
-//			res[i] = fans[i];
-//		}
-//	}
-//	fans = res;
-//	res = nullptr;
-//	delete[]res;
-//	numOfFans--;
-//}
+int FanPage::getNumOfFans()
+{
+	return fans->getNumOfUsres(); 
+}
+
+void FanPage::removeFan(Member* fan)
+{
+	fans->deleteMember(fan);
+}
 
 void FanPage::printFans()
 {
@@ -70,23 +43,6 @@ void FanPage::showMyStatuses()
 {
 	statuses.printAllStatuses();
 }
-
-//void FanPage::addStatus(char* text)
-//{
-//	Status** res = new Status * [numOfStatuses + 1];
-//	Status* newStatus = new Status(text);
-//
-//	for (int i = 0; i < numOfStatuses; i++)
-//	{
-//		res[i] = statuses[i];
-//	}
-//
-//	res[numOfStatuses] = newStatus;
-//	statuses = res;
-//	numOfStatuses++;
-//	res = nullptr;
-//	delete[]res;
-//}
 
 void FanPage::addStatus()
 {

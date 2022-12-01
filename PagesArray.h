@@ -14,12 +14,14 @@ private:
 	int numOfMaxPages = 1;
 
 public:
-	void addPage(FanPage* p);
+	void addPage(FanPage* p); //by ref
+	int getnumOfPages() { return numOfPages; }
 	//~AllPages();
 	PagesArray();
 	void printAllPages();
 	FanPage* findPage(char* name);
 	bool checkIfNameExist(char* name);
+	void deletePage(FanPage* page); //by ref
 };
 
 

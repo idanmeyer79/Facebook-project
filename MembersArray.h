@@ -16,12 +16,16 @@ private:
 public:
 	MembersArray();
 	//~MembersArray();
+	int getNumOfMembers() { return numOfMembers; }
 	bool checkIfNameExist(char* name);
-	void addMember(Member* p);
+	void addMember(Member* p); //by ref
 	void printAllMembers();
 	Member* getMember(char* name);
 	int getNumOfUsres() { return numOfMembers; }
+	void showLast10StatusesOfEach();
+	void deleteMember(Member* member); //by ref
 };
+
 
 
 #endif // !__AllMembers_H__

@@ -5,16 +5,20 @@ PagesArray::PagesArray()
 {
 	pagesArray = new FanPage * [numOfMaxPages];
 }
-
-//PagesArray::~PagesArray()
-//{
-//	for(int i=0;i<numOfPages;i++)
-//	{
-//		delete allPages[i];
-//	}
-//	delete[]allPages;
-//}
 	
+void PagesArray::deletePage(FanPage* page)
+{
+	for (int i = 0; i < numOfPages; i++)
+	{
+		if (!strcmp(pagesArray[i]->getName(), page->getName()))
+		{
+			pagesArray[i] = pagesArray[numOfPages - 1];
+			pagesArray[numOfPages - 1] = nullptr;
+			numOfPages--;
+		}
+	}
+}
+
 void PagesArray::addPage(FanPage* p)
 {
 	if (numOfMaxPages == numOfPages) {
@@ -47,14 +51,13 @@ bool PagesArray::checkIfNameExist(char* name)
 	}
 }
 
-
 void PagesArray::printAllPages()
 {
 	cout << "All the pages:" << endl;
 
 	if (numOfPages == 0)
 	{
-		cout << "None";
+		cout << "None"<<endl;
 		return;
 	}
 
@@ -66,7 +69,6 @@ void PagesArray::printAllPages()
 
 FanPage* PagesArray::findPage(char* name)
 {
-	//זה כמו של ממבר אמור לעבוד
 	FanPage* theFoundPage = nullptr;
 
 	for (int i = 0; i < numOfPages; i++)
@@ -78,23 +80,4 @@ FanPage* PagesArray::findPage(char* name)
 		}
 	}
 	return theFoundPage;
-
-	//זה הישן
-	/*FanPage* theFoundPage = nullptr;
-
-	while (theFoundPage == nullptr) {
-		for (int i = 0; i < numOfPages; i++)
-		{
-			if (!strcmp(pagesArray[i]->getName(), name))
-			{
-				theFoundPage = pagesArray[i];
-				return theFoundPage;
-			}
-		}
-		cout << "The page not found Please enter another name" << endl;
-		char* newname = new char[20];
-		cin >> newname;
-		strcpy(name, newname);
-		delete[] newname;
-	}*/
 }

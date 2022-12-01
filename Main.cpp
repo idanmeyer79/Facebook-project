@@ -11,6 +11,18 @@ int main()
 	Status status2((char*)"Boaz 2");
 	Status status3((char*)"Hey its Romina");
 	Status status4((char*)"Romina 2");
+
+	Status status22((char*)"3");
+	Status status13((char*)"4"); 
+	Status status14((char*)"5");
+	Status status15((char*)"6"); 
+	Status status16((char*)"7");
+	Status status17((char*)"8"); 
+	Status status18((char*)"9");
+	Status status19((char*)"10"); 
+	Status status20((char*)"11");
+	Status status21((char*)"12");
+
 	Status status5((char*)"Hey its Arie");
 	Status status6((char*)" Arie 2");
 	Status status7((char*)"welcome to Mondial 2022");
@@ -48,14 +60,22 @@ int main()
 	fanPage3.addStatus(status11);
 	fanPage3.addStatus(status12);
 
+	member2.addStatus(status22);
+	member2.addStatus(status13); 
+	member2.addStatus(status14);
+	member2.addStatus(status15); 
+	member2.addStatus(status16);
+	member2.addStatus(status17); 
+	member2.addStatus(status18);
+	member2.addStatus(status19); 
+	member2.addStatus(status20);
+	member2.addStatus(status21);
+
 	admin.makeFriendship(member1, member2);
+	admin.makeFriendship(member1, member3);
 	admin.ConnectFanToPage(member1, fanPage1);
-	
-	//admin.getusers().addMember(&member2);
-	//admin.getusers().addMember(&member3);
- //   admin.getFanPages().addPage(&fanPage1);
-	//admin.getFanPages().addPage(&fanPage2);
-	//admin.getFanPages().addPage(&fanPage3);
+	admin.ConnectFanToPage(member1, fanPage2);
+	admin.ConnectFanToPage(member2, fanPage1);
 
 	admin.menu();
 }

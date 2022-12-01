@@ -22,26 +22,25 @@ private:
 	PagesArray* memberFanPages;
 
 public:
-	Member(char* name, Date dateOfBirth);
+	Member(char* name, Date dateOfBirth); //by ref
 	void setName(char* Name);
 	char* getName();
-	void setDate(Date date);
+	void setDate(Date date); //by ref
 	Date getDate();
-	void addFriend(Member* member);
-	void followPage(FanPage* fanPage);
-	/*Member** membersRealloc(Member** arrOfPFriends, int numOfNewFriends);
-	void removeFriend(Member* member1, Member* member2);*/
+	void addFriend(Member* member); //by ref
+	void followPage(FanPage* fanPage); //by ref
+	int getNumOfFriends();
 	void showFriends();
 	void showFanPages();
 	void addStatus();
-	void addStatus(Status& status);
-	//Status** statusRealloc(Status** arrOfPStatuses, int numOfStatusesOfMember);
-	/*void showFanPage();*/
+	void addStatus(Status& status); //by ref
 	void showMyStatuses();
-	/*void addFanPage(FanPage* fanPage, Member* member1);
-	FanPage** fanPageRealloc(FanPage** arrOfPFanPages, int memberFanPages);
-	void Show10LastStatuses(Member* member);*/
+	void unFriend(Member* member); //by ref
+	void Show10MyFriendsLastStatuses();
+	void printMyLast10Statuses();
 	bool checkFriendship(char* name);
+	void disConnectPage(FanPage* page);
+	bool checkIfAlreadyFolowing(char* name);
 };
 
 #endif // !__MEMBER_H__

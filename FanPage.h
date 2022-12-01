@@ -16,16 +16,15 @@ private:
 	char* pageName;
 	MembersArray* fans;
 	StatusesArray statuses;
-	int numOfStatuses = 0;
-	int numOfFans = 0;
-
+	
 public:
 	FanPage(char* name);
 	bool setName(char* name);
 	char* getName();
-	void addFan(Member* fan);
+	int getNumOfFans();
+	void addFan(Member* fan); //by ref
 	void printFans();
-	void removeFan(Member* fan);
+	void removeFan(Member* fan); //by ref
 	void showMyStatuses();
 	void addStatus(Status& s);
 	void addStatus();

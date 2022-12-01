@@ -17,9 +17,6 @@ private:
 public:
 	PagesArray fanPages;
 	MembersArray users;
-	//צריך לבדוק
-	//AllPages getFanPages()  {return fanPages ;}
-	//AllMembers getusers() { return users; }
 	void printMenu();
 	void menu();
 	void createFanPage();
@@ -29,9 +26,13 @@ public:
 	void addStatusToFanPageOrMember();
 	void showAllStatusesOfMemberOrFanPage();
 	void makeFriendship();
-	void makeFriendship(Member member1, Member member2);
-	void ConnectFanToPage(Member member, FanPage page);
-	void printAllFriends();
+	void makeFriendship(Member member1, Member member2); // by ref
+	void ConnectFanToPage(Member member, FanPage page); //by ref
+	void ConnectFanToPage();
+	void printAllFriendsOfMemberOrFanPage();
+	void showLast10StatusesOfFriendsOfMember();
+	void unFriendship();
+	void disConnectFanAndPage();
 };
 
 #endif // !__ADMIN_H__

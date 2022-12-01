@@ -1,4 +1,5 @@
 #include "StatusesArray.h"
+#include <cmath>
 using namespace std;
 
 StatusesArray::StatusesArray()
@@ -31,5 +32,14 @@ void StatusesArray::printAllStatuses()
 	}
 }
 
+void StatusesArray::print10()
+{
+	int currMemberNumOfStatuses = min(numOfStatuses, 10);
+	for (int k = 1; k < currMemberNumOfStatuses+1; k++)
+	{
+		statusArray[numOfStatuses-k]->printStatus();
+	}
+	cout << endl;
+}
 
 //צריך לממש דיסטרקטור

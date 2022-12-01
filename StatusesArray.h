@@ -16,6 +16,7 @@ public:
 	//~StatusesArray();
 	void addStatusToArray(Status& s);
 	void printAllStatuses();
+	void print10();
 	int getNumOfStatuses() { return numOfStatuses; }
 };
 
