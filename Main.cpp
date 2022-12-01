@@ -49,7 +49,7 @@ int main()
 	fanPage3.addStatus(status12);
 
 	admin.makeFriendship(member1, member2);
-	admin.makeFriendship(member1, fanPage1);
+	admin.ConnectFanToPage(member1, fanPage1);
 	
 	//admin.getusers().addMember(&member2);
 	//admin.getusers().addMember(&member3);
