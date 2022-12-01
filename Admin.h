@@ -30,6 +30,7 @@ public:
 	void showAllStatusesOfMemberOrFanPage();
 	void makeFriendship();
 	void makeFriendship(Member member1, Member member2);
+	void makeFriendship(Member member, FanPage page);
 	void printAllFriends();
 };
 

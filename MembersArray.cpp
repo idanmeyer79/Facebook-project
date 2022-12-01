@@ -41,6 +41,13 @@ void MembersArray::addMember(Member* m)
 void MembersArray::printAllMembers()
 {
 	cout << "All the members:" << endl;
+
+	if (numOfMembers == 0)
+	{
+		cout << "None";
+		return;
+	}
+
 	for (int i = 0; i < numOfMembers; i++)
 	{
 		cout << "#" << i+1  << " " << membersArray[i]->getName() << endl;

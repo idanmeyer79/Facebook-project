@@ -81,10 +81,11 @@ Member* Admin::getDetailsForMember()
 	int day =0 , month =0, year=0;
 	char slash_dummy;
 	char name[20];
+	getchar(); //clear the buffer 
 
 	do {
 		cout << "Please enter a name - max 20 letters" << endl;
-		cin.ignore();
+		//cin.ignore();
 		cin.getline(name, 20);
 	} while (users.checkIfNameExist(name));
 
@@ -108,10 +109,11 @@ void Admin::createFanPage()
 FanPage* Admin::getDetailsForPage()
 {
 	char name[20];
+	getchar(); //clear the buffer 
 
 	do {
 		cout << "Please enter the name  of the page- max 20 letters" << endl;
-		cin.ignore();
+		//cin.ignore();
 		cin.getline(name, 20);
 	} while (fanPages.checkIfNameExist(name));
 
@@ -122,8 +124,9 @@ FanPage* Admin::getDetailsForPage()
 void Admin::addStatusToFanPageOrMember() {
 	int choice;
 	char name[20];
-	char ch;
+
 	Member* tmpMember= nullptr;
+	getchar(); //clear the buffer 
 
 	do {
 		cout << "If you want to add status to member enter 1, if you want to add status to a fan page enter 2" << endl;
@@ -132,7 +135,6 @@ void Admin::addStatusToFanPageOrMember() {
 		if (choice == 1) //to member
 		{
 			users.printAllMembers();
-			getchar(); //clear the buffer 
 			do
 			{
 				cout << "Please enter the name of the member from the list" << endl;
@@ -150,7 +152,7 @@ void Admin::addStatusToFanPageOrMember() {
 		else //to fan page
 		{
 			cout << "Please enter the name of the page you want" << endl;
-			cin.ignore();
+			//cin.ignore();
 			cin.getline(name, 20);
 			FanPage* tmpPage = fanPages.findPage(name);
 			tmpPage->addStatus();
@@ -168,11 +170,11 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 	do {
 		cout << "If you want to add status to member enter 1, if you want to add status to a fan page enter 2" << endl;
 		cin >> choice;
+		getchar(); //clear the buffer 
 
 		if (choice == 1) //to member
 		{
 			users.printAllMembers();
-			getchar(); //clear the buffer 
 			do
 			{
 				cout << "Please enter the name of the member from the list" << endl;
@@ -189,7 +191,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 		else  //to fan page
 		{
 			cout << "Please enter the name of the member you want" << endl;
-			cin.ignore();
+			//cin.ignore();
 			cin.getline(name, 20);
 			FanPage* tmpPage = fanPages.findPage(name);
 			tmpPage->showMyStatuses();
@@ -207,18 +209,23 @@ void Admin::makeFriendship()
 	Member* member2 = nullptr;
 
 	users.printAllMembers();
+	getchar(); //clear the buffer 
+
 	do
 	{
 		do {
 			cout << "Please Choose the first member" << endl;
-			cin.ignore();
+			//cin.ignore();
 			cin.getline(name1, 20);
 			member1 = users.getMember(name1);
+			if (member1 == nullptr)
+				cout << "No such user please try again"<<endl;
+				
 		} while (member1 == nullptr);
 
 		do {
 			cout << "Please Choose the second member" << endl;
-			cin.ignore();
+			//cin.ignore();
 			cin.getline(name2, 20);
 			if (!(strcmp(name1, name2)))
 			{
@@ -226,8 +233,12 @@ void Admin::makeFriendship()
 			}
 			else
 			{
-				member2 = users.getMember(name1);
+				member2 = users.getMember(name2);
 			}
+
+			if (member2==nullptr)
+				cout << "No such user please try again" << endl;
+
 		} while ((member2 == nullptr) || !(strcmp(name1,name2)));
 
 		if ((!member1->checkFriendship(name2)))
@@ -247,20 +258,27 @@ void Admin:: makeFriendship(Member member1, Member member2)
 	member1.addFriend(&member2);
 }
 
+void Admin::makeFriendship(Member member, FanPage page) //new!
+{
+	member.followPage(&page);
+}
+
 void Admin::printAllFriends()
 {
 	int choice;
+	char name[20];
 
-	do {
-		cout << "If you want to watch all friends of member enter 1, if you want to watch all fans of a fan page enter 2" << endl;
+	//למה צריך פה את הלולאה החיצונית בכלל?
+	//do {
+		cout << "Enter 1 to choose a member, 2 to choose a fan page or 3 to go back to main menu" << endl;
+		//cout << "If you want to watch all friends of member enter 1, if you want to watch all fans of a fan page enter 2 or enter 3 to go back to main menu" << endl;
 		cin >> choice;
+		getchar(); //clear the buffer 
 
 		if (choice == 1) //to member
 		{
-			char name[20];
 			Member* member;
 			users.printAllMembers();
-			getchar(); //clear the buffer 
 			do
 			{
 				cout << "Please enter the name of the member from the list" << endl;
@@ -268,14 +286,30 @@ void Admin::printAllFriends()
 				member = users.getMember(name);
 				if (member == nullptr)
 				{
-					cout << "The member not found Please enter another name" << endl;
+					cout << "The member not not found Please enter another name" << endl;
 				}
 			} while (member == nullptr);
 			member->showFriends();
+			member->showFanPages();
 		}
-		else //to fan page
+		//חדש אני הוספתי
+		else if (choice == 2) //to fan page
 		{
-			
+			FanPage* fanPage;
+			fanPages.printAllPages();
+			do
+			{
+				cout << "Please enter the name of the page from the list" << endl;
+				cin.getline(name, 20);
+				fanPage = fanPages.findPage(name);
+				if (fanPage == nullptr)
+				{
+					cout << "The page was not found Please enter another name" << endl;
+				}
+			} while (fanPage == nullptr);
+			fanPage->printFans();
 		}
-	} while ((choice != 1) || (choice != 2));
+	
+
+	//} while ((choice != 1) || (choice != 2));
 }

@@ -4,11 +4,13 @@
 #include "StatusesArray.h"
 #include "Date.h"
 #include "PagesArray.h"
+#include "FanPage.h"
 #include <iostream>
 #pragma warning(disable: 4996)
 
 class PagesArray;
 class MembersArray;
+class FanPage;
 
 class Member
 {
@@ -26,9 +28,11 @@ public:
 	void setDate(Date date);
 	Date getDate();
 	void addFriend(Member* member);
+	void followPage(FanPage* fanPage);
 	/*Member** membersRealloc(Member** arrOfPFriends, int numOfNewFriends);
 	void removeFriend(Member* member1, Member* member2);*/
 	void showFriends();
+	void showFanPages();
 	void addStatus();
 	void addStatus(Status& status);
 	//Status** statusRealloc(Status** arrOfPStatuses, int numOfStatusesOfMember);

@@ -51,6 +51,13 @@ bool PagesArray::checkIfNameExist(char* name)
 void PagesArray::printAllPages()
 {
 	cout << "All the pages:" << endl;
+
+	if (numOfPages == 0)
+	{
+		cout << "None";
+		return;
+	}
+
 	for (int i = 0; i < numOfPages; i++)
 	{
 		cout << "#" << i + 1 << " " << pagesArray[i]->getName() << endl;
@@ -59,7 +66,21 @@ void PagesArray::printAllPages()
 
 FanPage* PagesArray::findPage(char* name)
 {
+	//זה כמו של ממבר אמור לעבוד
 	FanPage* theFoundPage = nullptr;
+
+	for (int i = 0; i < numOfPages; i++)
+	{
+		if (!strcmp(pagesArray[i]->getName(), name))
+		{
+			theFoundPage = pagesArray[i];
+			return theFoundPage;
+		}
+	}
+	return theFoundPage;
+
+	//זה הישן
+	/*FanPage* theFoundPage = nullptr;
 
 	while (theFoundPage == nullptr) {
 		for (int i = 0; i < numOfPages; i++)
@@ -75,5 +96,5 @@ FanPage* PagesArray::findPage(char* name)
 		cin >> newname;
 		strcpy(name, newname);
 		delete[] newname;
-	}
+	}*/
 }

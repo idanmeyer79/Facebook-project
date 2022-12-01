@@ -39,6 +39,15 @@ void Member :: addFriend(Member* member)
 	member->memberFriends->addMember(this);
 }
 
+//new!
+void Member::followPage(FanPage* fanPage)
+{
+	memberFanPages->addPage(fanPage);
+	fanPage->addFan(this);
+}
+
+
+
 //Member** Member :: membersRealloc (Member** arrOfPFriends, int numOfNewFriends)
 //{
 //	Member** newFriends = new Member*[numOfNewFriends];
@@ -81,6 +90,11 @@ void Member :: addFriend(Member* member)
 void Member::showFriends() 
 {
 	memberFriends->printAllMembers();
+}
+
+void Member::showFanPages()
+{
+	memberFanPages->printAllPages();
 }
 
 void Member :: addStatus()

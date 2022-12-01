@@ -20,6 +20,10 @@ bool FanPage::setName(char* name)
 	return true;
 }
 
+void FanPage::addFan(Member* fan)
+{
+	fans->addMember(fan);
+}
 //void FanPage::addFan(Member* fan)
 //{
 //	Member** res = new Member * [numOfFans + 1];
