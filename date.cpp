@@ -25,8 +25,7 @@ bool Date::setDate(int d, int m, int y)
 
 bool Date:: checkdate()
 { 
-    //gregorian dates started in 1582
-    if (!(1900 <= year))//comment these 2 lines out if it bothers you
+    if (!(1900 <= year))
     {
         cout << "Invalid date"<<endl;
         return false;
