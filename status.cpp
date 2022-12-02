@@ -1,7 +1,7 @@
 #include "Status.h"
 using namespace std;
 
-Status::Status(char* t) // c'tor with text
+Status::Status(const char* t) // c'tor with text
 {
 	this->text = new char[strlen(t) + 1];
 	strcpy(this->text, t);

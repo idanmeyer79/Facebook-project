@@ -6,11 +6,11 @@ PagesArray::PagesArray()
 	pagesArray = new FanPage * [numOfMaxPages];
 }
 	
-void PagesArray::deletePage(FanPage* page)
+void PagesArray::deletePage(FanPage& page)
 {
 	for (int i = 0; i < numOfPages; i++)
 	{
-		if (!strcmp(pagesArray[i]->getName(), page->getName()))
+		if (!strcmp(pagesArray[i]->getName(), page.getName()))
 		{
 			pagesArray[i] = pagesArray[numOfPages - 1];
 			pagesArray[numOfPages - 1] = nullptr;
@@ -19,7 +19,7 @@ void PagesArray::deletePage(FanPage* page)
 	}
 }
 
-void PagesArray::addPage(FanPage* p)
+void PagesArray::addPage(FanPage& p)
 {
 	if (numOfMaxPages == numOfPages) {
 		numOfMaxPages = numOfMaxPages * 2;
@@ -31,11 +31,11 @@ void PagesArray::addPage(FanPage* p)
 		delete[] tmp;
 	}
 
-	pagesArray[numOfPages] = p;
+	pagesArray[numOfPages] = &p;
 	numOfPages++;
 }
 
-bool PagesArray::checkIfNameExist(char* name)
+bool PagesArray::checkIfNameExist(const char* name)
 {
 	for (int i = 0; i < numOfPages; i++)
 	{
@@ -67,7 +67,7 @@ void PagesArray::printAllPages()
 	}
 }
 
-FanPage* PagesArray::findPage(char* name)
+FanPage* PagesArray::findPage(const char* name)
 {
 	FanPage* theFoundPage = nullptr;
 

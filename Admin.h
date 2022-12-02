@@ -12,12 +12,12 @@
 class Admin
 {
 private:
-	
-
-public:
 	PagesArray fanPages;
 	MembersArray users;
-	void printMenu();
+
+public:
+	PagesArray& getPagesArray();
+	void printMenu() ;
 	void menu();
 	void createFanPage();
 	Member* getDetailsForMember();
@@ -26,13 +26,14 @@ public:
 	void addStatusToFanPageOrMember();
 	void showAllStatusesOfMemberOrFanPage();
 	void makeFriendship();
-	void makeFriendship(Member member1, Member member2); // by ref
-	void ConnectFanToPage(Member member, FanPage page); //by ref
+	void makeFriendship(Member& member1, Member& member2) ;
+	void ConnectFanToPage(Member& member, FanPage& page);
 	void ConnectFanToPage();
 	void printAllFriendsOfMemberOrFanPage();
 	void showLast10StatusesOfFriendsOfMember();
 	void unFriendship();
 	void disConnectFanAndPage();
+	void hardCodedData();
 };
 
 #endif // !__ADMIN_H__

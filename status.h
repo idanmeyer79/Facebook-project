@@ -11,12 +11,10 @@ private:
 	char* date_and_time;
 
 public:
-	Status(char* text);
+	Status(const char* text);
 	Status();
 	~Status();
-
 	void printStatus();
-
 };
 
 #endif // !__STATUS_H__

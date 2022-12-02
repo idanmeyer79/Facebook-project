@@ -18,13 +18,13 @@ private:
 	StatusesArray statuses;
 	
 public:
-	FanPage(char* name);
-	bool setName(char* name);
+	FanPage(const char* name);
+	bool setName(const char* name);
 	char* getName();
 	int getNumOfFans();
-	void addFan(Member* fan); //by ref
+	void addFan(Member& fan);
 	void printFans();
-	void removeFan(Member* fan); //by ref
+	void removeFan(Member& fan);
 	void showMyStatuses();
 	void addStatus(Status& s);
 	void addStatus();

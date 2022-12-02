@@ -21,6 +21,12 @@ void Admin:: printMenu()
 	cout << "\n";
 }
 
+PagesArray& Admin:: getPagesArray()
+{
+	return fanPages;
+}
+
+
 void Admin:: menu()
 {
 	int action;
@@ -73,7 +79,7 @@ void Admin:: menu()
 void Admin::createMember()
 {
 	Member* member = getDetailsForMember();
-	users.addMember(member);
+	users.addMember(*member);
 }
 
 Member* Admin::getDetailsForMember()
@@ -103,7 +109,7 @@ Member* Admin::getDetailsForMember()
 void Admin::createFanPage()
 {
 	FanPage* fanPage = getDetailsForPage();
-	fanPages.addPage(fanPage);
+	fanPages.addPage(*fanPage);
 }
 
 FanPage* Admin::getDetailsForPage()
@@ -203,7 +209,6 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 			do
 			{
 				cout << "Please enter the name of the fan page you want" << endl;
-				//cin.ignore();
 				cin.getline(name, 20);
 				tmpPage = fanPages.findPage(name);
 				if (tmpPage == nullptr)
@@ -232,7 +237,6 @@ void Admin::makeFriendship()
 	{
 		do {
 			cout << "Please Choose the first member" << endl;
-			//cin.ignore();
 			cin.getline(name1, 20);
 			member1 = users.getMember(name1);
 			if (member1 == nullptr)
@@ -242,7 +246,6 @@ void Admin::makeFriendship()
 
 		do {
 			cout << "Please Choose the second member" << endl;
-			//cin.ignore();
 			cin.getline(name2, 20);
 			if (!(strcmp(name1, name2)))
 			{
@@ -260,7 +263,7 @@ void Admin::makeFriendship()
 
 		if ((!member1->checkFriendship(name2)))
 		{
-			member1->addFriend(member2);
+			member1->addFriend(*member2);
 		}
 		else
 		{
@@ -270,9 +273,9 @@ void Admin::makeFriendship()
 	} while (!member1->checkFriendship(name2));
 }
 
-void Admin::makeFriendship(Member member1, Member member2)
+void Admin::makeFriendship(Member& member1, Member& member2)
 {
-	member1.addFriend(&member2);
+	member1.addFriend(member2);
 }
 
 void Admin::unFriendship()
@@ -287,7 +290,6 @@ void Admin::unFriendship()
 
 	do {
 		cout << "Please Choose the first member" << endl;
-		//cin.ignore();
 		cin.getline(name1, 20);
 		member1 = users.getMember(name1);
 		if (member1 == nullptr)
@@ -307,7 +309,6 @@ void Admin::unFriendship()
 
 	do {
 		cout << "Please Choose the second member" << endl;
-		//cin.ignore();
 		cin.getline(name2, 20);
 		if (!(strcmp(name1, name2)))
 		{
@@ -321,7 +322,7 @@ void Admin::unFriendship()
 		}
 	} while ((member2 == nullptr) || !member1->checkFriendship(name2));
 
-	member1->unFriend(member2);
+	member1->unFriend(*member2);
 }
 
 void Admin::disConnectFanAndPage()
@@ -369,12 +370,12 @@ void Admin::disConnectFanAndPage()
 
 	} while (!member->checkIfAlreadyFolowing(nameOfPage));
 
-	member->disConnectPage(page);
+	member->disConnectPage(*page);
 }
 
-void Admin::ConnectFanToPage(Member member, FanPage page) 
+void Admin::ConnectFanToPage(Member& member, FanPage& page) 
 {
-	member.followPage(&page);
+	member.followPage(page);
 }
 
 void Admin::ConnectFanToPage() //להודפיס את כל הדפים שהחבר הנחבר עוקב אחריהם
@@ -408,7 +409,7 @@ void Admin::ConnectFanToPage() //להודפיס את כל הדפים שהחבר הנחבר עוקב אחריהם
 
 		if ((!member1->checkIfAlreadyFolowing(nameOfPage)))
 		{
-			member1->followPage(page1);
+			member1->followPage(*page1);
 		}
 		else
 		{
@@ -490,4 +491,78 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 	} while (member1 == nullptr);
 
 	member1->Show10MyFriendsLastStatuses();
+}
+
+void Admin::hardCodedData()
+{
+	Status* status1 = new Status("Hey its Boaz");
+	Status* status2 = new Status("Boaz 2");
+	Status* status3 = new Status("Hey its Romina");
+	Status* status4 = new Status("Romina 2");
+
+	//למחוק לפני ההגשה
+	Status* status22 = new Status("3");
+	Status* status13 = new Status("4");
+	Status* status14 = new Status("5");
+	Status* status15 = new Status("6");
+	Status* status16 = new Status("7");
+	Status* status17 = new Status("8");
+	Status* status18 = new Status("9");
+	Status* status19 = new Status("10");
+	Status* status20 = new Status("11");
+	Status* status21 = new Status("12");
+
+	Status* status5 = new Status("Hey its Arie");
+	Status* status6 = new Status(" Arie 2");
+	Status* status7 = new Status("welcome to Mondial 2022");
+	Status* status8 = new Status("Mondial 2022 2");
+	Status* status9 = new Status("welcome to re'evim beravcha");
+	Status* status10 = new Status("re'evim beravcha 2");
+	Status* status11 = new Status("welcome to keren kalif fans");
+	Status* status12 = new Status("keren kalif fans 2");
+
+	Member* member1 = new Member("Boaz", Date(1, 1, 2000));
+	Member* member2 = new Member("Romina", Date(2, 2, 2000));
+	Member* member3 = new Member("Arie", Date(3, 3, 2000));
+
+	FanPage* fanPage1 = new FanPage("M");
+	FanPage* fanPage2 = new FanPage("re'evim beravcha");
+	FanPage* fanPage3 = new FanPage("keren kalif fans");
+
+	users.addMember(*member1);
+	users.addMember(*member2);
+	users.addMember(*member3);
+	fanPages.addPage(*fanPage1);
+	fanPages.addPage(*fanPage2);
+	fanPages.addPage(*fanPage3);
+
+	member1->addStatus(*status1);
+	member1->addStatus(*status2);
+	member2->addStatus(*status3);
+	member2->addStatus(*status4);
+	member3->addStatus(*status5);
+	member3->addStatus(*status6);
+	fanPage1->addStatus(*status7);
+	fanPage1->addStatus(*status8);
+	fanPage2->addStatus(*status9);
+	fanPage2->addStatus(*status10);
+	fanPage3->addStatus(*status11);
+	fanPage3->addStatus(*status12);
+
+	member2->addStatus(*status22);
+	member2->addStatus(*status13); 
+	member2->addStatus(*status14);
+	member2->addStatus(*status15); 
+	member2->addStatus(*status16);
+	member2->addStatus(*status17); 
+	member2->addStatus(*status18);
+	member2->addStatus(*status19); 
+	member2->addStatus(*status20);
+	member2->addStatus(*status21);
+
+	makeFriendship(*member1, *member2);
+	makeFriendship(*member1, *member3);
+	ConnectFanToPage(*member1, *fanPage1);
+	ConnectFanToPage(*member1, *fanPage2);
+	ConnectFanToPage(*member2, *fanPage1);
 }

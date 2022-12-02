@@ -22,25 +22,25 @@ private:
 	PagesArray* memberFanPages;
 
 public:
-	Member(char* name, Date dateOfBirth); //by ref
-	void setName(char* Name);
+	Member(const char* name, const Date& dateOfBirth);
+	void setName(const char* Name);
 	char* getName();
-	void setDate(Date date); //by ref
+	void setBirthDay(Date& date);
 	Date getDate();
-	void addFriend(Member* member); //by ref
-	void followPage(FanPage* fanPage); //by ref
+	void addFriend(Member& member);
+	void followPage(FanPage& fanPage);
 	int getNumOfFriends();
 	void showFriends();
 	void showFanPages();
 	void addStatus();
-	void addStatus(Status& status); //by ref
+	void addStatus(Status& status);
 	void showMyStatuses();
-	void unFriend(Member* member); //by ref
+	void unFriend(Member& member);
 	void Show10MyFriendsLastStatuses();
 	void printMyLast10Statuses();
-	bool checkFriendship(char* name);
-	void disConnectPage(FanPage* page);
-	bool checkIfAlreadyFolowing(char* name);
+	bool checkFriendship(const char* name);
+	void disConnectPage(FanPage& page);
+	bool checkIfAlreadyFolowing(const char* name);
 };
 
 #endif // !__MEMBER_H__

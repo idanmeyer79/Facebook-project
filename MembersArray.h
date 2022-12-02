@@ -17,13 +17,13 @@ public:
 	MembersArray();
 	//~MembersArray();
 	int getNumOfMembers() { return numOfMembers; }
-	bool checkIfNameExist(char* name);
-	void addMember(Member* p); //by ref
+	bool checkIfNameExist(const char* name);
+	void addMember(Member& p);
 	void printAllMembers();
-	Member* getMember(char* name);
+	Member* getMember(const char* name);
 	int getNumOfUsres() { return numOfMembers; }
 	void showLast10StatusesOfEach();
-	void deleteMember(Member* member); //by ref
+	void deleteMember(Member& member);
 };
 
 

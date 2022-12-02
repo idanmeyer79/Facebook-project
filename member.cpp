@@ -4,7 +4,7 @@
 #pragma warning(disable: 4996)
 using namespace std;
 
-Member::Member(char* name, Date date) : dateOfBirth(date)
+Member::Member(const char* name, const Date& date) : dateOfBirth(date)
 {
 	memberName = new char[strlen(name) + 1];
 	strcpy(memberName, name);
@@ -13,9 +13,9 @@ Member::Member(char* name, Date date) : dateOfBirth(date)
 	//שיש שדות לא מאותחלים פה
 }
 
-void Member :: setName(char* Name)
+void Member :: setName(const char* Name)
 {
-	memberName = Name;
+	strcpy(memberName , Name);
 }
 
 char* Member :: getName()
@@ -23,7 +23,7 @@ char* Member :: getName()
 	return memberName;
 }
 
-void Member :: setDate(Date date)
+void Member ::setBirthDay(Date& date)
 {
 	dateOfBirth = date;
 }
@@ -33,31 +33,30 @@ Date Member::getDate()
 	return dateOfBirth; 
 }
 
-void Member::addFriend(Member* member)
+void Member::addFriend(Member& member)
 {
 	memberFriends->addMember(member);
-	member->memberFriends->addMember(this);
+	member.memberFriends->addMember(*this);
 }
 
-void Member::disConnectPage(FanPage* page)
+void Member::disConnectPage(FanPage& page)
 {
 	memberFanPages->deletePage(page);
-	page->removeFan(this);
-	cout << endl << memberName << " is no longer follows " << page->getName() << endl;
+	page.removeFan(*this);
+	cout << endl << memberName << " is no longer follows " << page.getName() << endl;
 }
 
-
-void Member::unFriend(Member* member)
+void Member::unFriend(Member& member)
 {
 	memberFriends->deleteMember(member);
-	member->memberFriends->deleteMember(this);
-	cout << endl <<member->getName() << " and " << memberName << " are no longer friends :(" << endl;
+	member.memberFriends->deleteMember(*this);
+	cout << endl <<member.getName() << " and " << memberName << " are no longer friends :(" << endl;
 }
 
-void Member::followPage(FanPage* fanPage)
+void Member::followPage(FanPage& fanPage)
 {
 	memberFanPages->addPage(fanPage);
-	fanPage->addFan(this);
+	fanPage.addFan(*this);
 }
 
 void Member::showFriends() 
@@ -89,12 +88,12 @@ void Member::showMyStatuses()
 	memberStatuses.printAllStatuses();
 }
  
-bool Member::checkFriendship(char* name)
+bool Member::checkFriendship(const char* name)
 {
 	return memberFriends->getMember(name);
 }
 
-bool Member::checkIfAlreadyFolowing(char* name)
+bool Member::checkIfAlreadyFolowing(const char* name)
 {
 	return memberFanPages->findPage(name);
 }

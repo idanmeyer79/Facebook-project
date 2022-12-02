@@ -6,7 +6,7 @@ MembersArray:: MembersArray()
 	membersArray = new Member * [numOfMaxMembers];
 }
 
-bool MembersArray::checkIfNameExist(char* name)
+bool MembersArray::checkIfNameExist(const char* name)
 {
 	for (int i = 0; i < numOfMembers; i++)
 	{
@@ -22,7 +22,7 @@ bool MembersArray::checkIfNameExist(char* name)
 	}
 }
 
-void MembersArray::addMember(Member* m)
+void MembersArray::addMember(Member& m)
 {
 	if (numOfMaxMembers == numOfMembers) {
 		numOfMaxMembers = numOfMaxMembers * 2;
@@ -34,15 +34,15 @@ void MembersArray::addMember(Member* m)
 		delete[] tmp;
 	}
 
-	membersArray[numOfMembers] = m;
+	membersArray[numOfMembers] = &m;
 	numOfMembers++;
 }
 
-void MembersArray:: deleteMember(Member* member)
+void MembersArray:: deleteMember(Member& member)
 {
 	for (int i = 0; i < numOfMembers; i++)
 	{
-		if (!strcmp(membersArray[i]->getName(), member->getName()))
+		if (!strcmp(membersArray[i]->getName(), member.getName()))
 		{
 			membersArray[i] = membersArray[numOfMembers-1];
 			membersArray[numOfMembers - 1] = nullptr;
@@ -68,7 +68,7 @@ void MembersArray::printAllMembers()
 	}
 }
 
-Member* MembersArray::getMember(char* name)
+Member* MembersArray::getMember(const char* name)
 {
 	Member* theFoundMember = nullptr;
 

@@ -1,7 +1,7 @@
 #include "FanPage.h"
 using namespace std;
 
-FanPage::FanPage(char* name) 
+FanPage::FanPage(const char* name) 
 {
 	pageName = new char[strlen(name) + 1];
 	strcpy(pageName, name);
@@ -13,13 +13,13 @@ char* FanPage::getName()
 	return pageName; 
 }
 
-bool FanPage::setName(char* name) 
+bool FanPage::setName(const char* name) 
 {
-	this->pageName = name;
+	strcpy(this->pageName, name);
 	return true;
 }
 
-void FanPage::addFan(Member* fan)
+void FanPage::addFan(Member& fan)
 {
 	fans->addMember(fan);
 }
@@ -29,7 +29,7 @@ int FanPage::getNumOfFans()
 	return fans->getNumOfUsres(); 
 }
 
-void FanPage::removeFan(Member* fan)
+void FanPage::removeFan(Member& fan)
 {
 	fans->deleteMember(fan);
 }
