@@ -57,3 +57,10 @@ void FanPage::addStatus(Status& s)
 {
 	statuses.addStatusToArray(s);
 }
+
+Status& FanPage::addStatus(const char* txt)
+{
+	Status* status = new Status(txt);
+	statuses.addStatusToArray(*status);
+	return *status;
+}

@@ -83,6 +83,13 @@ void Member:: addStatus(Status& status)
 	memberStatuses.addStatusToArray(status);
 }
 
+Status& Member::addStatus(const char* txt)
+{
+	Status* status = new Status(txt);
+	memberStatuses.addStatusToArray(*status);
+	return *status;
+}
+
 void Member::showMyStatuses()
 {
 	memberStatuses.printAllStatuses();

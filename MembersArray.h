@@ -3,6 +3,7 @@
 #include <iostream>
 #pragma warning(disable: 4996)
 #include"Member.h"
+#include "Date.h"
 
 class Member;
 
@@ -24,6 +25,7 @@ public:
 	int getNumOfUsres() { return numOfMembers; }
 	void showLast10StatusesOfEach();
 	void deleteMember(Member& member);
+	Member& addMember(const char* name, const Date& dateOfBirth);
 };
 
 

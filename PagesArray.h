@@ -22,6 +22,7 @@ public:
 	FanPage* findPage(const char* name);
 	bool checkIfNameExist(const char* name);
 	void deletePage(FanPage& page);
+	FanPage& addPage(const char* name);
 };
 
 

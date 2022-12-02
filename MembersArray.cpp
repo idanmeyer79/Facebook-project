@@ -38,6 +38,25 @@ void MembersArray::addMember(Member& m)
 	numOfMembers++;
 }
 
+Member& MembersArray::addMember(const char* name, const Date& dateOfBirth)
+{
+	Member* member1 = new Member(name, dateOfBirth);
+
+	if (numOfMaxMembers == numOfMembers) {
+		numOfMaxMembers = numOfMaxMembers * 2;
+		Member** tmp = new Member * [numOfMaxMembers];
+		for (int i = 0; i < numOfMembers; i++)
+			tmp[i] = membersArray[i];
+		membersArray = tmp;
+		tmp = nullptr;
+		delete[] tmp;
+	}
+
+	membersArray[numOfMembers] = member1;
+	numOfMembers++;
+	return *member1;
+}
+
 void MembersArray:: deleteMember(Member& member)
 {
 	for (int i = 0; i < numOfMembers; i++)

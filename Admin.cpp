@@ -495,74 +495,42 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 
 void Admin::hardCodedData()
 {
-	Status* status1 = new Status("Hey its Boaz");
-	Status* status2 = new Status("Boaz 2");
-	Status* status3 = new Status("Hey its Romina");
-	Status* status4 = new Status("Romina 2");
+	FanPage fanPage1 = fanPages.addPage("M");
+	FanPage fanPage2 = fanPages.addPage("re'evim beravcha");
+	FanPage fanPage3 = fanPages.addPage("keren kalif fans");
+
+	Member member1 = users.addMember("Boaz", Date(1, 1, 2000));
+	Member member2 = users.addMember("Romina", Date(2, 2, 2000));
+	Member member3 = users.addMember("Arie", Date(3, 3, 2000));
+
+	member1.addStatus("Hey its Boaz");
+	member1.addStatus("Boaz 2");
+	member2.addStatus("Hey its Romina");
+	member2.addStatus("Romina 2");
+	member3.addStatus("Hey its Arie");
+	member3.addStatus(" Arie 2");
+	fanPage1.addStatus("welcome to Mondial 2022");
+	fanPage1.addStatus("Mondial 2022 2");
+	fanPage2.addStatus("welcome to re'evim beravcha");
+	fanPage2.addStatus("re'evim beravcha 2");
+	fanPage3.addStatus("welcome to keren kalif fans");
+	fanPage3.addStatus("keren kalif fans 2");
 
 	//למחוק לפני ההגשה
-	Status* status22 = new Status("3");
-	Status* status13 = new Status("4");
-	Status* status14 = new Status("5");
-	Status* status15 = new Status("6");
-	Status* status16 = new Status("7");
-	Status* status17 = new Status("8");
-	Status* status18 = new Status("9");
-	Status* status19 = new Status("10");
-	Status* status20 = new Status("11");
-	Status* status21 = new Status("12");
+	member2.addStatus("3");
+	member2.addStatus("4"); 
+	member2.addStatus("5");
+	member2.addStatus("6"); 
+	member2.addStatus("7");
+	member2.addStatus("8"); 
+	member2.addStatus("9");
+	member2.addStatus("10"); 
+	member2.addStatus("11");
+	member2.addStatus("12");
 
-	Status* status5 = new Status("Hey its Arie");
-	Status* status6 = new Status(" Arie 2");
-	Status* status7 = new Status("welcome to Mondial 2022");
-	Status* status8 = new Status("Mondial 2022 2");
-	Status* status9 = new Status("welcome to re'evim beravcha");
-	Status* status10 = new Status("re'evim beravcha 2");
-	Status* status11 = new Status("welcome to keren kalif fans");
-	Status* status12 = new Status("keren kalif fans 2");
-
-	Member* member1 = new Member("Boaz", Date(1, 1, 2000));
-	Member* member2 = new Member("Romina", Date(2, 2, 2000));
-	Member* member3 = new Member("Arie", Date(3, 3, 2000));
-
-	FanPage* fanPage1 = new FanPage("M");
-	FanPage* fanPage2 = new FanPage("re'evim beravcha");
-	FanPage* fanPage3 = new FanPage("keren kalif fans");
-
-	users.addMember(*member1);
-	users.addMember(*member2);
-	users.addMember(*member3);
-	fanPages.addPage(*fanPage1);
-	fanPages.addPage(*fanPage2);
-	fanPages.addPage(*fanPage3);
-
-	member1->addStatus(*status1);
-	member1->addStatus(*status2);
-	member2->addStatus(*status3);
-	member2->addStatus(*status4);
-	member3->addStatus(*status5);
-	member3->addStatus(*status6);
-	fanPage1->addStatus(*status7);
-	fanPage1->addStatus(*status8);
-	fanPage2->addStatus(*status9);
-	fanPage2->addStatus(*status10);
-	fanPage3->addStatus(*status11);
-	fanPage3->addStatus(*status12);
-
-	member2->addStatus(*status22);
-	member2->addStatus(*status13); 
-	member2->addStatus(*status14);
-	member2->addStatus(*status15); 
-	member2->addStatus(*status16);
-	member2->addStatus(*status17); 
-	member2->addStatus(*status18);
-	member2->addStatus(*status19); 
-	member2->addStatus(*status20);
-	member2->addStatus(*status21);
-
-	makeFriendship(*member1, *member2);
-	makeFriendship(*member1, *member3);
-	ConnectFanToPage(*member1, *fanPage1);
-	ConnectFanToPage(*member1, *fanPage2);
-	ConnectFanToPage(*member2, *fanPage1);
+	makeFriendship(member1, member2);
+	makeFriendship(member1,member3);
+	ConnectFanToPage(member1, fanPage1);
+	ConnectFanToPage(member1, fanPage2);
+	ConnectFanToPage(member2, fanPage1);
 }
