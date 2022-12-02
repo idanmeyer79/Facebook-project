@@ -3,8 +3,6 @@
 #include <iostream>
 #pragma warning(disable: 4996)
 
-bool checkdate(int m, int d, int y);
-
 class Date
 {
 private: 
