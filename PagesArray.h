@@ -14,6 +14,7 @@ private:
 	int numOfMaxPages = 1;
 
 public:
+	PagesArray(PagesArray& other) = delete;
 	PagesArray();
 	~PagesArray();
 	int getnumOfPages() { return numOfPages; }

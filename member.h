@@ -26,6 +26,7 @@ private:
 	PagesArray* memberFanPages;
 
 public:
+	Member(Member& other) = delete;
 	Member(const char* name, const Date& dateOfBirth);
 	~Member();
 	void setName(const char* Name);

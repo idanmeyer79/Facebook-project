@@ -15,6 +15,7 @@ private:
 	int numOfMaxMembers = 1;
 
 public:
+	MembersArray(MembersArray& other) = delete;
 	MembersArray();
 	~MembersArray();
 	int getNumOfMembers() { return numOfMembers; }

@@ -17,8 +17,11 @@ public:
 private:
 	PagesArray fanPages;
 	MembersArray users;
+	
 
 public:
+	Admin() = default;
+	Admin(Admin& other) = delete;
 	void printMenu() ;
 	void menu();
 	void createFanPage();

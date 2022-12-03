@@ -12,6 +12,7 @@ private:
 	int numOfMaxStatuses = 1;
 
 public:
+	StatusesArray(StatusesArray& other) = delete;
 	StatusesArray();
 	~StatusesArray();
 	int getNumOfStatuses() { return numOfStatuses; }

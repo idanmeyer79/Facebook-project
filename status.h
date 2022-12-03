@@ -11,6 +11,7 @@ private:
 	char* date_and_time;
 
 public:
+	Status(Status& other) = delete;
 	Status(const char* text);
 	Status(char* text);
 	~Status();

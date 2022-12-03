@@ -22,6 +22,7 @@ private:
 	StatusesArray statuses;
 	
 public:
+	FanPage(FanPage& other) = delete;
 	FanPage(const char* name);
 	~FanPage();
 	bool setName(const char* name);
