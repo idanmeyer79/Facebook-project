@@ -22,16 +22,16 @@ private:
 	StatusesArray statuses;
 	
 public:
-	FanPage(FanPage& other) = delete;
+	FanPage(const FanPage& other) = delete;
 	FanPage(const char* name);
 	~FanPage();
 	bool setName(const char* name);
-	char* getName();
-	int getNumOfFans();
-	StatusesArray& getStatusesArray() { return statuses; }
-	MembersArray& getFansArray() { return *fans; }
+	const char* getName() const;
+	const int getNumOfFans() const;
+	const StatusesArray& getStatusesArray() const { return statuses; }
+	const MembersArray& getFansArray() const { return *fans; }
 	void addFan(Member& fan);
-	void printFans();
+	void printFans() const;
 	void removeFan(Member& fan);
 	void showMyStatuses();
 	void addStatus(Status& s);

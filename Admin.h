@@ -20,24 +20,25 @@ private:
 	
 public:
 	Admin() = default;
-	Admin(Admin& other) = delete;
-	MembersArray& getMembersArray();
-	Member* getDetailsForMember();
-	FanPage* getDetailsForPage();
-	PagesArray& getPagesArray();
-	void setPagesArray(PagesArray newFanPages) { fanPages = newFanPages; }
-	void setMembersArray(MembersArray newUsers) { users = newUsers; }
+	Admin(const Admin& other) = delete;
+	const MembersArray& getMembersArray() const;
+	Member* getDetailsForMember() const;
+	FanPage* getDetailsForPage() const;
+    const PagesArray& getPagesArray() const;
+	void setPagesArray(PagesArray newFanPages)  { fanPages = newFanPages; }
+	void setMembersArray(MembersArray newUsers) { users = newUsers;       }
 	void printMenu();
+	void printAcounts() const;
+	void printAllFriendsOfMemberOrFanPage() const;
 	void menu();
 	void createFanPage();
 	void createMember();
 	void addStatusToFanPageOrMember();
 	void showAllStatusesOfMemberOrFanPage();
 	void makeFriendship();
-	void makeFriendship(Member& member1, Member& member2) ;
+	void makeFriendship(Member& member1, Member& member2);
 	void ConnectFanToPage(Member& member, FanPage& page);
 	void ConnectFanToPage();
-	void printAllFriendsOfMemberOrFanPage();
 	void showLast10StatusesOfFriendsOfMember();
 	void unFriendship();
 	void disConnectFanAndPage();

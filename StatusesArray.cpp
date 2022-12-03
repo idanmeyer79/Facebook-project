@@ -31,21 +31,22 @@ void StatusesArray::addStatusToArray(Status& s)
 	numOfStatuses++;
 }
 
-void StatusesArray::printAllStatuses()
+void StatusesArray::printAllStatuses() const
 {
-	cout << "All the statuses:" << endl;
+	cout << "statuses are:" << endl;
 	for (int i = 0; i < numOfStatuses; i++)
 	{
-		cout << "# " << i + 1 << " ";
+		cout << "#" << i + 1 << " ";
 		statusArray[i]->printStatus();
 	}
 }
 
-void StatusesArray::print10()
+void StatusesArray::print10() const
 {
 	int currMemberNumOfStatuses = min(numOfStatuses, 10);
 	for (int k = 1; k < currMemberNumOfStatuses+1; k++)
 	{
+		cout << "#" << numOfStatuses-k+1 << " ";
 		statusArray[numOfStatuses-k]->printStatus();
 	}
 	cout << endl;

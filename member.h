@@ -26,31 +26,31 @@ private:
 	PagesArray* memberFanPages;
 
 public:
-	Member(Member& other) = delete;
+	Member(const Member& other) = delete;
 	Member(const char* name, const Date& dateOfBirth);
 	~Member();
-	MembersArray& getMembersArray() { return *memberFriends; }
-	StatusesArray& getStatusesArray() { return memberStatuses; }
-	PagesArray& getPagesArray() { return *memberFanPages; }
-	char* getName();
-	Date getDate();
-	int getNumOfFriends();
+	const MembersArray& getMembersArray() const  { return *memberFriends;  }
+	const StatusesArray& getStatusesArray() const{ return memberStatuses;  }
+	const PagesArray& getPagesArray()   const    { return *memberFanPages; }
+	const char* getName() const;
+	const Date getDate()const ;
+	const int getNumOfFriends() const;
 	bool setName(const char* name);
 	void setBirthDay(Date& date);
 	void followPage(FanPage& fanPage);
-	void showFriends();
-	void showFanPages();
-	void showMyStatuses();
-	void Show10MyFriendsLastStatuses();
+	void showFriends() const;
+	void showFanPages() const;
+	void showMyStatuses() const;
+	void Show10MyFriendsLastStatuses()const;
 	void addFriend(Member& member);
 	void addStatus();
 	void addStatus(const char* text);
 	void addStatus(Status& status);
 	void unFriend(Member& member);
-	void printMyLast10Statuses();
+	void printMyLast10Statuses()const;
 	void disConnectPage(FanPage& page);
-	bool checkFriendship(const char* name);
-	bool checkIfAlreadyFolowing(const char* name);
+	bool checkFriendship(const char* name) const;
+	bool checkIfAlreadyFolowing(const char* name) const;
 };
 
 #endif // !__MEMBER_H__

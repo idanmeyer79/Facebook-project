@@ -8,7 +8,7 @@ PagesArray::PagesArray()
 
 PagesArray::~PagesArray()
 {
-	for(int i=0;i<numOfPages;i++)
+	for(int i=0;i< numOfMaxPages-1;i++)
 	{
 		delete pagesArray[i];
 	}
@@ -64,7 +64,7 @@ FanPage* PagesArray::addPage(const char* name)
 }
 
 
-bool PagesArray::checkIfNameExist(const char* name)
+bool PagesArray::checkIfNameExist(const char* name) const
 {
 	for (int i = 0; i < numOfPages; i++)
 	{
@@ -80,10 +80,8 @@ bool PagesArray::checkIfNameExist(const char* name)
 	}
 }
 
-void PagesArray::printAllPages()
+void PagesArray::printAllPages() const
 {
-	cout << "All the pages:" << endl;
-
 	if (numOfPages == 0)
 	{
 		cout << "None"<<endl;
@@ -96,7 +94,7 @@ void PagesArray::printAllPages()
 	}
 }
 
-FanPage* PagesArray::findPage(const char* name)
+FanPage* PagesArray::findPage(const char* name) const
 {
 	FanPage* theFoundPage = nullptr;
 

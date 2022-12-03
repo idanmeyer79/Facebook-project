@@ -8,14 +8,14 @@ MembersArray:: MembersArray()
 
 MembersArray::~MembersArray()
 {
-	for(int i =0;i<numOfMembers;i++)
+	for(int i =0;i< numOfMaxMembers-1;i++)
 	{
 		delete membersArray[i];
 	}
 	delete[]membersArray;
 }
 
-bool MembersArray::checkIfNameExist(const char* name)
+bool MembersArray::checkIfNameExist(const char* name) const
 {
 	for (int i = 0; i < numOfMembers; i++)
 	{
@@ -79,10 +79,8 @@ void MembersArray:: deleteMember(Member& member)
 	}
 }
 
-void MembersArray::printAllMembers()
+void MembersArray::printAllMembers() const
 {
-	cout << "All the members:" << endl;
-
 	if (numOfMembers == 0)
 	{
 		cout << "None"<<endl;
@@ -95,7 +93,7 @@ void MembersArray::printAllMembers()
 	}
 }
 
-Member* MembersArray::getMember(const char* name)
+Member* MembersArray::getMember(const char* name) const
 {
 	Member* theFoundMember = nullptr;
 
@@ -110,7 +108,7 @@ Member* MembersArray::getMember(const char* name)
 	return theFoundMember;
 }
 
-void MembersArray::showLast10StatusesOfEach()
+void MembersArray::showLast10StatusesOfEach() const
 {
 	for (int i = 0; i < numOfMembers; i++)
 	{

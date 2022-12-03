@@ -15,15 +15,15 @@ private:
 	int numOfMaxMembers = 1;
 
 public:
-	MembersArray(MembersArray& other) = delete;
+	MembersArray(const MembersArray& other) = delete;
 	MembersArray();
 	~MembersArray();
-	int getNumOfMembers()   { return numOfMembers; }
-	int getNumOfMaxMembrs() { return numOfMaxMembers; }
-	Member* getMember(const char* name);
-	bool checkIfNameExist(const char* name);
-	void printAllMembers();
-	void showLast10StatusesOfEach();
+	const int getNumOfMembers() const  { return numOfMembers;    }
+	const int getNumOfMaxMembrs() const { return numOfMaxMembers; }
+	Member* getMember(const char* name) const;
+	bool checkIfNameExist(const char* name) const ;
+	void printAllMembers() const;
+	void showLast10StatusesOfEach() const;
 	void deleteMember(Member& member);
 	void addMember(Member& p);
 	Member* addMember(const char* name, const Date& dateOfBirth);

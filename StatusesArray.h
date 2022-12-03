@@ -12,15 +12,15 @@ private:
 	int numOfMaxStatuses = 1;
 
 public:
-	StatusesArray(StatusesArray& other) = delete;
+	StatusesArray(const StatusesArray& other) = delete;
 	StatusesArray();
 	~StatusesArray();
-	int getNumOfStatuses() { return numOfStatuses; }
-	int getMaxNumOfStatuses() { return numOfMaxStatuses; }
-	Status** getStatusArray() {return statusArray; 	}
+	int getNumOfStatuses() const   { return numOfStatuses;    }
+	int getMaxNumOfStatuses() const { return numOfMaxStatuses; }
+	Status** getStatusArray() {return statusArray; 	     }
 	void addStatusToArray(Status& s);
-	void printAllStatuses();
-	void print10();
+	void printAllStatuses() const ;
+	void print10() const ;
 };
 
 #endif // !__StatusesArray__

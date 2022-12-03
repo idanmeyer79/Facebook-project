@@ -13,14 +13,14 @@ private:
 	char* date_and_time;
 
 public:
-	Status(Status& other) = delete;
+	Status(const Status& other) = delete;
 	Status(const char* text);
 	Status(char* text);
 	~Status();
-	bool setText(const char* text);
-	char* getText() { return text; }
-	char* getDateAndTime() { return date_and_time; }
-	void printStatus();
+	bool setText(const char* text); 
+	const char* getText() const        { return text;          }
+	const char* getDateAndTime() const { return date_and_time; }
+	void printStatus() const;
 };
 
 #endif // !__STATUS_H__

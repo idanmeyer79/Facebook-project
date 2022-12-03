@@ -31,9 +31,9 @@ Status::~Status() //d'tor
 	delete[]date_and_time;
 }
 
-void Status::printStatus()
+void Status::printStatus() const
 {
-	cout << "The status created at: " << date_and_time << "The status is: " << text << endl;
+	cout << "The status created at: " << date_and_time << "   The status is: " << text << endl;
 }
 
 bool Status:: setText(const char* text)
