@@ -41,6 +41,7 @@ public:
 	bool checkFriendship(const char* name);
 	void disConnectPage(FanPage& page);
 	bool checkIfAlreadyFolowing(const char* name);
+	void addStatus(const char* text);
 };
 
 #endif // !__MEMBER_H__

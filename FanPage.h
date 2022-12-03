@@ -28,7 +28,8 @@ public:
 	void showMyStatuses();
 	void addStatus(Status& s);
 	void addStatus();
-
+	void addStatus(const char* txt);
+	
 };
 
 #endif // !__PAGE_H__

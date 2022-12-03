@@ -57,3 +57,9 @@ void FanPage::addStatus(Status& s)
 {
 	statuses.addStatusToArray(s);
 }
+
+void FanPage::addStatus(const char* txt)
+{
+	Status* status = new Status(txt);
+	statuses.addStatusToArray(*status);
+}

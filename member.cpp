@@ -78,7 +78,13 @@ void Member :: addStatus()
 	memberStatuses.addStatusToArray(*status);
 }
 
-void Member:: addStatus(Status& status)
+void Member::addStatus(const char* text)
+{
+	Status* status = new Status(text);
+	memberStatuses.addStatusToArray(*status);
+}
+
+void Member::addStatus(Status& status)
 {
 	memberStatuses.addStatusToArray(status);
 }

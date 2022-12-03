@@ -35,6 +35,26 @@ void PagesArray::addPage(FanPage& p)
 	numOfPages++;
 }
 
+FanPage* PagesArray::addPage(const char* name)
+{
+	FanPage* fanPage1 = new FanPage(name);
+
+	if (numOfMaxPages == numOfPages) {
+		numOfMaxPages = numOfMaxPages * 2;
+		FanPage** tmp = new FanPage * [numOfMaxPages];
+		for (int i = 0; i < numOfPages; i++)
+			tmp[i] = pagesArray[i];
+		pagesArray = tmp;
+		tmp = nullptr;
+		delete[] tmp;
+	}
+
+	pagesArray[numOfPages] = fanPage1;
+	numOfPages++;
+	return fanPage1;
+}
+
+
 bool PagesArray::checkIfNameExist(const char* name)
 {
 	for (int i = 0; i < numOfPages; i++)
