@@ -1,8 +1,8 @@
 #ifndef __StatusesArray__
 #define __StatusesArray__
 #include <iostream>
-#pragma warning(disable: 4996)
 #include"Status.h"
+#pragma warning(disable: 4996)
 
 class StatusesArray
 {
@@ -13,11 +13,11 @@ private:
 
 public:
 	StatusesArray();
-	//~StatusesArray();
+	~StatusesArray();
+	int getNumOfStatuses() { return numOfStatuses; }
 	void addStatusToArray(Status& s);
 	void printAllStatuses();
 	void print10();
-	int getNumOfStatuses() { return numOfStatuses; }
 };
 
 

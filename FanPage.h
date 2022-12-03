@@ -12,6 +12,10 @@ class Member;
 
 class FanPage
 {
+public:
+	static constexpr int LEN_OF_STATUS = 100;
+	static constexpr int LEN_OF_NAME = 20;
+
 private:
 	char* pageName;
 	MembersArray* fans;
@@ -19,6 +23,7 @@ private:
 	
 public:
 	FanPage(const char* name);
+	~FanPage();
 	bool setName(const char* name);
 	char* getName();
 	int getNumOfFans();
@@ -29,7 +34,6 @@ public:
 	void addStatus(Status& s);
 	void addStatus();
 	void addStatus(const char* txt);
-	
 };
 
 #endif // !__PAGE_H__

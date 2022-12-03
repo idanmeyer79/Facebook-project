@@ -26,7 +26,6 @@ PagesArray& Admin:: getPagesArray()
 	return fanPages;
 }
 
-
 void Admin:: menu()
 {
 	int action;
@@ -86,13 +85,13 @@ Member* Admin::getDetailsForMember()
 {
 	int day =0 , month =0, year=0;
 	char slash_dummy;
-	char name[20];
+	char name[LEN_OF_NAME];
 	getchar(); //clear the buffer 
 
 	do {
 		cout << "Please enter a name - max 20 letters" << endl;
 		//cin.ignore();
-		cin.getline(name, 20);
+		cin.getline(name, LEN_OF_NAME);
 	} while (users.checkIfNameExist(name));
 
 	Date date(day, month, year);
@@ -114,13 +113,13 @@ void Admin::createFanPage()
 
 FanPage* Admin::getDetailsForPage()
 {
-	char name[20];
+	char name[LEN_OF_NAME];
 	getchar(); //clear the buffer 
 
 	do {
-		cout << "Please enter the name  of the page- max 20 letters" << endl;
+		cout << "Please enter the name of the page- max 20 letters" << endl;
 		//cin.ignore();
-		cin.getline(name, 20);
+		cin.getline(name, LEN_OF_NAME);
 	} while (fanPages.checkIfNameExist(name));
 
 	FanPage* fanPage = new FanPage(name);
@@ -129,7 +128,7 @@ FanPage* Admin::getDetailsForPage()
 
 void Admin::addStatusToFanPageOrMember() {
 	int choice;
-	char name[20];
+	char name[LEN_OF_NAME];
 
 	do {
 		cout << "If you want to add status to member enter 1, if you want to add status to a fan page enter 2" << endl;
@@ -143,7 +142,7 @@ void Admin::addStatusToFanPageOrMember() {
 			do
 			{
 				cout << "Please enter the name of the member from the list" << endl;
-				cin.getline(name, 20);
+				cin.getline(name, LEN_OF_NAME);
 				tmpMember = users.getMember(name);
 				if (tmpMember == nullptr)
 				{
@@ -161,7 +160,7 @@ void Admin::addStatusToFanPageOrMember() {
 			do
 			{
 				cout << "Please enter the name of the paeg from the list" << endl;
-				cin.getline(name, 20);
+				cin.getline(name, LEN_OF_NAME);
 				tmpPage = fanPages.findPage(name);
 				if (tmpPage == nullptr)
 				{
@@ -178,7 +177,7 @@ void Admin::addStatusToFanPageOrMember() {
 void Admin::showAllStatusesOfMemberOrFanPage()
 {
 	int choice;
-	char name[20];
+	char name[LEN_OF_NAME];
 
 	do {
 		cout << "Enter 1 to choose a member, 2 to choose a fan page or 3 to go back to main menu" << endl;
@@ -192,7 +191,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 			do
 			{
 				cout << "Please enter the name of the member from the list" << endl;
-				cin.getline(name, 20);
+				cin.getline(name, LEN_OF_NAME);
 				tmpMember = users.getMember(name);
 				if (tmpMember == nullptr)
 				{
@@ -209,7 +208,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 			do
 			{
 				cout << "Please enter the name of the fan page you want" << endl;
-				cin.getline(name, 20);
+				cin.getline(name, LEN_OF_NAME);
 				tmpPage = fanPages.findPage(name);
 				if (tmpPage == nullptr)
 				{
@@ -225,8 +224,8 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 
 void Admin::makeFriendship()
 {
-	char name1[20];
-	char name2[20];
+	char name1[LEN_OF_NAME];
+	char name2[LEN_OF_NAME];
 	Member* member1;
 	Member* member2 = nullptr;
 
@@ -237,7 +236,7 @@ void Admin::makeFriendship()
 	{
 		do {
 			cout << "Please Choose the first member" << endl;
-			cin.getline(name1, 20);
+			cin.getline(name1, LEN_OF_NAME);
 			member1 = users.getMember(name1);
 			if (member1 == nullptr)
 				cout << "No such user please try again"<<endl;
@@ -246,7 +245,7 @@ void Admin::makeFriendship()
 
 		do {
 			cout << "Please Choose the second member" << endl;
-			cin.getline(name2, 20);
+			cin.getline(name2, LEN_OF_NAME);
 			if (!(strcmp(name1, name2)))
 			{
 				cout << "Its the same member as the first one, please enter another one" << endl;
@@ -280,8 +279,8 @@ void Admin::makeFriendship(Member& member1, Member& member2)
 
 void Admin::unFriendship()
 {
-	char name1[20];
-	char name2[20];
+	char name1[LEN_OF_NAME];
+	char name2[LEN_OF_NAME];
 	Member* member1;
 	Member* member2 = nullptr;
 
@@ -290,7 +289,7 @@ void Admin::unFriendship()
 
 	do {
 		cout << "Please Choose the first member" << endl;
-		cin.getline(name1, 20);
+		cin.getline(name1, LEN_OF_NAME);
 		member1 = users.getMember(name1);
 		if (member1 == nullptr)
 			cout << "No such user please try again" << endl;
@@ -309,7 +308,7 @@ void Admin::unFriendship()
 
 	do {
 		cout << "Please Choose the second member" << endl;
-		cin.getline(name2, 20);
+		cin.getline(name2, LEN_OF_NAME);
 		if (!(strcmp(name1, name2)))
 		{
 			cout << "Its the same member as the first one, please enter another one" << endl;
@@ -327,8 +326,8 @@ void Admin::unFriendship()
 
 void Admin::disConnectFanAndPage()
 {
-	char nameOfMember[20];
-	char nameOfPage[20];
+	char nameOfMember[LEN_OF_NAME];
+	char nameOfPage[LEN_OF_NAME];
 	Member* member = nullptr;
 	FanPage* page = nullptr;
 
@@ -339,7 +338,7 @@ void Admin::disConnectFanAndPage()
 		fanPages.printAllPages();
 		do {
 			cout << "Please Choose the fan page" << endl;
-			cin.getline(nameOfPage, 20);
+			cin.getline(nameOfPage, LEN_OF_NAME);
 			page = fanPages.findPage(nameOfPage);
 			if (page == nullptr)
 				cout << "No such page please try again" << endl;
@@ -357,7 +356,7 @@ void Admin::disConnectFanAndPage()
 
 		do {
 			cout << "Please Choose the member" << endl;
-			cin.getline(nameOfMember, 20);
+			cin.getline(nameOfMember, LEN_OF_NAME);
 			member = users.getMember(nameOfMember);
 			if (member == nullptr)
 				cout << "No such user please try again" << endl;
@@ -380,8 +379,8 @@ void Admin::ConnectFanToPage(Member& member, FanPage& page)
 
 void Admin::ConnectFanToPage() //להודפיס את כל הדפים שהחבר הנחבר עוקב אחריהם
 {
-	char nameOfMember[20];
-	char nameOfPage[20];
+	char nameOfMember[LEN_OF_NAME];
+	char nameOfPage[LEN_OF_NAME];
 	Member* member1 = nullptr;
 	FanPage* page1 = nullptr;
 
@@ -392,7 +391,7 @@ void Admin::ConnectFanToPage() //להודפיס את כל הדפים שהחבר הנחבר עוקב אחריהם
 		getchar(); //clear the buffer 
 		do {
 			cout << "Please Choose the member" << endl;
-			cin.getline(nameOfMember, 20);
+			cin.getline(nameOfMember, LEN_OF_NAME);
 			member1 = users.getMember(nameOfMember);
 			if (member1 == nullptr)
 				cout << "No such user please try again" << endl;
@@ -401,7 +400,7 @@ void Admin::ConnectFanToPage() //להודפיס את כל הדפים שהחבר הנחבר עוקב אחריהם
 		do {
 			fanPages.printAllPages();
 			cout << "Please Choose the fan page" << endl;
-			cin.getline(nameOfPage, 20);
+			cin.getline(nameOfPage, LEN_OF_NAME);
 			page1 = fanPages.findPage(nameOfPage);
 			if (page1 == nullptr)
 				cout << "No such page please try again" << endl;
@@ -422,7 +421,7 @@ void Admin::ConnectFanToPage() //להודפיס את כל הדפים שהחבר הנחבר עוקב אחריהם
 void Admin::printAllFriendsOfMemberOrFanPage()
 {
 	int choice;
-	char name[20];
+	char name[LEN_OF_NAME];
 
 	do {
 		cout << "Enter 1 to choose a member, 2 to choose a fan page or 3 to go back to main menu" << endl;
@@ -436,7 +435,7 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 			do
 			{
 				cout << "Please enter the name of the member from the list" << endl;
-				cin.getline(name, 20);
+				cin.getline(name, LEN_OF_NAME);
 				member = users.getMember(name);
 				if (member == nullptr)
 				{
@@ -454,7 +453,7 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 			do
 			{
 				cout << "Please enter the name of the page from the list" << endl;
-				cin.getline(name, 20);
+				cin.getline(name, LEN_OF_NAME);
 				fanPage = fanPages.findPage(name);
 				if (fanPage == nullptr)
 				{
@@ -476,7 +475,7 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 
 void Admin::showLast10StatusesOfFriendsOfMember()
 {
-	char name1[20];
+	char name1[LEN_OF_NAME];
 	Member* member1 = nullptr;
 
 	users.printAllMembers();
@@ -484,7 +483,7 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 
 	do {
 		cout << "Please Choose the first member" << endl;
-		cin.getline(name1, 20);
+		cin.getline(name1, LEN_OF_NAME);
 		member1 = users.getMember(name1);
 		if (member1 == nullptr)
 			cout << "No such user please try again" << endl;
@@ -499,9 +498,9 @@ void Admin::hardCodedData()
 	FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
 	FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
 
-	Member* member1 = users.addMember("Boaz", Date(1, 1, 2000));
+	Member* member1 = users.addMember("Boaz", Date(1, 1, 2020));
 	Member* member2 = users.addMember("Romina", Date(2, 2, 2000));
-	Member* member3 = users.addMember("Arie", Date(3, 3, 2000));
+	Member* member3 = users.addMember("Arie", Date(3, 3, 1997));
 
 	member1->addStatus("Hey its Boaz");
 	member1->addStatus("Boaz 2");
@@ -509,8 +508,8 @@ void Admin::hardCodedData()
 	member2->addStatus("Romina 2");
 	member3->addStatus("Hey its Arie");
 	member3->addStatus(" Arie 2");
-	fanPage1->addStatus("welcome to Mondial 2022");
-	fanPage1->addStatus("Mondial 2022 2");
+	fanPage1->addStatus("welcome to Mondial LEN_OF_NAME22");
+	fanPage1->addStatus("Mondial LEN_OF_NAME22 2");
 	fanPage2->addStatus("welcome to re'evim beravcha");
 	fanPage2->addStatus("re'evim beravcha 2");
 	fanPage3->addStatus("welcome to keren kalif fans");

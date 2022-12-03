@@ -1,9 +1,9 @@
 #ifndef __AllMembers__
 #define __AllMembers__
 #include <iostream>
-#pragma warning(disable: 4996)
 #include"Member.h"
 #include "Date.h"
+#pragma warning(disable: 4996)
 
 class Member;
 
@@ -16,15 +16,15 @@ private:
 
 public:
 	MembersArray();
-	//~MembersArray();
+	~MembersArray();
 	int getNumOfMembers() { return numOfMembers; }
-	bool checkIfNameExist(const char* name);
-	void addMember(Member& p);
-	void printAllMembers();
-	Member* getMember(const char* name);
 	int getNumOfUsres() { return numOfMembers; }
+	Member* getMember(const char* name);
+	bool checkIfNameExist(const char* name);
+	void printAllMembers();
 	void showLast10StatusesOfEach();
 	void deleteMember(Member& member);
+	void addMember(Member& p);
 	Member* addMember(const char* name, const Date& dateOfBirth);
 };
 

@@ -25,7 +25,6 @@ Status::Status(char* t)
 	strcpy(date_and_time, tm);
 }
 
-
 Status::~Status() //d'tor
 {
 	delete[]text;

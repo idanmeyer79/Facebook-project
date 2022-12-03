@@ -13,6 +13,13 @@ Member::Member(const char* name, const Date& date) : dateOfBirth(date)
 	//שיש שדות לא מאותחלים פה
 }
 
+Member::~Member()
+{
+	delete[]memberName;
+	//delete memberFriends;
+	//delete memberFanPages;
+}
+
 void Member :: setName(const char* Name)
 {
 	strcpy(memberName , Name);
@@ -71,9 +78,9 @@ void Member::showFanPages()
 
 void Member :: addStatus()
 {
-	char text[100];
+	char text[LEN_OF_STATUS];
 	cout << "Please enter new status: " << endl;
-	cin.getline(text,100);
+	cin.getline(text,LEN_OF_STATUS);
 	Status* status = new Status(text);
 	memberStatuses.addStatusToArray(*status);
 }

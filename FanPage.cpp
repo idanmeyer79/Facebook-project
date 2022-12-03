@@ -8,6 +8,12 @@ FanPage::FanPage(const char* name)
 	fans = new MembersArray;
 }
 
+FanPage:: ~FanPage()
+{
+	delete[]pageName;
+	//delete fans; 
+}
+
 char* FanPage::getName()
 { 
 	return pageName; 
@@ -46,9 +52,9 @@ void FanPage::showMyStatuses()
 
 void FanPage::addStatus()
 {
-	char text[100];
+	char text[LEN_OF_STATUS];
 	cout << "Please enter new status: " << endl;
-	cin.getline(text, 100);
+	cin.getline(text, LEN_OF_STATUS);
 	Status* status = new Status(text);
 	statuses.addStatusToArray(*status);
 }

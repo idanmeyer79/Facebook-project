@@ -14,6 +14,10 @@ class FanPage;
 
 class Member
 {
+public:
+	static constexpr int LEN_OF_STATUS = 100;
+	static constexpr int LEN_OF_NAME = 20;
+
 private:
 	char* memberName;
 	Date dateOfBirth;
@@ -23,25 +27,26 @@ private:
 
 public:
 	Member(const char* name, const Date& dateOfBirth);
+	~Member();
 	void setName(const char* Name);
 	char* getName();
 	void setBirthDay(Date& date);
 	Date getDate();
-	void addFriend(Member& member);
-	void followPage(FanPage& fanPage);
 	int getNumOfFriends();
+	void followPage(FanPage& fanPage);
 	void showFriends();
 	void showFanPages();
-	void addStatus();
-	void addStatus(Status& status);
 	void showMyStatuses();
-	void unFriend(Member& member);
 	void Show10MyFriendsLastStatuses();
-	void printMyLast10Statuses();
-	bool checkFriendship(const char* name);
-	void disConnectPage(FanPage& page);
-	bool checkIfAlreadyFolowing(const char* name);
+	void addFriend(Member& member);
+	void addStatus();
 	void addStatus(const char* text);
+	void addStatus(Status& status);
+	void unFriend(Member& member);
+	void printMyLast10Statuses();
+	void disConnectPage(FanPage& page);
+	bool checkFriendship(const char* name);
+	bool checkIfAlreadyFolowing(const char* name);
 };
 
 #endif // !__MEMBER_H__

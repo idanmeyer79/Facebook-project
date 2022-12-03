@@ -7,6 +7,15 @@ StatusesArray::StatusesArray()
 	statusArray = new Status * [numOfMaxStatuses];
 }
 
+StatusesArray::~StatusesArray()
+{
+	for(int i=0;i< numOfStatuses;i++)
+	{
+		delete statusArray[i];
+	}
+	delete[]statusArray;
+}
+
 void StatusesArray::addStatusToArray(Status& s)
 {
 	if (numOfMaxStatuses == numOfStatuses) {

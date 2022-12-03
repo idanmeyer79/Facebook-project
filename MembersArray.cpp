@@ -6,6 +6,15 @@ MembersArray:: MembersArray()
 	membersArray = new Member * [numOfMaxMembers];
 }
 
+MembersArray::~MembersArray()
+{
+	for(int i =0;i<numOfMembers;i++)
+	{
+		delete membersArray[i];
+	}
+	delete[]membersArray;
+}
+
 bool MembersArray::checkIfNameExist(const char* name)
 {
 	for (int i = 0; i < numOfMembers; i++)
@@ -69,7 +78,6 @@ void MembersArray:: deleteMember(Member& member)
 		}
 	}
 }
-
 
 void MembersArray::printAllMembers()
 {

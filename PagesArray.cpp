@@ -5,6 +5,15 @@ PagesArray::PagesArray()
 {
 	pagesArray = new FanPage * [numOfMaxPages];
 }
+
+PagesArray::~PagesArray()
+{
+	for(int i=0;i<numOfPages;i++)
+	{
+		delete pagesArray[i];
+	}
+	delete[]pagesArray;
+}
 	
 void PagesArray::deletePage(FanPage& page)
 {

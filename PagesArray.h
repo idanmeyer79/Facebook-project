@@ -1,8 +1,8 @@
 #ifndef __AllPages_H__
 #define __AllPages_H__
 #include <iostream>
-#pragma warning(disable: 4996)
 #include"FanPage.h"
+#pragma warning(disable: 4996)
 
 class FanPage;
 
@@ -14,15 +14,15 @@ private:
 	int numOfMaxPages = 1;
 
 public:
-	void addPage(FanPage& p);
-	int getnumOfPages() { return numOfPages; }
-	//~AllPages();
 	PagesArray();
+	~PagesArray();
+	int getnumOfPages() { return numOfPages; }
+	void addPage(FanPage& p);
+	FanPage* addPage(const char* name);
 	void printAllPages();
 	FanPage* findPage(const char* name);
 	bool checkIfNameExist(const char* name);
 	void deletePage(FanPage& page);
-	FanPage* addPage(const char* name);
 };
 
 

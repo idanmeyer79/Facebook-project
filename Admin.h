@@ -11,17 +11,20 @@
 
 class Admin
 {
+public:
+	static constexpr int LEN_OF_NAME = 20;
+
 private:
 	PagesArray fanPages;
 	MembersArray users;
 
 public:
-	PagesArray& getPagesArray();
 	void printMenu() ;
 	void menu();
 	void createFanPage();
 	Member* getDetailsForMember();
 	FanPage* getDetailsForPage();
+	PagesArray& getPagesArray();
 	void createMember();
 	void addStatusToFanPageOrMember();
 	void showAllStatusesOfMemberOrFanPage();
