@@ -13,7 +13,6 @@ void Date::show() const
 	cout << day << "/" << month << "/" << year << " ";
 }
 
-///ма рлеп
 bool Date::setDate(int d, int m, int y)
 {
     if (!checkdate(d, m, y))
