@@ -11,7 +11,6 @@ FanPage::FanPage(const char* name)
 FanPage:: ~FanPage()
 {
 	delete[]pageName;
-	//delete fans; 
 }
 
 char* FanPage::getName()

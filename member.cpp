@@ -10,14 +10,11 @@ Member::Member(const char* name, const Date& date) : dateOfBirth(date)
 	strcpy(memberName, name);
 	memberFriends = new MembersArray;
 	memberFanPages = new PagesArray;
-	//שיש שדות לא מאותחלים פה
 }
 
 Member::~Member()
 {
 	delete[]memberName;
-	//delete memberFriends;
-	//delete memberFanPages;
 }
 
 void Member :: setName(const char* Name)

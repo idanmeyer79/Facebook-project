@@ -51,4 +51,3 @@ void StatusesArray::print10()
 	cout << endl;
 }
 
-//צריך לממש דיסטרקטור

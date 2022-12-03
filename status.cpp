@@ -28,6 +28,7 @@ Status::Status(char* t)
 Status::~Status() //d'tor
 {
 	delete[]text;
+	delete[]date_and_time;
 }
 
 void Status::printStatus()
