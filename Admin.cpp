@@ -397,7 +397,7 @@ void Admin::ConnectFanToPage(Member& member, FanPage& page)
 	member.followPage(page);
 }
 
-void Admin::ConnectFanToPage() //להודפיס את כל הדפים שהחבר הנחבר עוקב אחריהם
+void Admin::ConnectFanToPage() 
 {
 	char nameOfMember[LEN_OF_NAME];
 	char nameOfPage[LEN_OF_NAME];
@@ -537,18 +537,6 @@ void Admin::hardCodedData()
 	fanPage2->addStatus("re'evim beravcha 2");
 	fanPage3->addStatus("welcome to keren kalif fans");
 	fanPage3->addStatus("keren kalif fans 2");
-
-	///לממחוק לפני ההגשה
-	member2->addStatus("3");
-	member2->addStatus("4"); 
-	member2->addStatus("5");
-	member2->addStatus("6"); 
-	member2->addStatus("7");
-	member2->addStatus("8"); 
-	member2->addStatus("9");
-	member2->addStatus("10"); 
-	member2->addStatus("11");
-	member2->addStatus("12");
 
 	makeFriendship(*member1, *member2);
 	makeFriendship(*member1,*member3);
