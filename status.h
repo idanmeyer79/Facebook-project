@@ -6,6 +6,8 @@
 
 class Status
 {
+public:
+	static constexpr int LEN_OF_STATUS = 100;
 private:
 	char* text;
 	char* date_and_time;
@@ -15,6 +17,9 @@ public:
 	Status(const char* text);
 	Status(char* text);
 	~Status();
+	bool setText(const char* text);
+	char* getText() { return text; }
+	char* getDateAndTime() { return date_and_time; }
 	void printStatus();
 };
 

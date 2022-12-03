@@ -28,6 +28,8 @@ public:
 	bool setName(const char* name);
 	char* getName();
 	int getNumOfFans();
+	StatusesArray& getStatusesArray() { return statuses; }
+	MembersArray& getFansArray() { return *fans; }
 	void addFan(Member& fan);
 	void printFans();
 	void removeFan(Member& fan);

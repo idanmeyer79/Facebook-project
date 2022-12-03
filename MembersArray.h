@@ -18,8 +18,8 @@ public:
 	MembersArray(MembersArray& other) = delete;
 	MembersArray();
 	~MembersArray();
-	int getNumOfMembers() { return numOfMembers; }
-	int getNumOfUsres() { return numOfMembers; }
+	int getNumOfMembers()   { return numOfMembers; }
+	int getNumOfMaxMembrs() { return numOfMaxMembers; }
 	Member* getMember(const char* name);
 	bool checkIfNameExist(const char* name);
 	void printAllMembers();
@@ -28,8 +28,6 @@ public:
 	void addMember(Member& p);
 	Member* addMember(const char* name, const Date& dateOfBirth);
 };
-
-
 
 #endif // !__AllMembers_H__
 

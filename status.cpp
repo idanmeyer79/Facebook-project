@@ -35,3 +35,13 @@ void Status::printStatus()
 {
 	cout << "The status created at: " << date_and_time << "The status is: " << text << endl;
 }
+
+bool Status:: setText(const char* text)
+{
+	if (strlen(text) > LEN_OF_STATUS)
+	return false;
+
+	strcpy(this->text , text);
+	return true;
+}
+

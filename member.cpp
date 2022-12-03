@@ -17,9 +17,13 @@ Member::~Member()
 	delete[]memberName;
 }
 
-void Member :: setName(const char* Name)
+bool Member :: setName(const char* name)
 {
-	strcpy(memberName , Name);
+	if (strlen(name) > LEN_OF_NAME)
+		return false;
+
+	strcpy(memberName , name);
+	return true;
 }
 
 char* Member :: getName()

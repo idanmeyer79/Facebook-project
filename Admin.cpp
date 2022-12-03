@@ -26,6 +26,11 @@ PagesArray& Admin:: getPagesArray()
 	return fanPages;
 }
 
+MembersArray& Admin::getMembersArray()
+{
+	return users;
+}
+
 void Admin:: menu()
 {
 	int action;

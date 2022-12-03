@@ -17,7 +17,8 @@ public:
 	PagesArray(PagesArray& other) = delete;
 	PagesArray();
 	~PagesArray();
-	int getnumOfPages() { return numOfPages; }
+	int getNumOfPages() { return numOfPages; }
+	int getMaxNumOfPages() { return numOfMaxPages; }
 	void addPage(FanPage& p);
 	FanPage* addPage(const char* name);
 	void printAllPages();
@@ -25,7 +26,6 @@ public:
 	bool checkIfNameExist(const char* name);
 	void deletePage(FanPage& page);
 };
-
 
 #endif // !__AllPages_H__
 

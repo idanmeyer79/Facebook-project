@@ -29,11 +29,14 @@ public:
 	Member(Member& other) = delete;
 	Member(const char* name, const Date& dateOfBirth);
 	~Member();
-	void setName(const char* Name);
+	MembersArray& getMembersArray() { return *memberFriends; }
+	StatusesArray& getStatusesArray() { return memberStatuses; }
+	PagesArray& getPagesArray() { return *memberFanPages; }
 	char* getName();
-	void setBirthDay(Date& date);
 	Date getDate();
 	int getNumOfFriends();
+	bool setName(const char* name);
+	void setBirthDay(Date& date);
 	void followPage(FanPage& fanPage);
 	void showFriends();
 	void showFanPages();

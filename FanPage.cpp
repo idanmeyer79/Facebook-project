@@ -20,6 +20,9 @@ char* FanPage::getName()
 
 bool FanPage::setName(const char* name) 
 {
+	if (strlen(name) > LEN_OF_NAME)
+		return false;
+
 	strcpy(this->pageName, name);
 	return true;
 }
@@ -31,7 +34,7 @@ void FanPage::addFan(Member& fan)
 
 int FanPage::getNumOfFans()
 {
-	return fans->getNumOfUsres(); 
+	return fans->getNumOfMembers();
 }
 
 void FanPage::removeFan(Member& fan)

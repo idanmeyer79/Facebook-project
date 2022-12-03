@@ -18,16 +18,18 @@ private:
 	PagesArray fanPages;
 	MembersArray users;
 	
-
 public:
 	Admin() = default;
 	Admin(Admin& other) = delete;
-	void printMenu() ;
-	void menu();
-	void createFanPage();
+	MembersArray& getMembersArray();
 	Member* getDetailsForMember();
 	FanPage* getDetailsForPage();
 	PagesArray& getPagesArray();
+	void setPagesArray(PagesArray newFanPages) { fanPages = newFanPages; }
+	void setMembersArray(MembersArray newUsers) { users = newUsers; }
+	void printMenu();
+	void menu();
+	void createFanPage();
 	void createMember();
 	void addStatusToFanPageOrMember();
 	void showAllStatusesOfMemberOrFanPage();
