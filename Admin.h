@@ -29,7 +29,7 @@ public:
 	void setMembersArray(MembersArray newUsers) { users = newUsers;       }
 	void printMenu();
 	void printAcounts() const;
-	void printAllFriendsOfMemberOrFanPage() const;
+	void printAllFriendsOfMemberOrFanPage();
 	void menu();
 	void createFanPage();
 	void createMember();
@@ -43,6 +43,8 @@ public:
 	void unFriendship();
 	void disConnectFanAndPage();
 	void hardCodedData();
+	Member* getMemberToAction();
+	FanPage* getFanPageToAction();
 };
 
 #endif // !__ADMIN_H__

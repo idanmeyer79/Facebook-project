@@ -137,9 +137,40 @@ FanPage* Admin::getDetailsForPage() const
 	return fanPage;
 }
 
+Member* Admin::getMemberToAction() {
+	Member* tmpMember = nullptr;
+	char name[LEN_OF_NAME];
+	do
+	{
+		cout << "Please enter the name of the member from the list" << endl;
+		cin.getline(name, LEN_OF_NAME);
+		tmpMember = users.getMember(name);
+		if (tmpMember == nullptr)
+		{
+			cout << "The member was not found Please enter another name" << endl;
+		}
+	} while (tmpMember == nullptr);
+	return tmpMember;
+}
+
+FanPage* Admin::getFanPageToAction() {
+	FanPage* tmpPage = nullptr;
+	char name[LEN_OF_NAME];
+	do
+	{
+		cout << "Please enter the name of the paeg from the list" << endl;
+		cin.getline(name, LEN_OF_NAME);
+		tmpPage = fanPages.findPage(name);
+		if (tmpPage == nullptr)
+		{
+			cout << "The page was not found Please enter another name" << endl;
+		}
+	} while (tmpPage == nullptr);
+	return tmpPage;
+}
+
 void Admin::addStatusToFanPageOrMember() {
 	int choice;
-	char name[LEN_OF_NAME];
 
 	do {
 		cout << "For a member enter 1 , For a Fan page enter 2" << endl;
@@ -151,17 +182,7 @@ void Admin::addStatusToFanPageOrMember() {
 			Member* tmpMember = nullptr;
 			cout << "All the members:" << endl;
 			users.printAllMembers();
-			do
-			{
-				cout << "Please enter the name of the member from the list" << endl;
-				cin.getline(name, LEN_OF_NAME);
-				tmpMember = users.getMember(name);
-				if (tmpMember == nullptr)
-				{
-					cout << "The member was not found Please enter another name" << endl;
-				}
-			} while (tmpMember == nullptr);
-
+			tmpMember = getMemberToAction();
 			tmpMember->addStatus();
 			cout << "The status was added :)" << endl;
 			return;
@@ -169,18 +190,9 @@ void Admin::addStatusToFanPageOrMember() {
 		else //to fan page
 		{
 			FanPage* tmpPage = nullptr;
+			cout << "All the fan Pages:" << endl;
 			fanPages.printAllPages();
-			do
-			{
-				cout << "Please enter the name of the paeg from the list" << endl;
-				cin.getline(name, LEN_OF_NAME);
-				tmpPage = fanPages.findPage(name);
-				if (tmpPage == nullptr)
-				{
-					cout << "The page was not found Please enter another name" << endl;
-				}
-			} while (tmpPage == nullptr);
-
+			tmpPage = getFanPageToAction();
 			tmpPage->addStatus();
 			cout << "The status was added :)" << endl;
 			return;
@@ -191,7 +203,6 @@ void Admin::addStatusToFanPageOrMember() {
 void Admin::showAllStatusesOfMemberOrFanPage()
 {
 	int choice;
-	char name[LEN_OF_NAME];
 
 	do {
 		cout << "For a member enter 1 , For a fan page enter 2" << endl;
@@ -203,16 +214,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 			Member* tmpMember = nullptr;
 			cout << "All the members:" << endl;
 			users.printAllMembers();
-			do
-			{
-				cout << "Please enter the name of the member from the list" << endl;
-				cin.getline(name, LEN_OF_NAME);
-				tmpMember = users.getMember(name);
-				if (tmpMember == nullptr)
-				{
-					cout << "The member was not found Please enter another name" << endl;
-				}
-			} while (tmpMember == nullptr);
+			tmpMember = getMemberToAction();
 			tmpMember->showMyStatuses();
 			return;
 		}
@@ -220,16 +222,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 		{
 			FanPage* tmpPage = nullptr;
 			fanPages.printAllPages();
-			do
-			{
-				cout << "Please enter the name of the fan page you want" << endl;
-				cin.getline(name, LEN_OF_NAME);
-				tmpPage = fanPages.findPage(name);
-				if (tmpPage == nullptr)
-				{
-					cout << "The page was not found Please enter another name" << endl;
-				}
-			} while (tmpPage == nullptr);			
+			tmpPage = getFanPageToAction();
 			tmpPage->showMyStatuses();
 			return;
 		}
@@ -344,24 +337,15 @@ void Admin::unFriendship()
 
 void Admin::disConnectFanAndPage()
 {
-	char nameOfMember[LEN_OF_NAME];
-	char nameOfPage[LEN_OF_NAME];
 	Member* member = nullptr;
 	FanPage* page = nullptr;
 
 	getchar(); //clear the buffer 
-
 	do
 	{
+		cout << "All the fan pages:" << endl;
 		fanPages.printAllPages();
-		do {
-			cout << "Please Choose the fan page" << endl;
-			cin.getline(nameOfPage, LEN_OF_NAME);
-			page = fanPages.findPage(nameOfPage);
-			if (page == nullptr)
-				cout << "No such page please try again" << endl;
-		} while ((page == nullptr));
-
+		page = getFanPageToAction();
 		if (page->getNumOfFans() == 0)
 		{
 			cout << "This fanPage doesn't have any fans yet" << endl;
@@ -369,27 +353,20 @@ void Admin::disConnectFanAndPage()
 		}
 		else
 		{
-			cout << nameOfPage << "'s fans are:" << endl;
+			cout << page->getName() << "'s fans are:" << endl;
 			page->printFans();
 		}
+		member = getMemberToAction();
 
-		do {
-			cout << "Please Choose the member" << endl;
-			cin.getline(nameOfMember, LEN_OF_NAME);
-			member = users.getMember(nameOfMember);
-			if (member == nullptr)
-				cout << "No such user please try again" << endl;
-		} while (member == nullptr);
-
-		if (!(member->checkIfAlreadyFolowing(nameOfPage)))
+		if (!(member->checkIfAlreadyFolowing(page->getName())))
 		{
 			cout << "This member doesn't follow this page " << endl;
 		}
 
-	} while (!member->checkIfAlreadyFolowing(nameOfPage));
+	} while (!member->checkIfAlreadyFolowing(page->getName()));
 
 	member->disConnectPage(*page);
-	cout << endl << nameOfMember << " is no longer follows " << nameOfPage << " :(" << endl;
+	cout << endl << member->getName() << " is no longer follows " << page->getName() << " :(" << endl;
 }
 
 void Admin::ConnectFanToPage(Member& member, FanPage& page) 
@@ -399,52 +376,34 @@ void Admin::ConnectFanToPage(Member& member, FanPage& page)
 
 void Admin::ConnectFanToPage() 
 {
-	char nameOfMember[LEN_OF_NAME];
-	char nameOfPage[LEN_OF_NAME];
 	Member* member = nullptr;
 	FanPage* page = nullptr;
 
 	cout << "All the members:" << endl;
 	users.printAllMembers();
-
 	do
 	{
 		getchar(); //clear the buffer 
-		do {
-			cout << "Please Choose the member" << endl;
-			cin.getline(nameOfMember, LEN_OF_NAME);
-			member = users.getMember(nameOfMember);
-			if (member == nullptr)
-				cout << "No such user please try again" << endl;
-		} while (member == nullptr);
-
-		do {
-			fanPages.printAllPages();
-			cout << "Please Choose the fan page" << endl;
-			cin.getline(nameOfPage, LEN_OF_NAME);
-			page = fanPages.findPage(nameOfPage);
-			if (page == nullptr)
-				cout << "No such page please try again" << endl;
-		} while ((page == nullptr));
-
-		if ((!member->checkIfAlreadyFolowing(nameOfPage)))
+		member = getMemberToAction();
+		cout << "All the fanPages:" << endl;
+		fanPages.printAllPages();
+		page = getFanPageToAction();
+		if ((!member->checkIfAlreadyFolowing(page->getName())))
 		{
 			member->followPage(*page);
-			cout << nameOfMember << " is now following " << nameOfPage << " :) " << endl;
+			cout << member->getName() << " is now following " << page->getName() << " :) " << endl;
 		}
 		else
 		{
 			cout << "They are already connected!" << endl;
 		}
-	} while (!member->checkIfAlreadyFolowing(nameOfPage));
+	} while (!member->checkIfAlreadyFolowing(page->getName()));
 	
 }
 
-void Admin::printAllFriendsOfMemberOrFanPage() const
+void Admin::printAllFriendsOfMemberOrFanPage()
 {
 	int choice;
-	char memberName[LEN_OF_NAME];
-	char pageName[LEN_OF_NAME];
 
 	do {
 		cout << "For a member enter 1 , For a fan page enter 2" << endl;
@@ -456,16 +415,7 @@ void Admin::printAllFriendsOfMemberOrFanPage() const
 			Member* member;
 			cout << "All the members:" << endl;
 			users.printAllMembers();
-			do
-			{
-				cout << "Please enter the name of the member from the list" << endl;
-				cin.getline(memberName, LEN_OF_NAME);
-				member = users.getMember(memberName);
-				if (member == nullptr)
-				{
-					cout << "The member not not found Please enter another name" << endl;
-				}
-			} while (member == nullptr);
+			member = getMemberToAction();
 			member->showFriends();
 			member->showFanPages();
 			break;
@@ -475,17 +425,8 @@ void Admin::printAllFriendsOfMemberOrFanPage() const
 		{
 			FanPage* fanPage;
 			fanPages.printAllPages();
-			do
-			{
-				cout << "Please enter the name of the page from the list" << endl;
-				cin.getline(pageName, LEN_OF_NAME);
-				fanPage = fanPages.findPage(pageName);
-				if (fanPage == nullptr)
-				{
-					cout << "The page was not found Please enter another name" << endl;
-				}
-			} while (fanPage == nullptr);
-			cout << pageName << "'s fans are:" << endl;
+			fanPage = getFanPageToAction();
+			cout << fanPage->getName() << "'s fans are:" << endl;
 			fanPage->printFans();
 			break;
 		}
@@ -497,27 +438,17 @@ void Admin::printAllFriendsOfMemberOrFanPage() const
 
 void Admin::showLast10StatusesOfFriendsOfMember()
 {
-	char name[LEN_OF_NAME];
 	Member* member = nullptr;
-
 	cout << "All the members:" << endl;
 	users.printAllMembers();
 	getchar(); //clear the buffer 
-
-	do {
-		cout << "Please Choose a user" << endl;
-		cin.getline(name, LEN_OF_NAME);
-		member = users.getMember(name);
-		if (member == nullptr)
-			cout << "No such user please try again" << endl;
-	} while (member == nullptr);
-
+	member = getMemberToAction();
 	member->Show10MyFriendsLastStatuses();
 }
 
 void Admin::hardCodedData()
 {
-	FanPage* fanPage1 = fanPages.addPage("M");
+	FanPage* fanPage1 = fanPages.addPage("Mondial 2022");
 	FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
 	FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
 
