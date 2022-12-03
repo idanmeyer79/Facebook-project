@@ -2,6 +2,13 @@
 #include <cmath>
 using namespace std;
 
+#define new MYDEBUG_NEW
+#ifdef _DEBUG
+#define MYDEBUG_NEW new( _NORMAL_BLOCK, __FILE__, __LINE__)
+#else
+#define MYDEBUG_NEW new
+#endif //_DEBUG
+
 StatusesArray::StatusesArray()
 {
 	statusArray = new Status * [numOfMaxStatuses];

@@ -4,6 +4,13 @@
 #pragma warning(disable: 4996)
 using namespace std;
 
+#define new MYDEBUG_NEW
+#ifdef _DEBUG
+#define MYDEBUG_NEW new( _NORMAL_BLOCK, __FILE__, __LINE__)
+#else
+#define MYDEBUG_NEW new
+#endif //_DEBUG
+
 Member::Member(const char* name, const Date& date) : dateOfBirth(date)
 {
 	memberName = new char[strlen(name) + 1];
