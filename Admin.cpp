@@ -221,6 +221,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 		else  //to fan page
 		{
 			FanPage* tmpPage = nullptr;
+			cout << "All the fan pages:" << endl;
 			fanPages.printAllPages();
 			tmpPage = getFanPageToAction();
 			tmpPage->showMyStatuses();
@@ -443,7 +444,14 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 	users.printAllMembers();
 	getchar(); //clear the buffer 
 	member = getMemberToAction();
-	member->Show10MyFriendsLastStatuses();
+	if (member->getNumOfFriends() == 0)
+	{
+		cout << "The member doesnt have any friends" << endl;
+	}
+	else
+	{
+		member->Show10MyFriendsLastStatuses();
+	}
 }
 
 void Admin::hardCodedData()
