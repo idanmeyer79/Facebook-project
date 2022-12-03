@@ -495,42 +495,42 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 
 void Admin::hardCodedData()
 {
-	FanPage fanPage1 = fanPages.addPage("M");
-	FanPage fanPage2 = fanPages.addPage("re'evim beravcha");
-	FanPage fanPage3 = fanPages.addPage("keren kalif fans");
+	FanPage* fanPage1 = fanPages.addPage("M");
+	FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
+	FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
 
-	Member member1 = users.addMember("Boaz", Date(1, 1, 2000));
-	Member member2 = users.addMember("Romina", Date(2, 2, 2000));
-	Member member3 = users.addMember("Arie", Date(3, 3, 2000));
+	Member* member1 = users.addMember("Boaz", Date(1, 1, 2000));
+	Member* member2 = users.addMember("Romina", Date(2, 2, 2000));
+	Member* member3 = users.addMember("Arie", Date(3, 3, 2000));
 
-	member1.addStatus("Hey its Boaz");
-	member1.addStatus("Boaz 2");
-	member2.addStatus("Hey its Romina");
-	member2.addStatus("Romina 2");
-	member3.addStatus("Hey its Arie");
-	member3.addStatus(" Arie 2");
-	fanPage1.addStatus("welcome to Mondial 2022");
-	fanPage1.addStatus("Mondial 2022 2");
-	fanPage2.addStatus("welcome to re'evim beravcha");
-	fanPage2.addStatus("re'evim beravcha 2");
-	fanPage3.addStatus("welcome to keren kalif fans");
-	fanPage3.addStatus("keren kalif fans 2");
+	member1->addStatus("Hey its Boaz");
+	member1->addStatus("Boaz 2");
+	member2->addStatus("Hey its Romina");
+	member2->addStatus("Romina 2");
+	member3->addStatus("Hey its Arie");
+	member3->addStatus(" Arie 2");
+	fanPage1->addStatus("welcome to Mondial 2022");
+	fanPage1->addStatus("Mondial 2022 2");
+	fanPage2->addStatus("welcome to re'evim beravcha");
+	fanPage2->addStatus("re'evim beravcha 2");
+	fanPage3->addStatus("welcome to keren kalif fans");
+	fanPage3->addStatus("keren kalif fans 2");
 
-	//למחוק לפני ההגשה
-	member2.addStatus("3");
-	member2.addStatus("4"); 
-	member2.addStatus("5");
-	member2.addStatus("6"); 
-	member2.addStatus("7");
-	member2.addStatus("8"); 
-	member2.addStatus("9");
-	member2.addStatus("10"); 
-	member2.addStatus("11");
-	member2.addStatus("12");
+	///לממחוק לפני ההגשה
+	member2->addStatus("3");
+	member2->addStatus("4"); 
+	member2->addStatus("5");
+	member2->addStatus("6"); 
+	member2->addStatus("7");
+	member2->addStatus("8"); 
+	member2->addStatus("9");
+	member2->addStatus("10"); 
+	member2->addStatus("11");
+	member2->addStatus("12");
 
-	makeFriendship(member1, member2);
-	makeFriendship(member1,member3);
-	ConnectFanToPage(member1, fanPage1);
-	ConnectFanToPage(member1, fanPage2);
-	ConnectFanToPage(member2, fanPage1);
+	makeFriendship(*member1, *member2);
+	makeFriendship(*member1,*member3);
+	ConnectFanToPage(*member1, *fanPage1);
+	ConnectFanToPage(*member1, *fanPage2);
+	ConnectFanToPage(*member2, *fanPage1);
 }

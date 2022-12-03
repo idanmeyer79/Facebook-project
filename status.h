@@ -12,7 +12,7 @@ private:
 
 public:
 	Status(const char* text);
-	Status();
+	Status(char* text);
 	~Status();
 	void printStatus();
 };

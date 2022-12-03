@@ -78,16 +78,15 @@ void Member :: addStatus()
 	memberStatuses.addStatusToArray(*status);
 }
 
-void Member:: addStatus(Status& status)
+void Member::addStatus(const char* text)
 {
-	memberStatuses.addStatusToArray(status);
+	Status* status = new Status(text);
+	memberStatuses.addStatusToArray(*status);
 }
 
-Status& Member::addStatus(const char* txt)
+void Member::addStatus(Status& status)
 {
-	Status* status = new Status(txt);
-	memberStatuses.addStatusToArray(*status);
-	return *status;
+	memberStatuses.addStatusToArray(status);
 }
 
 void Member::showMyStatuses()

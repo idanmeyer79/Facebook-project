@@ -25,7 +25,7 @@ public:
 	int getNumOfUsres() { return numOfMembers; }
 	void showLast10StatusesOfEach();
 	void deleteMember(Member& member);
-	Member& addMember(const char* name, const Date& dateOfBirth);
+	Member* addMember(const char* name, const Date& dateOfBirth);
 };
 
 

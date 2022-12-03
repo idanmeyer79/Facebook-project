@@ -35,7 +35,7 @@ void PagesArray::addPage(FanPage& p)
 	numOfPages++;
 }
 
-FanPage& PagesArray::addPage(const char* name)
+FanPage* PagesArray::addPage(const char* name)
 {
 	FanPage* fanPage1 = new FanPage(name);
 
@@ -51,7 +51,7 @@ FanPage& PagesArray::addPage(const char* name)
 
 	pagesArray[numOfPages] = fanPage1;
 	numOfPages++;
-	return *fanPage1;
+	return fanPage1;
 }
 
 
