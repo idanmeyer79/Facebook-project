@@ -92,21 +92,21 @@ Member* Admin::getDetailsForMember()
 {
 	int day =0 , month =0, year=0;
 	char slash_dummy;
+	bool validDate = false;
 	string name;
 	getchar(); //clear the buffer 
 
 	do {
 		cout << "Please enter a name - max 20 letters" << endl;
 		getline(std::cin, name);
-		//cin.getline(name, LEN_OF_NAME);
 	} while (users.checkIfNameExist(name));
 
 	Date date(day, month, year);
 	do {
 		cout << "Please enter date of birth - format dd/mm/yyyy" << endl;
 		cin >> day >> slash_dummy >> month >> slash_dummy >> year;
-		date.setDate(day, month, year);
-	} while (!date.checkdate());
+		validDate = date.setDate(day, month, year);
+	} while (!validDate);
 
 	Member* member = new Member (name, date);
 	return member;
@@ -127,7 +127,6 @@ FanPage* Admin::getDetailsForPage()
 		cout << "Please enter the name of the page- max 20 letters" << endl;
 		getline(std::cin, name);
 
-		//cin.getline(name, LEN_OF_NAME);
 	} while (fanPages.checkIfNameExist(name));
 
 	FanPage* fanPage = new FanPage(name);
@@ -152,7 +151,6 @@ void Admin::addStatusToFanPageOrMember() {
 				cout << "Please enter the name of the member from the list" << endl;
 				getline(std::cin, name);
 
-				//cin.getline(name, LEN_OF_NAME);
 				tmpMember = users.getMember(name);
 				if (tmpMember == nullptr)
 				{
@@ -256,7 +254,7 @@ void Admin::makeFriendship()
 		do {
 			cout << "Please Choose the second member" << endl;
 			getline(std::cin, name2);
-			if (name1==name2)//!(strcmp(name1, name2)))
+			if (name1==name2)
 			{
 				cout << "Its the same member as the first one, please enter another one" << endl;
 			}
@@ -319,7 +317,7 @@ void Admin::unFriendship()
 	do {
 		cout << "Please Choose the second member" << endl;
 		getline(std::cin, name2);
-		if (name1==name2)//!(strcmp(name1, name2)))
+		if (name1==name2)
 		{
 			cout << "Its the same member as the first one, please enter another one" << endl;
 		}
@@ -492,9 +490,8 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 	getchar(); //clear the buffer 
 
 	do {
-		cout << "Please Choose the first member" << endl;
+		cout << "Please Choose a member" << endl;
 		getline(std::cin, name);
-		//cin.getline(name, LEN_OF_NAME);
 		member = users.getMember(name);
 		if (member == nullptr)
 			cout << "No such user please try again" << endl;
@@ -505,12 +502,10 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 
 void Admin::hardCodedData()
 {
-	string M = "M";	
-	string reevim = "re'evim beravcha";
-	string keren = "keren kalif fans";
-	FanPage* fanPage1 = fanPages.addPage("M");
-	FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
-	FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
+
+	FanPage* fanPage1 = fanPages.addPage((string)"M");
+	FanPage* fanPage2 = fanPages.addPage((string)"re'evim beravcha");
+	FanPage* fanPage3 = fanPages.addPage((string)"keren kalif fans");
 
 	Member* member1 = users.addMember((string)"Boaz", Date(1, 1, 2020));
 	Member* member2 = users.addMember((string)"Romina", Date(2, 2, 2000));

@@ -25,6 +25,7 @@ void PagesArray::deletePage(FanPage& page)
 		if (*itr!=nullptr&&(*itr)->getName()==page.getName())// !strcmp(pagesArray[i]->getName(), page.getName()))
 		{
 			pagesArray.erase(itr);
+			return;
 			/*pagesArray[i] = pagesArray[numOfPages - 1];
 			pagesArray[numOfPages - 1] = nullptr;
 			numOfPages--;*/
