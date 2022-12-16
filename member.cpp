@@ -1,32 +1,31 @@
 #include "Member.h"
 #include <cmath>
 #include <iostream>
+#include <string>
 #pragma warning(disable: 4996)
 using namespace std;
 
-Member::Member(const char* name, const Date& date) : dateOfBirth(date)
+Member::Member(const string name, const Date& date) : dateOfBirth(date)
 {
-	memberName = new char[strlen(name) + 1];
-	strcpy(memberName, name);
+	memberName = name;
 	memberFriends = new MembersArray;
 	memberFanPages = new PagesArray;
 }
 
 Member::~Member()
 {
-	delete[]memberName;
+	delete[]memberFriends;
+	delete[]memberFanPages;
+
 }
 
-bool Member :: setName(const char* name)
+bool Member :: setName(const string name)
 {
-	if (strlen(name) > LEN_OF_NAME)
-		return false;
-
-	strcpy(memberName , name);
+	memberName = name;
 	return true;
 }
 
-char* Member :: getName()
+string Member :: getName()
 {
 	return memberName;
 }
@@ -79,14 +78,14 @@ void Member::showFanPages()
 
 void Member :: addStatus()
 {
-	char text[LEN_OF_STATUS];
+	string text;
 	cout << "Please enter new status: " << endl;
-	cin.getline(text,LEN_OF_STATUS);
+	getline(std::cin, text);
 	Status* status = new Status(text);
 	memberStatuses.addStatusToArray(*status);
 }
 
-void Member::addStatus(const char* text)
+void Member::addStatus(const string text)
 {
 	Status* status = new Status(text);
 	memberStatuses.addStatusToArray(*status);
@@ -102,12 +101,12 @@ void Member::showMyStatuses()
 	memberStatuses.printAllStatuses();
 }
  
-bool Member::checkFriendship(const char* name)
+bool Member::checkFriendship(const string name)
 {
 	return memberFriends->getMember(name);
 }
 
-bool Member::checkIfAlreadyFolowing(const char* name)
+bool Member::checkIfAlreadyFolowing(const string name)
 {
 	return memberFanPages->findPage(name);
 }
@@ -125,5 +124,5 @@ void Member::printMyLast10Statuses()
 
 int Member::getNumOfFriends() 
 { 
-	return memberFriends->getNumOfMembers(); 
+	return memberFriends->getNumOfMembers();
 }

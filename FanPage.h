@@ -17,16 +17,16 @@ public:
 	static constexpr int LEN_OF_NAME = 20;
 
 private:
-	char* pageName;
+	std::string pageName;
 	MembersArray* fans;
 	StatusesArray statuses;
 	
 public:
 	FanPage(FanPage& other) = delete;
-	FanPage(const char* name);
-	~FanPage();
-	bool setName(const char* name);
-	char* getName();
+	FanPage(const std::string name);
+	//~FanPage();
+	bool setName(const std::string name);
+	std::string getName();
 	int getNumOfFans();
 	StatusesArray& getStatusesArray() { return statuses; }
 	MembersArray& getFansArray() { return *fans; }
@@ -36,7 +36,7 @@ public:
 	void showMyStatuses();
 	void addStatus(Status& s);
 	void addStatus();
-	void addStatus(const char* txt);
+	void addStatus(const std::string txt);
 };
 
 #endif // !__PAGE_H__

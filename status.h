@@ -9,17 +9,17 @@ class Status
 public:
 	static constexpr int LEN_OF_STATUS = 100;
 private:
-	char* text;
-	char* date_and_time;
+	std::string text;
+	std::string date_and_time;
 
 public:
 	Status(Status& other) = delete;
-	Status(const char* text);
-	Status(char* text);
-	~Status();
-	bool setText(const char* text);
-	char* getText() { return text; }
-	char* getDateAndTime() { return date_and_time; }
+	//Status(const std::string text);
+	Status(std::string text);
+	//~Status();
+	bool setText(const std::string text);
+	std::string getText() { return text; }
+	std::string getDateAndTime() { return date_and_time; }
 	void printStatus();
 };
 

@@ -19,7 +19,7 @@ public:
 	static constexpr int LEN_OF_NAME = 20;
 
 private:
-	char* memberName;
+	std::string memberName;
 	Date dateOfBirth;
 	MembersArray* memberFriends;
 	StatusesArray memberStatuses;
@@ -27,15 +27,15 @@ private:
 
 public:
 	Member(Member& other) = delete;
-	Member(const char* name, const Date& dateOfBirth);
+	Member(const std::string name, const Date& dateOfBirth);
 	~Member();
 	MembersArray& getMembersArray() { return *memberFriends; }
 	StatusesArray& getStatusesArray() { return memberStatuses; }
 	PagesArray& getPagesArray() { return *memberFanPages; }
-	char* getName();
+	std::string getName();
 	Date getDate();
 	int getNumOfFriends();
-	bool setName(const char* name);
+	bool setName(const std::string name);
 	void setBirthDay(Date& date);
 	void followPage(FanPage& fanPage);
 	void showFriends();
@@ -44,13 +44,13 @@ public:
 	void Show10MyFriendsLastStatuses();
 	void addFriend(Member& member);
 	void addStatus();
-	void addStatus(const char* text);
+	void addStatus(const std::string text);
 	void addStatus(Status& status);
 	void unFriend(Member& member);
 	void printMyLast10Statuses();
 	void disConnectPage(FanPage& page);
-	bool checkFriendship(const char* name);
-	bool checkIfAlreadyFolowing(const char* name);
+	bool checkFriendship(const std::string name);
+	bool checkIfAlreadyFolowing(const std::string name);
 };
 
 #endif // !__MEMBER_H__
