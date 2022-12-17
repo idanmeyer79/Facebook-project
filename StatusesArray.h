@@ -9,16 +9,8 @@ class StatusesArray
 {
 private:
 	std::vector<Status*> statusArray;
-	//Status** statusArray;
-	//int numOfStatuses = 0;
-	//int numOfMaxStatuses = 1;
 
 public:
-	/*StatusesArray(StatusesArray& other) = delete;*/
-	/*StatusesArray();*/
-	//~StatusesArray();
-	//int getNumOfStatuses() { return numOfStatuses; }
-	//int getMaxNumOfStatuses() { return numOfMaxStatuses; }
 	std::vector<Status*> getStatusArray() {return statusArray; 	}
 	void addStatusToArray(Status& s);
 	void printAllStatuses();

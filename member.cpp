@@ -46,6 +46,16 @@ void Member::addFriend(Member& member)
 	member.memberFriends->addMember(*this);
 }
 
+Member& Member:: operator+=(Member& other){
+	addFriend(other);
+	return *this;
+}
+
+Member& Member:: operator+=(FanPage& other){
+	this->followPage(other);
+	return *this;
+}
+
 void Member::disConnectPage(FanPage& page)
 {
 	memberFanPages->deletePage(page);
@@ -125,4 +135,14 @@ void Member::printMyLast10Statuses()
 int Member::getNumOfFriends() 
 { 
 	return memberFriends->getNumOfMembers();
+}
+
+bool Member:: operator>(Member& other)
+{
+	return getNumOfFriends() > other.getNumOfFriends() ? true : false;
+}
+
+bool Member:: operator>(FanPage& other) 
+{
+	return getNumOfFriends() > other.getNumOfFans() ? true : false;
 }

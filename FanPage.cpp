@@ -1,4 +1,5 @@
 #include "FanPage.h"
+#include<string>
 using namespace std;
 
 FanPage::FanPage(const string name) 
@@ -8,10 +9,10 @@ FanPage::FanPage(const string name)
 	fans = new MembersArray;
 }
 
-//FanPage:: ~FanPage()
-//{
-//	delete[]pageName;
-//}
+FanPage:: ~FanPage()
+{
+	delete[]fans;
+}
 
 string FanPage::getName()
 { 
@@ -20,10 +21,7 @@ string FanPage::getName()
 
 bool FanPage::setName(const string name) 
 {
-	//if (strlen(name) > LEN_OF_NAME)
-	//	return false;
 	pageName = name;
-	//strcpy(this->pageName, name);
 	return true;
 }
 
@@ -56,8 +54,7 @@ void FanPage::addStatus()
 {
 	string text;
 	cout << "Please enter new status: " << endl;
-	cin >> text;
-	//cin.getline(text, LEN_OF_STATUS);
+	getline(std::cin, text);
 	Status* status = new Status(text);
 	statuses.addStatusToArray(*status);
 }
@@ -71,4 +68,20 @@ void FanPage::addStatus(const string txt)
 {
 	Status* status = new Status(txt);
 	statuses.addStatusToArray(*status);
+}
+
+FanPage& FanPage:: operator+=(Member& other)
+{
+	other.followPage(*this);
+	return *this;
+}
+
+bool FanPage:: operator>(Member& other)
+{
+	return getNumOfFans() > other.getNumOfFriends() ? true: false;
+}
+
+bool FanPage:: operator>(FanPage& other) 
+{
+	return getNumOfFans() > other.getNumOfFans()? true : false;
 }

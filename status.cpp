@@ -19,8 +19,6 @@ Status::Status(string t) // c'tor with text
 	this->date_and_time = tm;
 }
 
-
-
 //Status::~Status() //d'tor
 //{
 //	delete[]text;
@@ -36,5 +34,15 @@ bool Status:: setText(const string text)
 {
 	this->text = text;
 	return true;
+}
+
+bool Status:: operator==(Status& other)
+{
+	return text == other.getText() ? true : false;
+}
+
+bool Status::  operator!=(Status& other)
+{
+	return text != other.getText() ? true : false;
 }
 

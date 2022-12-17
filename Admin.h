@@ -11,9 +11,6 @@
 
 class Admin
 {
-public:
-	static constexpr int LEN_OF_NAME = 20;
-
 private:
 	PagesArray fanPages;
 	MembersArray users;

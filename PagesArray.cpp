@@ -22,52 +22,24 @@ void PagesArray::deletePage(FanPage& page)
 
 	for (; itr!=itrEnd; ++itr)
 	{
-		if (*itr!=nullptr&&(*itr)->getName()==page.getName())// !strcmp(pagesArray[i]->getName(), page.getName()))
+		if (*itr!=nullptr&&(*itr)->getName()==page.getName())
 		{
 			pagesArray.erase(itr);
 			return;
-			/*pagesArray[i] = pagesArray[numOfPages - 1];
-			pagesArray[numOfPages - 1] = nullptr;
-			numOfPages--;*/
+
 		}
 	}
 }
 
 void PagesArray::addPage(FanPage& p)
 {
-	//if (numOfMaxPages == numOfPages) {
-	//	numOfMaxPages = numOfMaxPages * 2;
-	//	FanPage** tmp = new FanPage * [numOfMaxPages];
-	//	for (int i = 0; i < numOfPages; i++)
-	// 
-	//		tmp[i] = pagesArray[i];
-	//	pagesArray = tmp;
-	//	tmp = nullptr;
-	//	delete[] tmp;
-	//}
 	pagesArray.push_back(&p);
-
-	//pagesArray[numOfPages] = &p;
-	//numOfPages++;
 }
 
 FanPage* PagesArray::addPage(const string name)
 {
 	FanPage* fanPage = new FanPage(name);
-
-	//if (numOfMaxPages == numOfPages) {
-	//	numOfMaxPages = numOfMaxPages * 2;
-	//	FanPage** tmp = new FanPage * [numOfMaxPages];
-	//	for (int i = 0; i < numOfPages; i++)
-	//		tmp[i] = pagesArray[i];
-	//	pagesArray = tmp;
-	//	tmp = nullptr;
-	//	delete[] tmp;
-	//}
-
 	pagesArray.push_back(fanPage);
-	/*pagesArray[numOfPages] = fanPage1;
-	numOfPages++;*/
 	return fanPage;
 }
 
@@ -89,18 +61,7 @@ bool PagesArray::checkIfNameExist(const string name)
 			return false;
 		}
 	}
-	//for (int i = 0; i < numOfPages; i++)
-	//{
-	//	if (!strcmp(name, pagesArray[i]->getName()))
-	//	{
-	//		cout << "Name already taken, please enter another name." << endl;
-	//		return true;
-	//	}
-	//	else
-	//	{
-	//		return false;
-	//	}
-	//}
+
 }
 
 void PagesArray::printAllPages()
@@ -132,7 +93,7 @@ FanPage* PagesArray::findPage(string name)
 
 	for (; itr!=itrEnd; ++itr)
 	{
-		if (*itr!=nullptr&&(*itr)->getName()==name)//!strcmp(pagesArray[i]->getName(), name))
+		if (*itr!=nullptr&&(*itr)->getName()==name)
 		{
 			theFoundPage = (*itr);
 			return theFoundPage;

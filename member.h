@@ -51,6 +51,11 @@ public:
 	void disConnectPage(FanPage& page);
 	bool checkFriendship(const std::string name);
 	bool checkIfAlreadyFolowing(const std::string name);
+
+	Member& operator+=(Member& other);
+	Member& operator+=(FanPage& other);
+	bool operator>(FanPage& other);
+	bool operator>(Member& other);
 };
 
 #endif // !__MEMBER_H__

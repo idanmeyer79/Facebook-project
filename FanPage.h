@@ -24,7 +24,7 @@ private:
 public:
 	FanPage(FanPage& other) = delete;
 	FanPage(const std::string name);
-	//~FanPage();
+	~FanPage();
 	bool setName(const std::string name);
 	std::string getName();
 	int getNumOfFans();
@@ -37,6 +37,11 @@ public:
 	void addStatus(Status& s);
 	void addStatus();
 	void addStatus(const std::string txt);
+
+	FanPage& operator+=(Member& other);
+	bool operator>(FanPage& other);
+	bool operator>(Member& other);
+
 };
 
 #endif // !__PAGE_H__

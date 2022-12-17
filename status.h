@@ -21,6 +21,9 @@ public:
 	std::string getText() { return text; }
 	std::string getDateAndTime() { return date_and_time; }
 	void printStatus();
+
+	bool operator==(Status& other);
+	bool operator!=(Status& other);
 };
 
 #endif // !__STATUS_H__
