@@ -1,4 +1,5 @@
 #include "Admin.h"
+#include <string>
 using namespace std;
 
 void Admin::printMenu()
@@ -38,6 +39,7 @@ void Admin:: menu()
 	do
 	{
 		printMenu();
+		std::cin.sync();
 		cin >> action;
 		switch (action) {
 		case 1:
@@ -96,20 +98,21 @@ Member* Admin::getDetailsForMember() const
 {
 	int day =0 , month =0, year=0;
 	char slash_dummy;
-	char name[LEN_OF_NAME];
+	bool validDate = false;
+	string name;
 	getchar(); //clear the buffer 
 
 	do {
 		cout << "Please enter a name - max 20 letters" << endl;
-		cin.getline(name, LEN_OF_NAME);
+		getline(std::cin, name);
 	} while (users.checkIfNameExist(name));
 
 	Date date(day, month, year);
 	do {
 		cout << "Please enter date of birth - format dd/mm/yyyy" << endl;
 		cin >> day >> slash_dummy >> month >> slash_dummy >> year;
-		date.setDate(day, month, year);
-	} while (!date.checkdate());
+		validDate = date.setDate(day, month, year);
+	} while (!validDate);
 
 	Member* member = new Member (name, date);
 	cout << name << " was created :)" << endl;
@@ -124,12 +127,13 @@ void Admin::createFanPage()
 
 FanPage* Admin::getDetailsForPage() const
 {
-	char name[LEN_OF_NAME];
+	string name;
 	getchar(); //clear the buffer 
 
 	do {
 		cout << "Please enter the name of the page- max 20 letters" << endl;
-		cin.getline(name, LEN_OF_NAME);
+		getline(std::cin, name);
+
 	} while (fanPages.checkIfNameExist(name));
 
 	FanPage* fanPage = new FanPage(name);
@@ -171,6 +175,8 @@ FanPage* Admin::getFanPageToAction() {
 
 void Admin::addStatusToFanPageOrMember() {
 	int choice;
+	string name;
+
 
 	do {
 		cout << "For a member enter 1 , For a Fan page enter 2" << endl;
@@ -187,7 +193,7 @@ void Admin::addStatusToFanPageOrMember() {
 			cout << "The status was added :)" << endl;
 			return;
 		}
-		else //to fan page
+		else if (choice==2) //to fan page
 		{
 			FanPage* tmpPage = nullptr;
 			cout << "All the fan Pages:" << endl;
@@ -197,12 +203,17 @@ void Admin::addStatusToFanPageOrMember() {
 			cout << "The status was added :)" << endl;
 			return;
 		}
+		else
+		{
+			cout << "\033[1;31mInvalid input\033[0m" << endl;
+		}
 	} while ((choice != 1) || (choice != 2));
 }
 
 void Admin::showAllStatusesOfMemberOrFanPage()
 {
 	int choice;
+	string name;
 
 	do {
 		cout << "For a member enter 1 , For a fan page enter 2" << endl;
@@ -233,8 +244,8 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 
 void Admin::makeFriendship()
 {
-	char name1[LEN_OF_NAME];
-	char name2[LEN_OF_NAME];
+	string name1;
+	string name2;
 	Member* member1;
 	Member* member2 = nullptr;
 
@@ -245,7 +256,7 @@ void Admin::makeFriendship()
 	{
 		do {
 			cout << "Please Choose the first member" << endl;
-			cin.getline(name1, LEN_OF_NAME);
+			getline(std::cin, name1);
 			member1 = users.getMember(name1);
 			if (member1 == nullptr)
 				cout << "No such user please try again"<<endl;
@@ -254,8 +265,8 @@ void Admin::makeFriendship()
 
 		do {
 			cout << "Please Choose the second member" << endl;
-			cin.getline(name2, LEN_OF_NAME);
-			if (!(strcmp(name1, name2)))
+			getline(std::cin, name2);
+			if (name1==name2)
 			{
 				cout << "Its the same member as the first one, please enter another one" << endl;
 			}
@@ -267,7 +278,7 @@ void Admin::makeFriendship()
 			if (member2==nullptr)
 				cout << "No such user please try again" << endl;
 
-		} while ((member2 == nullptr) || !(strcmp(name1,name2)));
+		} while ((member2 == nullptr) || name1==name2);
 
 		if ((!member1->checkFriendship(name2)))
 		{
@@ -289,8 +300,8 @@ void Admin::makeFriendship(Member& member1, Member& member2)
 
 void Admin::unFriendship()
 {
-	char name1[LEN_OF_NAME];
-	char name2[LEN_OF_NAME];
+	string name1;
+	string name2;
 	Member* member1;
 	Member* member2 = nullptr;
 
@@ -300,7 +311,7 @@ void Admin::unFriendship()
 
 	do {
 		cout << "Please Choose the first member" << endl;
-		cin.getline(name1, LEN_OF_NAME);
+		getline(std::cin, name1);
 		member1 = users.getMember(name1);
 		if (member1 == nullptr)
 			cout << "No such user please try again" << endl;
@@ -319,8 +330,8 @@ void Admin::unFriendship()
 
 	do {
 		cout << "Please Choose the member you want to unfriend" << endl;
-		cin.getline(name2, LEN_OF_NAME);
-		if (!(strcmp(name1, name2)))
+		getline(std::cin, name2);
+		if (name1==name2)
 		{
 			cout << "Can't unfriends yourself try a diffrent name" << endl;
 		}
@@ -338,6 +349,8 @@ void Admin::unFriendship()
 
 void Admin::disConnectFanAndPage()
 {
+	string nameOfMember;
+	string nameOfPage;
 	Member* member = nullptr;
 	FanPage* page = nullptr;
 
@@ -359,6 +372,7 @@ void Admin::disConnectFanAndPage()
 		}
 		member = getMemberToAction();
 
+
 		if (!(member->checkIfAlreadyFolowing(page->getName())))
 		{
 			cout << "This member doesn't follow this page " << endl;
@@ -375,8 +389,11 @@ void Admin::ConnectFanToPage(Member& member, FanPage& page)
 	member.followPage(page);
 }
 
-void Admin::ConnectFanToPage() 
+
+void Admin::ConnectFanToPage()
 {
+	string nameOfMember;
+	string nameOfPage;
 	Member* member = nullptr;
 	FanPage* page = nullptr;
 
@@ -405,6 +422,8 @@ void Admin::ConnectFanToPage()
 void Admin::printAllFriendsOfMemberOrFanPage()
 {
 	int choice;
+	string name;
+
 
 	do {
 		cout << "For a member enter 1 , For a fan page enter 2" << endl;
@@ -432,13 +451,14 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 			break;
 		}
 		else
-			cout << "Ivalid input"<<endl;
+			cout << "\033[1;31mInvalid input\033[0m" <<endl;
 	
 	} while ((choice != 1) || (choice != 2));
 }
 
 void Admin::showLast10StatusesOfFriendsOfMember()
 {
+	string name;
 	Member* member = nullptr;
 	cout << "All the members:" << endl;
 	users.printAllMembers();
@@ -477,9 +497,20 @@ void Admin::hardCodedData()
 	fanPage3->addStatus("welcome to keren kalif fans");
 	fanPage3->addStatus("keren kalif fans 2");
 
-	makeFriendship(*member1, *member2);
-	makeFriendship(*member1,*member3);
-	ConnectFanToPage(*member1, *fanPage1);
-	ConnectFanToPage(*member1, *fanPage2);
-	ConnectFanToPage(*member2, *fanPage1);
+	*member1 += *member2;
+	*member1 += *member3;
+	*member1 += *fanPage1;
+	*fanPage2 += *member1;
+	*member2 += *fanPage1;
+
+	//cout << (*member1 > *member2); T
+	//cout << (*member1 > *fanPage1); F
+	//cout << (*fanPage2 > *member3); F
+	//cout << (*fanPage1 > *fanPage2); T
+
+	Status test1("M");
+	Status test2("m");
+
+	//cout << (test1 == test2); F
+	//cout << (test1 != test2); T
 }

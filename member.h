@@ -19,23 +19,24 @@ public:
 	static constexpr int LEN_OF_NAME = 20;
 
 private:
-	char* memberName;
+	std::string memberName;
 	Date dateOfBirth;
 	MembersArray* memberFriends;
 	StatusesArray memberStatuses;
 	PagesArray* memberFanPages;
 
 public:
-	Member(const Member& other) = delete;
-	Member(const char* name, const Date& dateOfBirth);
+
+	Member(Member& other) = delete;
+	Member(const std::string name, const Date& dateOfBirth);
 	~Member();
-	const MembersArray& getMembersArray() const  { return *memberFriends;  }
-	const StatusesArray& getStatusesArray() const{ return memberStatuses;  }
-	const PagesArray& getPagesArray()   const    { return *memberFanPages; }
-	const char* getName() const;
-	const Date getDate()const ;
-	const int getNumOfFriends() const;
-	bool setName(const char* name);
+	MembersArray& getMembersArray() { return *memberFriends; }
+	StatusesArray& getStatusesArray() { return memberStatuses; }
+	PagesArray& getPagesArray() { return *memberFanPages; }
+	std::string getName();
+	Date getDate();
+	int getNumOfFriends();
+	bool setName(const std::string name);
 	void setBirthDay(Date& date);
 	void followPage(FanPage& fanPage);
 	void showFriends() const;
@@ -44,13 +45,18 @@ public:
 	void Show10MyFriendsLastStatuses()const;
 	void addFriend(Member& member);
 	void addStatus();
-	void addStatus(const char* text);
+	void addStatus(const std::string text);
 	void addStatus(Status& status);
 	void unFriend(Member& member);
 	void printMyLast10Statuses()const;
 	void disConnectPage(FanPage& page);
-	bool checkFriendship(const char* name) const;
-	bool checkIfAlreadyFolowing(const char* name) const;
+	bool checkFriendship(const std::string name);
+	bool checkIfAlreadyFolowing(const std::string name);
+
+	Member& operator+=(Member& other);
+	Member& operator+=(FanPage& other);
+	bool operator>(FanPage& other);
+	bool operator>(Member& other);
 };
 
 #endif // !__MEMBER_H__

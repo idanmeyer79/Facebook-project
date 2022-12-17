@@ -1,32 +1,33 @@
 #include "Member.h"
 #include <cmath>
 #include <iostream>
+#include <string>
 #pragma warning(disable: 4996)
 using namespace std;
 
-Member::Member(const char* name, const Date& date) : dateOfBirth(date)
+Member::Member(const string name, const Date& date) : dateOfBirth(date)
 {
-	memberName = new char[strlen(name) + 1];
-	strcpy(memberName, name);
+	memberName = name;
 	memberFriends = new MembersArray;
 	memberFanPages = new PagesArray;
 }
 
 Member::~Member()
 {
-	delete[]memberName;
+	delete[]memberFriends;
+	delete[]memberFanPages;
+
 }
 
-bool Member :: setName(const char* name)
+bool Member :: setName(const string name)
 {
-	if (strlen(name) > LEN_OF_NAME)
-		return false;
-
-	strcpy(memberName , name);
+	memberName = name;
 	return true;
 }
 
-const char* Member :: getName() const
+
+string Member :: getName()
+
 {
 	return memberName;
 }
@@ -45,6 +46,16 @@ void Member::addFriend(Member& member)
 {
 	memberFriends->addMember(member);
 	member.memberFriends->addMember(*this);
+}
+
+Member& Member:: operator+=(Member& other){
+	addFriend(other);
+	return *this;
+}
+
+Member& Member:: operator+=(FanPage& other){
+	this->followPage(other);
+	return *this;
 }
 
 void Member::disConnectPage(FanPage& page)
@@ -79,14 +90,14 @@ void Member::showFanPages() const
 
 void Member :: addStatus() 
 {
-	char text[LEN_OF_STATUS];
+	string text;
 	cout << "Please enter new status: " << endl;
-	cin.getline(text,LEN_OF_STATUS);
+	getline(std::cin, text);
 	Status* status = new Status(text);
 	memberStatuses.addStatusToArray(*status);
 }
 
-void Member::addStatus(const char* text)
+void Member::addStatus(const string text)
 {
 	Status* status = new Status(text);
 	memberStatuses.addStatusToArray(*status);
@@ -103,12 +114,16 @@ void Member::showMyStatuses() const
 	memberStatuses.printAllStatuses();
 }
  
-bool Member::checkFriendship(const char* name) const
+
+bool Member::checkFriendship(const string name)
+
 {
 	return memberFriends->getMember(name);
 }
 
-bool Member::checkIfAlreadyFolowing(const char* name) const
+
+bool Member::checkIfAlreadyFolowing(const string name)
+
 {
 	return memberFanPages->findPage(name);
 }
@@ -126,5 +141,15 @@ void Member::printMyLast10Statuses() const
 
 const int Member::getNumOfFriends()  const
 { 
-	return memberFriends->getNumOfMembers(); 
+	return memberFriends->getNumOfMembers();
+}
+
+bool Member:: operator>(Member& other)
+{
+	return getNumOfFriends() > other.getNumOfFriends() ? true : false;
+}
+
+bool Member:: operator>(FanPage& other) 
+{
+	return getNumOfFriends() > other.getNumOfFans() ? true : false;
 }

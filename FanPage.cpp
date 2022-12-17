@@ -1,29 +1,29 @@
 #include "FanPage.h"
+#include<string>
 using namespace std;
 
-FanPage::FanPage(const char* name) 
+FanPage::FanPage(const string name) 
 {
-	pageName = new char[strlen(name) + 1];
-	strcpy(pageName, name);
+	//pageName = new char[strlen(name) + 1];
+	pageName= name;
 	fans = new MembersArray;
 }
 
 FanPage:: ~FanPage()
 {
-	delete[]pageName;
+	delete[]fans;
 }
 
-const char* FanPage::getName() const
+string FanPage::getName()
+
+
 { 
 	return pageName; 
 }
 
-bool FanPage::setName(const char* name) 
+bool FanPage::setName(const string name) 
 {
-	if (strlen(name) > LEN_OF_NAME)
-		return false;
-
-	strcpy(this->pageName, name);
+	pageName = name;
 	return true;
 }
 
@@ -55,9 +55,9 @@ void FanPage::showMyStatuses()
 
 void FanPage::addStatus()
 {
-	char text[LEN_OF_STATUS];
+	string text;
 	cout << "Please enter new status: " << endl;
-	cin.getline(text, LEN_OF_STATUS);
+	getline(std::cin, text);
 	Status* status = new Status(text);
 	statuses.addStatusToArray(*status);
 }
@@ -67,8 +67,24 @@ void FanPage::addStatus(Status& s)
 	statuses.addStatusToArray(s);
 }
 
-void FanPage::addStatus(const char* txt)
+void FanPage::addStatus(const string txt)
 {
 	Status* status = new Status(txt);
 	statuses.addStatusToArray(*status);
+}
+
+FanPage& FanPage:: operator+=(Member& other)
+{
+	other.followPage(*this);
+	return *this;
+}
+
+bool FanPage:: operator>(Member& other)
+{
+	return getNumOfFans() > other.getNumOfFriends() ? true: false;
+}
+
+bool FanPage:: operator>(FanPage& other) 
+{
+	return getNumOfFans() > other.getNumOfFans()? true : false;
 }

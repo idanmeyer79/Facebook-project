@@ -1,74 +1,60 @@
 #include "PagesArray.h"
 using namespace std;
 
-PagesArray::PagesArray()
-{
-	pagesArray = new FanPage * [numOfMaxPages];
-}
+//PagesArray::PagesArray()
+//{
+//	pagesArray = new FanPage * [numOfMaxPages];
+//}
 
-PagesArray::~PagesArray()
-{
-	for(int i=0;i< numOfMaxPages-1;i++)
-	{
-		delete pagesArray[i];
-	}
-	delete[]pagesArray;
-}
+
+//PagesArray::~PagesArray()
+//{
+//	for(int i=0;i<numOfPages;i++)
+//	{
+//		delete pagesArray[i];
+//	}
+//	delete[]pagesArray;
+//}
+
 	
 void PagesArray::deletePage(FanPage& page)
 {
-	for (int i = 0; i < numOfPages; i++)
+	vector<FanPage*>::iterator itr = pagesArray.begin();
+	vector<FanPage*>::iterator itrEnd = pagesArray.end();
+
+	for (; itr!=itrEnd; ++itr)
 	{
-		if (!strcmp(pagesArray[i]->getName(), page.getName()))
+		if (*itr!=nullptr&&(*itr)->getName()==page.getName())
 		{
-			pagesArray[i] = pagesArray[numOfPages - 1];
-			pagesArray[numOfPages - 1] = nullptr;
-			numOfPages--;
+			pagesArray.erase(itr);
+			return;
+
 		}
 	}
 }
 
 void PagesArray::addPage(FanPage& p)
 {
-	if (numOfMaxPages == numOfPages) {
-		numOfMaxPages = numOfMaxPages * 2;
-		FanPage** tmp = new FanPage * [numOfMaxPages];
-		for (int i = 0; i < numOfPages; i++)
-			tmp[i] = pagesArray[i];
-		pagesArray = tmp;
-		tmp = nullptr;
-		delete[] tmp;
-	}
-
-	pagesArray[numOfPages] = &p;
-	numOfPages++;
+	pagesArray.push_back(&p);
 }
 
-FanPage* PagesArray::addPage(const char* name)
+FanPage* PagesArray::addPage(const string name)
 {
-	FanPage* fanPage1 = new FanPage(name);
-
-	if (numOfMaxPages == numOfPages) {
-		numOfMaxPages = numOfMaxPages * 2;
-		FanPage** tmp = new FanPage * [numOfMaxPages];
-		for (int i = 0; i < numOfPages; i++)
-			tmp[i] = pagesArray[i];
-		pagesArray = tmp;
-		tmp = nullptr;
-		delete[] tmp;
-	}
-
-	pagesArray[numOfPages] = fanPage1;
-	numOfPages++;
-	return fanPage1;
+	FanPage* fanPage = new FanPage(name);
+	pagesArray.push_back(fanPage);
+	return fanPage;
 }
 
 
-bool PagesArray::checkIfNameExist(const char* name) const
+
+bool PagesArray::checkIfNameExist(const string name)
 {
-	for (int i = 0; i < numOfPages; i++)
+	vector<FanPage*>::iterator itr = pagesArray.begin();
+	vector<FanPage*>::iterator itrEnd = pagesArray.end();
+
+	for (; itr != itrEnd; ++itr)
 	{
-		if (!strcmp(name, pagesArray[i]->getName()))
+		if (*itr != nullptr && (*itr)->getName() == name)//!strcmp(pagesArray[i]->getName(), name))
 		{
 			cout << "Name already taken, please enter another name." << endl;
 			return true;
@@ -78,31 +64,43 @@ bool PagesArray::checkIfNameExist(const char* name) const
 			return false;
 		}
 	}
+
 }
 
 void PagesArray::printAllPages() const
 {
+
+	vector<FanPage*>::iterator itr = pagesArray.begin();
+	vector<FanPage*>::iterator itrEnd = pagesArray.end();
+	int i = 0;
+	int numOfPages = pagesArray.size();
+
+	cout << "All the pages:" << endl;
+
 	if (numOfPages == 0)
 	{
 		cout << "None"<<endl;
 		return;
 	}
 
-	for (int i = 0; i < numOfPages; i++)
+	for (; itr!=itrEnd; ++itr)
 	{
-		cout << "#" << i + 1 << " " << pagesArray[i]->getName() << endl;
+		cout << "#" << ++i << " " << (*itr)->getName() << endl;
 	}
 }
 
-FanPage* PagesArray::findPage(const char* name) const
+FanPage* PagesArray::findPage(string name)
+
 {
 	FanPage* theFoundPage = nullptr;
+	vector<FanPage*>::iterator itr = pagesArray.begin();
+	vector<FanPage*>::iterator itrEnd = pagesArray.end();
 
-	for (int i = 0; i < numOfPages; i++)
+	for (; itr!=itrEnd; ++itr)
 	{
-		if (!strcmp(pagesArray[i]->getName(), name))
+		if (*itr!=nullptr&&(*itr)->getName()==name)
 		{
-			theFoundPage = pagesArray[i];
+			theFoundPage = (*itr);
 			return theFoundPage;
 		}
 	}
