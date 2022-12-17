@@ -31,8 +31,9 @@ void StatusesArray::addStatusToArray(Status& s)
 	//numOfStatuses++;
 }
 
-void StatusesArray::printAllStatuses()
+void StatusesArray::printAllStatuses() const
 {
+
 	vector<Status*>::iterator itr = statusArray.begin();
 	vector<Status*>::iterator itrEnd = statusArray.end();
 
@@ -45,7 +46,7 @@ void StatusesArray::printAllStatuses()
 	}
 }
 
-void StatusesArray::print10()
+void StatusesArray::print10() const
 {
 	vector<Status*>::reverse_iterator  rit = statusArray.rbegin();
 	vector<Status*>::reverse_iterator ritrEnd = statusArray.rend();
@@ -53,8 +54,10 @@ void StatusesArray::print10()
 	int currMemberNumOfStatuses = min(size, 10);
 	for (; rit != ritrEnd; ++rit)
 	{
+
 		(*rit)->printStatus();
 		//statusArray[size - k]->printStatus();
+
 	}
 	cout << endl;
 	/*for (int k = 1; k < currMemberNumOfStatuses+1; k++)

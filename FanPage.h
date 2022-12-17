@@ -22,6 +22,7 @@ private:
 	StatusesArray statuses;
 	
 public:
+
 	FanPage(FanPage& other) = delete;
 	FanPage(const std::string name);
 	~FanPage();
@@ -30,8 +31,9 @@ public:
 	int getNumOfFans();
 	StatusesArray& getStatusesArray() { return statuses; }
 	MembersArray& getFansArray() { return *fans; }
+
 	void addFan(Member& fan);
-	void printFans();
+	void printFans() const;
 	void removeFan(Member& fan);
 	void showMyStatuses();
 	void addStatus(Status& s);

@@ -26,6 +26,7 @@ private:
 	PagesArray* memberFanPages;
 
 public:
+
 	Member(Member& other) = delete;
 	Member(const std::string name, const Date& dateOfBirth);
 	~Member();
@@ -38,16 +39,16 @@ public:
 	bool setName(const std::string name);
 	void setBirthDay(Date& date);
 	void followPage(FanPage& fanPage);
-	void showFriends();
-	void showFanPages();
-	void showMyStatuses();
-	void Show10MyFriendsLastStatuses();
+	void showFriends() const;
+	void showFanPages() const;
+	void showMyStatuses() const;
+	void Show10MyFriendsLastStatuses()const;
 	void addFriend(Member& member);
 	void addStatus();
 	void addStatus(const std::string text);
 	void addStatus(Status& status);
 	void unFriend(Member& member);
-	void printMyLast10Statuses();
+	void printMyLast10Statuses()const;
 	void disConnectPage(FanPage& page);
 	bool checkFriendship(const std::string name);
 	bool checkIfAlreadyFolowing(const std::string name);

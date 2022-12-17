@@ -13,6 +13,7 @@ class MembersArray
 private:
 	std::vector<Member*> membersArray;
 public:
+
 	int getNumOfMembers()  { return membersArray.size(); } 
 	Member* getMember(const std::string name) const;
 	bool checkIfNameExist(const std::string name) const;

@@ -25,7 +25,9 @@ bool Member :: setName(const string name)
 	return true;
 }
 
+
 string Member :: getName()
+
 {
 	return memberName;
 }
@@ -35,7 +37,7 @@ void Member ::setBirthDay(Date& date)
 	dateOfBirth = date;
 }
 
-Date Member::getDate()
+const Date Member::getDate() const
 { 
 	return dateOfBirth; 
 }
@@ -60,14 +62,12 @@ void Member::disConnectPage(FanPage& page)
 {
 	memberFanPages->deletePage(page);
 	page.removeFan(*this);
-	cout << endl << memberName << " is no longer follows " << page.getName() << endl;
 }
 
 void Member::unFriend(Member& member)
 {
 	memberFriends->deleteMember(member);
 	member.memberFriends->deleteMember(*this);
-	cout << endl <<member.getName() << " and " << memberName << " are no longer friends :(" << endl;
 }
 
 void Member::followPage(FanPage& fanPage)
@@ -76,17 +76,19 @@ void Member::followPage(FanPage& fanPage)
 	fanPage.addFan(*this);
 }
 
-void Member::showFriends() 
+void Member::showFriends()  const
 {
+	cout << memberName << "'s friends are:" << endl;
 	memberFriends->printAllMembers();
 }
 
-void Member::showFanPages()
+void Member::showFanPages() const
 {
+	cout << memberName << "'s fan pages are:" << endl;
 	memberFanPages->printAllPages();
 }
 
-void Member :: addStatus()
+void Member :: addStatus() 
 {
 	string text;
 	cout << "Please enter new status: " << endl;
@@ -106,33 +108,38 @@ void Member::addStatus(Status& status)
 	memberStatuses.addStatusToArray(status);
 }
 
-void Member::showMyStatuses()
+void Member::showMyStatuses() const
 {
+	cout << memberName << " ";
 	memberStatuses.printAllStatuses();
 }
  
+
 bool Member::checkFriendship(const string name)
+
 {
 	return memberFriends->getMember(name);
 }
 
+
 bool Member::checkIfAlreadyFolowing(const string name)
+
 {
 	return memberFanPages->findPage(name);
 }
 
-void Member::Show10MyFriendsLastStatuses()
+void Member::Show10MyFriendsLastStatuses() const
 {
 	memberFriends->showLast10StatusesOfEach();
 }
 
-void Member::printMyLast10Statuses()
+void Member::printMyLast10Statuses() const
 {
 	cout << memberName << " statuses:" << endl;
 	memberStatuses.print10();
 }
 
-int Member::getNumOfFriends() 
+const int Member::getNumOfFriends()  const
 { 
 	return memberFriends->getNumOfMembers();
 }

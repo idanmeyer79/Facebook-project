@@ -87,6 +87,7 @@ void MembersArray:: deleteMember(Member& member)
 
 void MembersArray::printAllMembers() const
 {
+
 	vector<Member*>::const_iterator itr = membersArray.begin();
 	vector<Member*>::const_iterator itrEnd = membersArray.end();
 	int numOfMembers = membersArray.size();
@@ -104,6 +105,7 @@ void MembersArray::printAllMembers() const
 		cout << "#" << ++i  << " " << (*itr)->getName() << endl;
 	}
 }
+
 
 Member* MembersArray::getMember(const string name) const
 {

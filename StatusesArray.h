@@ -13,8 +13,8 @@ private:
 public:
 	std::vector<Status*> getStatusArray() {return statusArray; 	}
 	void addStatusToArray(Status& s);
-	void printAllStatuses();
-	void print10();
+	void printAllStatuses() const ;
+	void print10() const ;
 };
 
 #endif // !__StatusesArray__

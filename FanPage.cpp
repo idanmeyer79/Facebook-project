@@ -15,6 +15,8 @@ FanPage:: ~FanPage()
 }
 
 string FanPage::getName()
+
+
 { 
 	return pageName; 
 }
@@ -30,7 +32,7 @@ void FanPage::addFan(Member& fan)
 	fans->addMember(fan);
 }
 
-int FanPage::getNumOfFans()
+const int FanPage::getNumOfFans() const
 {
 	return fans->getNumOfMembers();
 }
@@ -40,13 +42,14 @@ void FanPage::removeFan(Member& fan)
 	fans->deleteMember(fan);
 }
 
-void FanPage::printFans()
+void FanPage::printFans() const
 {
 	fans->printAllMembers();
 }
 
 void FanPage::showMyStatuses()
 {
+	cout << pageName << " ";
 	statuses.printAllStatuses();
 }
 

@@ -11,9 +11,9 @@ private:
 public:
 	Date(int d, int, int y);
 	bool setDate(int d, int m, int y);
-	int getDay() { return day;}
-	int getMonth() { return month; }
-	int getYear() { return year; }
+	const int getDay() const  { return day;  }
+	const int getMonth() const { return month;}
+	const int getYear() const { return year; }
 	void show() const;
 	bool checkdate();
 	bool checkdate(int day, int month, int year);

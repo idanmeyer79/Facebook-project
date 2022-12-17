@@ -6,6 +6,7 @@ using namespace std;
 //	pagesArray = new FanPage * [numOfMaxPages];
 //}
 
+
 //PagesArray::~PagesArray()
 //{
 //	for(int i=0;i<numOfPages;i++)
@@ -14,6 +15,7 @@ using namespace std;
 //	}
 //	delete[]pagesArray;
 //}
+
 	
 void PagesArray::deletePage(FanPage& page)
 {
@@ -44,6 +46,7 @@ FanPage* PagesArray::addPage(const string name)
 }
 
 
+
 bool PagesArray::checkIfNameExist(const string name)
 {
 	vector<FanPage*>::iterator itr = pagesArray.begin();
@@ -64,8 +67,9 @@ bool PagesArray::checkIfNameExist(const string name)
 
 }
 
-void PagesArray::printAllPages()
+void PagesArray::printAllPages() const
 {
+
 	vector<FanPage*>::iterator itr = pagesArray.begin();
 	vector<FanPage*>::iterator itrEnd = pagesArray.end();
 	int i = 0;
@@ -86,6 +90,7 @@ void PagesArray::printAllPages()
 }
 
 FanPage* PagesArray::findPage(string name)
+
 {
 	FanPage* theFoundPage = nullptr;
 	vector<FanPage*>::iterator itr = pagesArray.begin();
