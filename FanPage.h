@@ -22,16 +22,14 @@ private:
 	StatusesArray statuses;
 	
 public:
-
 	FanPage(FanPage& other) = delete;
 	FanPage(const std::string name);
 	~FanPage();
 	bool setName(const std::string name);
-	std::string getName();
-	int getNumOfFans();
+	std::string getName() const;
+	const int getNumOfFans() const;
 	StatusesArray& getStatusesArray() { return statuses; }
 	MembersArray& getFansArray() { return *fans; }
-
 	void addFan(Member& fan);
 	void printFans() const;
 	void removeFan(Member& fan);
@@ -39,7 +37,6 @@ public:
 	void addStatus(Status& s);
 	void addStatus();
 	void addStatus(const std::string txt);
-
 	FanPage& operator+=(Member& other);
 	bool operator>(FanPage& other);
 	bool operator>(Member& other);

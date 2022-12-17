@@ -16,7 +16,6 @@ Member::~Member()
 {
 	delete[]memberFriends;
 	delete[]memberFanPages;
-
 }
 
 bool Member :: setName(const string name)
@@ -25,9 +24,7 @@ bool Member :: setName(const string name)
 	return true;
 }
 
-
-string Member :: getName()
-
+string Member :: getName() const
 {
 	return memberName;
 }
@@ -114,16 +111,12 @@ void Member::showMyStatuses() const
 	memberStatuses.printAllStatuses();
 }
  
-
 bool Member::checkFriendship(const string name)
-
 {
 	return memberFriends->getMember(name);
 }
 
-
 bool Member::checkIfAlreadyFolowing(const string name)
-
 {
 	return memberFanPages->findPage(name);
 }

@@ -14,10 +14,6 @@ class FanPage;
 
 class Member
 {
-public:
-	static constexpr int LEN_OF_STATUS = 100;
-	static constexpr int LEN_OF_NAME = 20;
-
 private:
 	std::string memberName;
 	Date dateOfBirth;
@@ -33,9 +29,9 @@ public:
 	MembersArray& getMembersArray() { return *memberFriends; }
 	StatusesArray& getStatusesArray() { return memberStatuses; }
 	PagesArray& getPagesArray() { return *memberFanPages; }
-	std::string getName();
-	Date getDate();
-	int getNumOfFriends();
+	std::string getName() const;
+	const Date getDate()const;
+	const int getNumOfFriends() const ;
 	bool setName(const std::string name);
 	void setBirthDay(Date& date);
 	void followPage(FanPage& fanPage);

@@ -20,7 +20,7 @@ public:
 	bool setText(const std::string text);
 	std::string getText() { return text; }
 	std::string getDateAndTime() { return date_and_time; }
-	void printStatus();
+	void printStatus()const;
 
 	bool operator==(Status& other);
 	bool operator!=(Status& other);

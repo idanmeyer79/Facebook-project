@@ -76,8 +76,9 @@ void Admin:: menu()
 			printAllFriendsOfMemberOrFanPage();
 			break;
 		}
+		cout << endl;
 	} while (action != 12);
-	cout << "Bye Bye :)";
+	cout << "\033[32mBye Bye :)\033[0m";
 }
 
 void Admin::printAcounts() const
@@ -115,7 +116,7 @@ Member* Admin::getDetailsForMember() const
 	} while (!validDate);
 
 	Member* member = new Member (name, date);
-	cout << name << " was created :)" << endl;
+	cout << name << "\033[32m was created :)\033[0m" << endl;
 	return member;
 }
 
@@ -133,25 +134,25 @@ FanPage* Admin::getDetailsForPage() const
 	do {
 		cout << "Please enter the name of the page- max 20 letters" << endl;
 		getline(std::cin, name);
-
 	} while (fanPages.checkIfNameExist(name));
 
 	FanPage* fanPage = new FanPage(name);
-	cout << name << " was created :)" << endl;
+	cout << name << "\033[32m was created :)\033[0m" << endl;
 	return fanPage;
 }
 
 Member* Admin::getMemberToAction() {
 	Member* tmpMember = nullptr;
-	char name[LEN_OF_NAME];
+	string name;
 	do
 	{
 		cout << "Please enter the name of the member from the list" << endl;
-		cin.getline(name, LEN_OF_NAME);
+		getline(std::cin, name);
+
 		tmpMember = users.getMember(name);
 		if (tmpMember == nullptr)
 		{
-			cout << "The member was not found Please enter another name" << endl;
+			cout << "\033[1;31mThe member not found Please enter another name.\033[0m" << endl;
 		}
 	} while (tmpMember == nullptr);
 	return tmpMember;
@@ -159,15 +160,15 @@ Member* Admin::getMemberToAction() {
 
 FanPage* Admin::getFanPageToAction() {
 	FanPage* tmpPage = nullptr;
-	char name[LEN_OF_NAME];
+	string name;
 	do
 	{
-		cout << "Please enter the name of the paeg from the list" << endl;
-		cin.getline(name, LEN_OF_NAME);
+		cout << "Please enter the name of the fan page you want" << endl;
+		getline(std::cin, name);
 		tmpPage = fanPages.findPage(name);
 		if (tmpPage == nullptr)
 		{
-			cout << "The page was not found Please enter another name" << endl;
+			cout << "\033[1;31mThe member not found Please enter another name.\033[0m" << endl;
 		}
 	} while (tmpPage == nullptr);
 	return tmpPage;
@@ -176,7 +177,6 @@ FanPage* Admin::getFanPageToAction() {
 void Admin::addStatusToFanPageOrMember() {
 	int choice;
 	string name;
-
 
 	do {
 		cout << "For a member enter 1 , For a Fan page enter 2" << endl;
@@ -190,7 +190,7 @@ void Admin::addStatusToFanPageOrMember() {
 			users.printAllMembers();
 			tmpMember = getMemberToAction();
 			tmpMember->addStatus();
-			cout << "The status was added :)" << endl;
+			cout << "\033[32mThe status was added :)\033[0m" << endl;
 			return;
 		}
 		else if (choice==2) //to fan page
@@ -200,7 +200,7 @@ void Admin::addStatusToFanPageOrMember() {
 			fanPages.printAllPages();
 			tmpPage = getFanPageToAction();
 			tmpPage->addStatus();
-			cout << "The status was added :)" << endl;
+			cout << "\033[32mThe status was added :)\033[0m" << endl;
 			return;
 		}
 		else
@@ -259,8 +259,7 @@ void Admin::makeFriendship()
 			getline(std::cin, name1);
 			member1 = users.getMember(name1);
 			if (member1 == nullptr)
-				cout << "No such user please try again"<<endl;
-				
+				cout << "\033[1;31mNo such user please try again.\033[0m" << endl;
 		} while (member1 == nullptr);
 
 		do {
@@ -268,7 +267,7 @@ void Admin::makeFriendship()
 			getline(std::cin, name2);
 			if (name1==name2)
 			{
-				cout << "Its the same member as the first one, please enter another one" << endl;
+				cout << "\033[1;31mIts the same member as the first one, please enter another one.\033[0m" << endl;
 			}
 			else
 			{
@@ -276,18 +275,17 @@ void Admin::makeFriendship()
 			}
 
 			if (member2==nullptr)
-				cout << "No such user please try again" << endl;
-
+				cout << "\033[1;31mNo such user please try again.\033[0m" << endl;
 		} while ((member2 == nullptr) || name1==name2);
 
 		if ((!member1->checkFriendship(name2)))
 		{
 			member1->addFriend(*member2);
-			cout << name1 << " and " << name2 << " are friends now :) " << endl;
+			cout << name1 << "\033[32m and \033[0m"  << name2 << "\033[32m are friends now :)\033[0m " << endl;
 		}
 		else
 		{
-			cout << "They are already friends" << endl;
+			cout << "\033[1;31mThey are already friends.\033[0m" << endl;
 		}
 
 	} while (!member1->checkFriendship(name2));
@@ -314,13 +312,12 @@ void Admin::unFriendship()
 		getline(std::cin, name1);
 		member1 = users.getMember(name1);
 		if (member1 == nullptr)
-			cout << "No such user please try again" << endl;
-
+			cout << "\033[1;31mNo such user please try again.\033[0m" << endl;
 	} while (member1 == nullptr);
 
 	if (member1->getNumOfFriends() == 0)
 	{
-		cout << "This member doesn't have any friends yet" << endl;
+		cout << "\033[1;31mThis member doesn't have any friends yet.\033[0m" << endl;
 		return;
 	}
 	else
@@ -333,18 +330,18 @@ void Admin::unFriendship()
 		getline(std::cin, name2);
 		if (name1==name2)
 		{
-			cout << "Can't unfriends yourself try a diffrent name" << endl;
+			cout << "\033[1;31mCan't unfriends yourself try a diffrent name.\033[0m" << endl;
 		}
 		else
 		{
 			member2 = users.getMember(name2);
 			if (!member1->checkFriendship(name2))
-				cout << "They are not friends, please choose another friend" << endl;
+				cout << "\033[1;31mThey are not friends, please choose another friend.\033[0m" << endl;
 		}
 	} while ((member2 == nullptr) || !member1->checkFriendship(name2));
 
 	member1->unFriend(*member2);
-	cout << endl <<name1 << " and " << name2 << " are no longer friends :(" << endl;
+	cout << endl <<name1 << "\033[32m and \033[0m" << name2 << "\033[32m are no longer friends :(\033[0m" << endl;
 }
 
 void Admin::disConnectFanAndPage()
@@ -362,7 +359,7 @@ void Admin::disConnectFanAndPage()
 		page = getFanPageToAction();
 		if (page->getNumOfFans() == 0)
 		{
-			cout << "This fanPage doesn't have any fans yet" << endl;
+			cout << "\033[1;31mThis fanPage doesn't have any fans yet.\033[0m" << endl;
 			return;
 		}
 		else
@@ -375,13 +372,13 @@ void Admin::disConnectFanAndPage()
 
 		if (!(member->checkIfAlreadyFolowing(page->getName())))
 		{
-			cout << "This member doesn't follow this page " << endl;
+			cout << "\033[1;31mThis member doesn't follow this page.\033[0m" << endl;
 		}
 
 	} while (!member->checkIfAlreadyFolowing(page->getName()));
 
 	member->disConnectPage(*page);
-	cout << endl << member->getName() << " is no longer follows " << page->getName() << " :(" << endl;
+	cout << endl << member->getName() <<  "\033[32m is no longer follows \033[0m" << page->getName() << "\033[32m :(\033[0m" << endl;
 }
 
 void Admin::ConnectFanToPage(Member& member, FanPage& page) 
@@ -409,11 +406,11 @@ void Admin::ConnectFanToPage()
 		if ((!member->checkIfAlreadyFolowing(page->getName())))
 		{
 			member->followPage(*page);
-			cout << member->getName() << " is now following " << page->getName() << " :) " << endl;
+			cout << member->getName() << "\033[32m is now following \033[0m" << page->getName() << "\033[32m :) \033[0m" << endl;
 		}
 		else
 		{
-			cout << "They are already connected!" << endl;
+			cout << "\033[1;31mThey are already connected!\033[0m" << endl;
 		}
 	} while (!member->checkIfAlreadyFolowing(page->getName()));
 	
@@ -423,7 +420,6 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 {
 	int choice;
 	string name;
-
 
 	do {
 		cout << "For a member enter 1 , For a fan page enter 2" << endl;
@@ -444,6 +440,7 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 		else if (choice == 2) 
 		{
 			FanPage* fanPage;
+			cout << "All the Fan pages:" << endl;
 			fanPages.printAllPages();
 			fanPage = getFanPageToAction();
 			cout << fanPage->getName() << "'s fans are:" << endl;
@@ -466,7 +463,7 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 	member = getMemberToAction();
 	if (member->getNumOfFriends() == 0)
 	{
-		cout << "The member doesnt have any friends" << endl;
+		cout << "\033[1;31mThe member doesnt have any friends.\033[0m" << endl;
 	}
 	else
 	{
@@ -508,9 +505,8 @@ void Admin::hardCodedData()
 	//cout << (*fanPage2 > *member3); F
 	//cout << (*fanPage1 > *fanPage2); T
 
-	Status test1("M");
-	Status test2("m");
-
+	//Status test1("M");
+	//Status test2("m");
 	//cout << (test1 == test2); F
 	//cout << (test1 != test2); T
 }

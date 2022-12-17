@@ -16,7 +16,6 @@ using namespace std;
 //	delete[]pagesArray;
 //}
 
-	
 void PagesArray::deletePage(FanPage& page)
 {
 	vector<FanPage*>::iterator itr = pagesArray.begin();
@@ -28,7 +27,6 @@ void PagesArray::deletePage(FanPage& page)
 		{
 			pagesArray.erase(itr);
 			return;
-
 		}
 	}
 }
@@ -45,37 +43,28 @@ FanPage* PagesArray::addPage(const string name)
 	return fanPage;
 }
 
-
-
-bool PagesArray::checkIfNameExist(const string name)
+bool PagesArray::checkIfNameExist(const string name) const
 {
-	vector<FanPage*>::iterator itr = pagesArray.begin();
-	vector<FanPage*>::iterator itrEnd = pagesArray.end();
+	vector<FanPage*>::const_iterator itr = pagesArray.begin();
+	vector<FanPage*>::const_iterator itrEnd = pagesArray.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if (*itr != nullptr && (*itr)->getName() == name)//!strcmp(pagesArray[i]->getName(), name))
+		if (*itr != nullptr && (*itr)->getName() == name)
 		{
-			cout << "Name already taken, please enter another name." << endl;
+			cout << "\033[1;31mName already taken, please enter another name.\033[0m" << endl;
 			return true;
 		}
-		else
-		{
-			return false;
-		}
 	}
-
+	return false;
 }
 
 void PagesArray::printAllPages() const
 {
-
-	vector<FanPage*>::iterator itr = pagesArray.begin();
-	vector<FanPage*>::iterator itrEnd = pagesArray.end();
+	vector<FanPage*>::const_iterator itr = pagesArray.begin();
+	vector<FanPage*>::const_iterator itrEnd = pagesArray.end();
 	int i = 0;
 	int numOfPages = pagesArray.size();
-
-	cout << "All the pages:" << endl;
 
 	if (numOfPages == 0)
 	{
@@ -90,7 +79,6 @@ void PagesArray::printAllPages() const
 }
 
 FanPage* PagesArray::findPage(string name)
-
 {
 	FanPage* theFoundPage = nullptr;
 	vector<FanPage*>::iterator itr = pagesArray.begin();

@@ -16,9 +16,9 @@ public:
 	int getNumOfPages() { return pagesArray.size(); }
 	void addPage(FanPage& p);
 	FanPage* addPage(const std::string name);
-	void printAllPages();
+	void printAllPages() const;
 	FanPage* findPage(std::string name);
-	bool checkIfNameExist(const std::string name);
+	bool checkIfNameExist(const std::string name) const;
 	void deletePage(FanPage& page);
 };
 

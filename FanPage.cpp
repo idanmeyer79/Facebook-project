@@ -14,9 +14,7 @@ FanPage:: ~FanPage()
 	delete[]fans;
 }
 
-string FanPage::getName()
-
-
+string FanPage::getName() const
 { 
 	return pageName; 
 }

@@ -45,4 +45,3 @@ bool Status::  operator!=(Status& other)
 {
 	return text != other.getText() ? true : false;
 }
-
