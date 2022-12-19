@@ -91,11 +91,20 @@ void Admin::printAcounts() const
 
 void Admin::createMember()
 {
-	Member* member = getDetailsForMember();
-	users.addMember(*member);
+	bool isValid = false;
+	while (!isValid)
+	{
+		try {
+			Member* member = getDetailsForMember();
+			users.addMember(*member);
+			isValid = true;
+		}
+		catch (string) { cout << "\033[1;31mName already taken, please enter another name, enter another name.\033[0m" << endl; }
+		catch (Date) { cout << "\033[1;31mInvalid date\033[0m" << endl; }
+	}
 }
 
-Member* Admin::getDetailsForMember() const
+Member* Admin::getDetailsForMember() const noexcept(false)
 {
 	int day =0 , month =0, year=0;
 	char slash_dummy;
@@ -103,17 +112,21 @@ Member* Admin::getDetailsForMember() const
 	string name;
 	getchar(); //clear the buffer 
 
-	do {
+	//do {
 		cout << "Please enter a name - max 20 letters" << endl;
 		getline(std::cin, name);
-	} while (users.checkIfNameExist(name));
+	//} while (users.checkIfNameExist(name));
+		if (users.checkIfNameExist(name))
+			throw (name);
 
 	Date date(day, month, year);
-	do {
+	//do {
 		cout << "Please enter date of birth - format dd/mm/yyyy" << endl;
 		cin >> day >> slash_dummy >> month >> slash_dummy >> year;
 		validDate = date.setDate(day, month, year);
-	} while (!validDate);
+	//} while (!validDate);
+		if (!validDate)
+			throw (date);
 
 	Member* member = new Member (name, date);
 	cout << name << "\033[32m was created :)\033[0m" << endl;

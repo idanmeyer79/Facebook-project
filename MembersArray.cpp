@@ -24,7 +24,6 @@ bool MembersArray::checkIfNameExist(const string name) const
 	{
 		if ((*itr)->getName()==name)//!strcmp(name, membersArray[i]->getName()))
 		{
-			cout << "\033[1;31mName already taken, please enter another name.\033[0m" << endl; 
 			return true;
 		}
 	}
