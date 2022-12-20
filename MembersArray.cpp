@@ -6,14 +6,16 @@ using namespace std;
 //	membersArray = new Member * [numOfMaxMembers];
 //}
 
-//MembersArray::~MembersArray()
-//{
-//	for(int i =0;i<numOfMembers;i++)
-//	{
-//		delete membersArray[i];
-//	}
-//	delete[]membersArray;
-//}
+MembersArray::~MembersArray()
+{
+	vector<Member*>::iterator itr = membersArray.begin();
+	vector<Member*>::iterator itrEnd = membersArray.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		delete* itr;
+	}
+}
 
 bool MembersArray::checkIfNameExist(const string name) const
 {

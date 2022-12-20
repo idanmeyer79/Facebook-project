@@ -5,7 +5,12 @@
 #include "Date.h"
 #include<vector>
 #pragma warning(disable: 4996)
-
+#define new MYDEBUG_NEW
+#ifdef _DEBUG 
+#define MYDEBUG_NEW new(_NORMAL_BLOCK,__FILE__,__LINE__)
+#else
+#define MYDEBUG_NEW new
+#endif // _DEBUG 
 class Member;
 
 class MembersArray
@@ -13,7 +18,7 @@ class MembersArray
 private:
 	std::vector<Member*> membersArray;
 public:
-
+	~MembersArray();
 	int getNumOfMembers()  { return membersArray.size(); } 
 	Member* getMember(const std::string name) const;
 	bool checkIfNameExist(const std::string name) const;

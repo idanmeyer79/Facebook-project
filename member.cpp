@@ -14,8 +14,9 @@ Member::Member(const string name, const Date& date) : dateOfBirth(date)
 
 Member::~Member()
 {
-	delete[]memberFriends;
-	delete[]memberFanPages;
+	delete []memberFriends;
+	delete []memberFanPages;
+	//memberStatuses.free();
 }
 
 bool Member :: setName(const string name)

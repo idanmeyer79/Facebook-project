@@ -6,16 +6,17 @@
 #include"StatusesArray.h"
 #include <iostream>
 #pragma warning(disable: 4996)
-
+#define new MYDEBUG_NEW
+#ifdef _DEBUG 
+#define MYDEBUG_NEW new(_NORMAL_BLOCK,__FILE__,__LINE__)
+#else
+#define MYDEBUG_NEW new
+#endif // _DEBUG 
 class MembersArray;
 class Member;
 
 class FanPage
 {
-public:
-	static constexpr int LEN_OF_STATUS = 100;
-	static constexpr int LEN_OF_NAME = 20;
-
 private:
 	std::string pageName;
 	MembersArray* fans;

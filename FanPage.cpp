@@ -11,7 +11,8 @@ FanPage::FanPage(const string name)
 
 FanPage:: ~FanPage()
 {
-	delete[]fans;
+	/*delete[]fans;*/
+	//statuses.free();
 }
 
 string FanPage::getName() const

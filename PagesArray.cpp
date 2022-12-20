@@ -7,14 +7,16 @@ using namespace std;
 //}
 
 
-//PagesArray::~PagesArray()
-//{
-//	for(int i=0;i<numOfPages;i++)
-//	{
-//		delete pagesArray[i];
-//	}
-//	delete[]pagesArray;
-//}
+PagesArray::~PagesArray()
+{
+	vector<FanPage*>::iterator itr = pagesArray.begin();
+	vector<FanPage*>::iterator itrEnd = pagesArray.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		delete* itr;
+	}
+}
 
 void PagesArray::deletePage(FanPage& page)
 {

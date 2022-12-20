@@ -7,14 +7,28 @@ using namespace std;
 //	statusArray = new Status * [numOfMaxStatuses];
 //}
 
-//StatusesArray::~StatusesArray()
-//{
-//	for(int i=0;i< numOfStatuses;i++)
-//	{
-//		delete statusArray[i];
-//	}
-//	delete[]statusArray;
-//}
+StatusesArray::~StatusesArray()
+{
+	vector<Status*>::iterator itr = statusArray.begin();
+	vector<Status*>::iterator itrEnd = statusArray.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		delete* itr;
+	}
+}
+
+void StatusesArray::free()
+{
+	vector<Status*>::iterator itr = statusArray.begin();
+	vector<Status*>::iterator itrEnd = statusArray.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		delete* itr;
+	}
+}
+
 
 void StatusesArray::addStatusToArray(Status& s)
 {
