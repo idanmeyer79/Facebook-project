@@ -1,5 +1,6 @@
 #include "Admin.h"
 #include <string>
+#include<vector>
 using namespace std;
 
 void Admin::printMenu()
@@ -22,12 +23,12 @@ void Admin::printMenu()
 	cout << endl;
 }
 
-const PagesArray& Admin:: getPagesArray() const
+const vector<FanPage>& Admin:: getPagesArray() 
 {
 	return fanPages;
 }
 
-const MembersArray& Admin::getMembersArray() const
+const vector<Member>& Admin::getMembersArray() 
 {
 	return users;
 }
@@ -84,15 +85,15 @@ void Admin:: menu()
 void Admin::printAcounts() const
 {
 	cout << "All the members:" << endl;
-	users.printAllMembers();
+	printAllMembers();
 	cout << "All the pages:" << endl;
-	fanPages.printAllPages();
+	printAllPages();
 }
 
 void Admin::createMember()
 {
 	Member* member = getDetailsForMember();
-	users.addMember(*member);
+	users.push_back(*member);
 }
 
 Member* Admin::getDetailsForMember() const
@@ -106,7 +107,7 @@ Member* Admin::getDetailsForMember() const
 	do {
 		cout << "Please enter a name - max 20 letters" << endl;
 		getline(std::cin, name);
-	} while (users.checkIfNameExist(name));
+	} while (checkIfNameExist(name));
 
 	Date date(day, month, year);
 	do {
@@ -123,7 +124,7 @@ Member* Admin::getDetailsForMember() const
 void Admin::createFanPage()
 {
 	FanPage* fanPage = getDetailsForPage();
-	fanPages.addPage(*fanPage);
+	fanPages.push_back(*fanPage);
 }
 
 FanPage* Admin::getDetailsForPage() const
@@ -134,7 +135,7 @@ FanPage* Admin::getDetailsForPage() const
 	do {
 		cout << "Please enter the name of the page- max 20 letters" << endl;
 		getline(std::cin, name);
-	} while (fanPages.checkIfNameExist(name));
+	} while (checkIfNameExist(name));
 
 	FanPage* fanPage = new FanPage(name);
 	cout << name << "\033[32m was created :)\033[0m" << endl;
@@ -149,7 +150,7 @@ Member* Admin::getMemberToAction() {
 		cout << "Please enter the name of the member from the list" << endl;
 		getline(std::cin, name);
 
-		tmpMember = users.getMember(name);
+		tmpMember = getMember(name);
 		if (tmpMember == nullptr)
 		{
 			cout << "\033[1;31mThe member not found Please enter another name.\033[0m" << endl;
@@ -165,7 +166,7 @@ FanPage* Admin::getFanPageToAction() {
 	{
 		cout << "Please enter the name of the fan page you want" << endl;
 		getline(std::cin, name);
-		tmpPage = fanPages.findPage(name);
+		tmpPage = findPage(name);
 		if (tmpPage == nullptr)
 		{
 			cout << "\033[1;31mThe member not found Please enter another name.\033[0m" << endl;
@@ -187,7 +188,7 @@ void Admin::addStatusToFanPageOrMember() {
 		{
 			Member* tmpMember = nullptr;
 			cout << "All the members:" << endl;
-			users.printAllMembers();
+			printAllMembers();
 			tmpMember = getMemberToAction();
 			tmpMember->addStatus();
 			cout << "\033[32mThe status was added :)\033[0m" << endl;
@@ -197,7 +198,7 @@ void Admin::addStatusToFanPageOrMember() {
 		{
 			FanPage* tmpPage = nullptr;
 			cout << "All the fan Pages:" << endl;
-			fanPages.printAllPages();
+			printAllPages();
 			tmpPage = getFanPageToAction();
 			tmpPage->addStatus();
 			cout << "\033[32mThe status was added :)\033[0m" << endl;
@@ -224,7 +225,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 		{
 			Member* tmpMember = nullptr;
 			cout << "All the members:" << endl;
-			users.printAllMembers();
+			printAllMembers();
 			tmpMember = getMemberToAction();
 			tmpMember->showMyStatuses();
 			return;
@@ -233,7 +234,7 @@ void Admin::showAllStatusesOfMemberOrFanPage()
 		{
 			FanPage* tmpPage = nullptr;
 			cout << "All the fan pages:" << endl;
-			fanPages.printAllPages();
+			printAllPages();
 			tmpPage = getFanPageToAction();
 			tmpPage->showMyStatuses();
 			return;
@@ -250,14 +251,14 @@ void Admin::makeFriendship()
 	Member* member2 = nullptr;
 
 	cout << "All the members:" << endl;
-	users.printAllMembers();
+	printAllMembers();
 	getchar(); //clear the buffer 
 	do
 	{
 		do {
 			cout << "Please Choose the first member" << endl;
 			getline(std::cin, name1);
-			member1 = users.getMember(name1);
+			member1 = getMember(name1);
 			if (member1 == nullptr)
 				cout << "\033[1;31mNo such user please try again.\033[0m" << endl;
 		} while (member1 == nullptr);
@@ -271,7 +272,7 @@ void Admin::makeFriendship()
 			}
 			else
 			{
-				member2 = users.getMember(name2);
+				member2 = getMember(name2);
 			}
 
 			if (member2==nullptr)
@@ -304,13 +305,13 @@ void Admin::unFriendship()
 	Member* member2 = nullptr;
 
 	cout << "All the members:" << endl;
-	users.printAllMembers();
+	printAllMembers();
 	getchar(); //clear the buffer 
 
 	do {
 		cout << "Please Choose the first member" << endl;
 		getline(std::cin, name1);
-		member1 = users.getMember(name1);
+		member1 = getMember(name1);
 		if (member1 == nullptr)
 			cout << "\033[1;31mNo such user please try again.\033[0m" << endl;
 	} while (member1 == nullptr);
@@ -334,7 +335,7 @@ void Admin::unFriendship()
 		}
 		else
 		{
-			member2 = users.getMember(name2);
+			member2 = getMember(name2);
 			if (!member1->checkFriendship(name2))
 				cout << "\033[1;31mThey are not friends, please choose another friend.\033[0m" << endl;
 		}
@@ -355,7 +356,7 @@ void Admin::disConnectFanAndPage()
 	do
 	{
 		cout << "All the fan pages:" << endl;
-		fanPages.printAllPages();
+		printAllPages();
 		page = getFanPageToAction();
 		if (page->getNumOfFans() == 0)
 		{
@@ -395,13 +396,13 @@ void Admin::ConnectFanToPage()
 	FanPage* page = nullptr;
 
 	cout << "All the members:" << endl;
-	users.printAllMembers();
+	printAllMembers();
 	do
 	{
 		getchar(); //clear the buffer 
 		member = getMemberToAction();
 		cout << "All the fanPages:" << endl;
-		fanPages.printAllPages();
+		printAllPages();
 		page = getFanPageToAction();
 		if ((!member->checkIfAlreadyFolowing(page->getName())))
 		{
@@ -430,7 +431,7 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 		{
 			Member* member;
 			cout << "All the members:" << endl;
-			users.printAllMembers();
+			printAllMembers();
 			member = getMemberToAction();
 			member->showFriends();
 			member->showFanPages();
@@ -441,7 +442,7 @@ void Admin::printAllFriendsOfMemberOrFanPage()
 		{
 			FanPage* fanPage;
 			cout << "All the Fan pages:" << endl;
-			fanPages.printAllPages();
+			printAllPages();
 			fanPage = getFanPageToAction();
 			cout << fanPage->getName() << "'s fans are:" << endl;
 			fanPage->printFans();
@@ -458,7 +459,7 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 	string name;
 	Member* member = nullptr;
 	cout << "All the members:" << endl;
-	users.printAllMembers();
+	printAllMembers();
 	getchar(); //clear the buffer 
 	member = getMemberToAction();
 	if (member->getNumOfFriends() == 0)
@@ -473,13 +474,19 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 
 void Admin::hardCodedData()
 {
-	FanPage* fanPage1 = fanPages.addPage("Mondial 2022");
-	FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
-	FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
+	FanPage* fanPage1 = new FanPage("mondial");
+	FanPage* fanPage2 = new FanPage("re'evim beravcha");
+	FanPage* fanPage3 = new FanPage("keren kalif fans");
+	//FanPage* fanPage1 = fanPages.addPage("Mondial 2022");
+	//FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
+	//FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
 
-	Member* member1 = users.addMember("Boaz", Date(1, 1, 2020));
-	Member* member2 = users.addMember("Romina", Date(2, 2, 2000));
-	Member* member3 = users.addMember("Arie", Date(3, 3, 1997));
+	Member* member1 = new Member("Boaz", Date(1, 1, 2020));
+	Member* member2 = new Member("Romina", Date(2, 2, 2000));
+	Member* member3 = new Member("Arie", Date(3, 3, 1997));
+	//Member* member1 = users.addMember("Boaz", Date(1, 1, 2020));
+	//Member* member2 = users.addMember("Romina", Date(2, 2, 2000));
+	//Member* member3 = users.addMember("Arie", Date(3, 3, 1997));
 
 	member1->addStatus("Hey its Boaz");
 	member1->addStatus("Boaz 2");
@@ -509,4 +516,186 @@ void Admin::hardCodedData()
 	//Status test2("m");
 	//cout << (test1 == test2); F
 	//cout << (test1 != test2); T
+}
+
+//from members array
+bool Admin::checkIfNameExist(const string name) const
+{
+	vector<Member>::const_iterator itr = users.begin();
+	vector<Member>::const_iterator itrEnd = users.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == name)//!strcmp(name, membersArray[i]->getName()))
+		{
+			cout << "\033[1;31mName already taken, please enter another name.\033[0m" << endl;
+			return true;
+		}
+	}
+	return false;
+}
+
+void Admin::addMember(Member& m)
+{
+	//if (numOfMaxMembers == numOfMembers) {
+	//	numOfMaxMembers = numOfMaxMembers * 2;
+	//	Member** tmp = new Member * [numOfMaxMembers];
+	//	for (int i = 0; i < numOfMembers; i++)
+	//		tmp[i] = membersArray[i];
+	//	membersArray = tmp;
+	//	tmp = nullptr;
+	//	delete[] tmp;
+	//}
+	users.push_back(m);
+	//membersArray[numOfMembers] = &m;
+	//numOfMembers++;
+}
+
+Member* Admin::addMember(const string name, const Date& dateOfBirth)
+{
+	Member* member = new Member(name, dateOfBirth);
+
+	//if (numOfMaxMembers == numOfMembers) {
+	//	numOfMaxMembers = numOfMaxMembers * 2;
+	//	Member** tmp = new Member * [numOfMaxMembers];
+	//	for (int i = 0; i < numOfMembers; i++)
+	//		tmp[i] = membersArray[i];
+	//	membersArray = tmp;
+	//	tmp = nullptr;
+	//	delete[] tmp;
+	//}
+	users.push_back(*member);
+	return member;
+	/*membersArray[numOfMembers] = member1;
+	numOfMembers++;
+	return member1;*/
+}
+
+void Admin::deleteMember(Member& member)
+{
+	vector<Member>::iterator itr = users.begin();
+	vector<Member>::iterator itrEnd = users.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == member.getName())
+		{
+			users.erase(itr);
+			return;
+		}
+	}
+}
+
+void Admin::printAllMembers() const
+{
+
+	vector<Member>::const_iterator itr = users.begin();
+	vector<Member>::const_iterator itrEnd = users.end();
+	int numOfMembers = users.size();
+	int i = 0;
+
+	if (numOfMembers == 0)
+	{
+		cout << "None" << endl;
+		return;
+	}
+
+	for (; itr != itrEnd; ++itr)
+	{
+		cout << "#" << ++i << " " << (*itr).getName() << endl;
+	}
+}
+
+
+Member* Admin::getMember(const string name) 
+{
+	vector<Member>::iterator itr = users.begin();
+	vector<Member>::iterator itrEnd = users.end();
+
+	Member* theFoundMember = nullptr;
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == name)
+		{
+			theFoundMember = &(*itr);
+			return theFoundMember;
+		}
+	}
+	return theFoundMember;
+}
+
+void Admin::showLast10StatusesOfEach() const
+{
+	vector<Member>::const_iterator itr = users.begin();
+	vector<Member>::const_iterator itrEnd = users.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		(*itr).printMyLast10Statuses();
+	}
+}
+
+//from pages array
+void Admin::deletePage(FanPage& page)
+{
+	vector<FanPage>::iterator itr = fanPages.begin();
+	vector<FanPage>::iterator itrEnd = fanPages.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == page.getName())
+		{
+			fanPages.erase(itr);
+			return;
+		}
+	}
+}
+
+void Admin::addPage(FanPage& p)
+{
+	fanPages.push_back(p);
+}
+
+FanPage* Admin::addPage(const string name)
+{
+	FanPage* fanPage = new FanPage(name);
+	fanPages.push_back(*fanPage);
+	return fanPage;
+}
+
+void Admin::printAllPages() const
+{
+	vector<FanPage>::const_iterator itr = fanPages.begin();
+	vector<FanPage>::const_iterator itrEnd = fanPages.end();
+	int i = 0;
+	int numOfPages = fanPages.size();
+
+	if (numOfPages == 0)
+	{
+		cout << "None" << endl;
+		return;
+	}
+
+	for (; itr != itrEnd; ++itr)
+	{
+		cout << "#" << ++i << " " << (*itr).getName() << endl;
+	}
+}
+
+FanPage* Admin::findPage(string name)
+{
+	FanPage* theFoundPage = nullptr;
+	vector<FanPage>::iterator itr = fanPages.begin();
+	vector<FanPage>::iterator itrEnd = fanPages.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == name)
+		{
+			theFoundPage = &(*itr);
+			return theFoundPage;
+		}
+	}
+	return theFoundPage;
 }

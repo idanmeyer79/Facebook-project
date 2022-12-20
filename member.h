@@ -6,6 +6,7 @@
 #include "PagesArray.h"
 #include "FanPage.h"
 #include <iostream>
+#include<vector>
 #pragma warning(disable: 4996)
 
 class PagesArray;
@@ -17,18 +18,20 @@ class Member
 private:
 	std::string memberName;
 	Date dateOfBirth;
-	MembersArray* memberFriends;
-	StatusesArray memberStatuses;
-	PagesArray* memberFanPages;
+	//MembersArray* memberFriends;
+	//StatusesArray memberStatuses;
+	std::vector<Status> memberStatuses;
+	std::vector<FanPage> memberFanPages;
+	std::vector<Member> memberFriends;
+	//PagesArray* memberFanPages;
 
 public:
 
-	Member(Member& other) = delete;
-	Member(const std::string name, const Date& dateOfBirth);
-	~Member();
-	MembersArray& getMembersArray() { return *memberFriends; }
-	StatusesArray& getStatusesArray() { return memberStatuses; }
-	PagesArray& getPagesArray() { return *memberFanPages; }
+	Member(const std::string name, const Date& dateOfBirth) noexcept(false);
+	//~Member();
+	std::vector<Member> getMembersArray()  { return memberFriends; }
+	std::vector<Status> getStatusesArray() { return memberStatuses; }
+	std::vector<FanPage> getPagesArray()   { return memberFanPages; }
 	std::string getName() const;
 	const Date getDate()const;
 	const int getNumOfFriends() const ;
@@ -48,6 +51,27 @@ public:
 	void disConnectPage(FanPage& page);
 	bool checkFriendship(const std::string name);
 	bool checkIfAlreadyFolowing(const std::string name);
+	//From pages Array
+	int getNumOfPages() { return memberFanPages.size(); }
+	void addPage(FanPage& p);
+	FanPage* addPage(const std::string name);
+	void printAllPages() const;
+	FanPage* findPage(std::string name);
+	bool checkIfNameExist(const std::string name) const;
+	void deletePage(FanPage& page);
+	//from members array
+	int getNumOfMembers() { return memberFriends.size(); }
+	Member* getMember(const std::string name);
+	void printAllMembers() const;
+	void showLast10StatusesOfEach() const;
+	void deleteMember(Member& member);
+	void addMember(Member& p);
+	Member* addMember(const std::string name, const Date& dateOfBirth);
+	//from statuses array
+	std::vector<Status> getStatusArray() { return memberStatuses; }
+	void addStatusToArray(Status& s);
+	void printAllStatuses() const;
+	void print10() const;
 
 	Member& operator+=(Member& other);
 	Member& operator+=(FanPage& other);

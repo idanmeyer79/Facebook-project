@@ -5,21 +5,25 @@
 #pragma warning(disable: 4996)
 using namespace std;
 
-Member::Member(const string name, const Date& date) : dateOfBirth(date)
+Member::Member(const string name, const Date& date) : dateOfBirth(date) 
 {
+	if (checkIfNameExist(name))
+		throw name;
 	memberName = name;
-	memberFriends = new MembersArray;
-	memberFanPages = new PagesArray;
+	//memberFriends = new MembersArray;
+	//memberFanPages = new PagesArray;
 }
 
-Member::~Member()
-{
-	delete[]memberFriends;
-	delete[]memberFanPages;
-}
+//Member::~Member()
+//{
+//	delete[]memberFriends;
+//	delete[]memberFanPages;
+//}
 
 bool Member :: setName(const string name)
 {
+	if (checkIfNameExist(name))
+		return false;
 	memberName = name;
 	return true;
 }
@@ -41,8 +45,8 @@ const Date Member::getDate() const
 
 void Member::addFriend(Member& member)
 {
-	memberFriends->addMember(member);
-	member.memberFriends->addMember(*this);
+	memberFriends.push_back(member);
+	member.memberFriends.push_back(*this);
 }
 
 Member& Member:: operator+=(Member& other){
@@ -57,84 +61,85 @@ Member& Member:: operator+=(FanPage& other){
 
 void Member::disConnectPage(FanPage& page)
 {
-	memberFanPages->deletePage(page);
+	deletePage(page);
 	page.removeFan(*this);
 }
 
 void Member::unFriend(Member& member)
 {
-	memberFriends->deleteMember(member);
-	member.memberFriends->deleteMember(*this);
+
+	deleteMember(member);
+	member.deleteMember(*this);
 }
 
 void Member::followPage(FanPage& fanPage)
 {
-	memberFanPages->addPage(fanPage);
+	addPage(fanPage);
 	fanPage.addFan(*this);
 }
 
 void Member::showFriends()  const
 {
 	cout << memberName << "'s friends are:" << endl;
-	memberFriends->printAllMembers();
+	printAllMembers();
 }
 
 void Member::showFanPages() const
 {
 	cout << memberName << "'s fan pages are:" << endl;
-	memberFanPages->printAllPages();
+	printAllPages();
 }
 
-void Member :: addStatus() 
+void Member :: addStatus() //this need to go
 {
 	string text;
 	cout << "Please enter new status: " << endl;
 	getline(std::cin, text);
 	Status* status = new Status(text);
-	memberStatuses.addStatusToArray(*status);
+	addStatusToArray(*status);
 }
 
 void Member::addStatus(const string text)
 {
 	Status* status = new Status(text);
-	memberStatuses.addStatusToArray(*status);
+	addStatusToArray(*status);
 }
 
 void Member::addStatus(Status& status)
 {
-	memberStatuses.addStatusToArray(status);
+	addStatusToArray(status);
 }
 
 void Member::showMyStatuses() const
 {
 	cout << memberName << " ";
-	memberStatuses.printAllStatuses();
+	printAllStatuses();
 }
  
 bool Member::checkFriendship(const string name)
 {
-	return memberFriends->getMember(name);
+	return getMember(name);
 }
 
 bool Member::checkIfAlreadyFolowing(const string name)
 {
-	return memberFanPages->findPage(name);
+	return findPage(name);
 }
 
 void Member::Show10MyFriendsLastStatuses() const
 {
-	memberFriends->showLast10StatusesOfEach();
+	showLast10StatusesOfEach();
 }
 
 void Member::printMyLast10Statuses() const
 {
 	cout << memberName << " statuses:" << endl;
-	memberStatuses.print10();
+	print10();
 }
 
 const int Member::getNumOfFriends()  const
 { 
-	return memberFriends->getNumOfMembers();
+	return memberFriends.size();
 }
 
 bool Member:: operator>(Member& other)
@@ -145,4 +150,239 @@ bool Member:: operator>(Member& other)
 bool Member:: operator>(FanPage& other) 
 {
 	return getNumOfFriends() > other.getNumOfFans() ? true : false;
+}
+
+
+
+//from pages array
+void Member::deletePage(FanPage& page)
+{
+	vector<FanPage>::iterator itr = memberFanPages.begin();
+	vector<FanPage>::iterator itrEnd = memberFanPages.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == page.getName())
+		{
+			memberFanPages.erase(itr);
+			return;
+		}
+	}
+}
+
+void Member::addPage(FanPage& p)
+{
+	memberFanPages.push_back(p);
+}
+
+FanPage* Member::addPage(const string name)
+{
+	FanPage* fanPage = new FanPage(name); //throw
+	memberFanPages.push_back(*fanPage);
+	return fanPage;
+}
+
+
+void Member::printAllPages() const
+{
+	vector<FanPage>::const_iterator itr = memberFanPages.begin();
+	vector<FanPage>::const_iterator itrEnd = memberFanPages.end();
+	int i = 0;
+	int numOfPages = memberFanPages.size();
+
+	if (numOfPages == 0)
+	{
+		cout << "None" << endl;
+		return;
+	}
+
+	for (; itr != itrEnd; ++itr)
+	{
+		cout << "#" << ++i << " " << (*itr).getName() << endl;
+	}
+}
+
+FanPage* Member::findPage(string name)
+{
+	FanPage* theFoundPage = nullptr;
+	vector<FanPage>::iterator itr = memberFanPages.begin();
+	vector<FanPage>::iterator itrEnd = memberFanPages.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == name)
+		{
+			theFoundPage = &(*itr);
+			return theFoundPage;
+		}
+	}
+	return theFoundPage;
+}
+
+//from members array
+bool Member::checkIfNameExist(const string name) const
+{
+	vector<Member>::const_iterator itr = memberFriends.begin();
+	vector<Member>::const_iterator itrEnd = memberFriends.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == name)//!strcmp(name, membersArray[i]->getName()))
+		{
+			cout << "\033[1;31mName already taken, please enter another name.\033[0m" << endl;
+			return true;
+		}
+	}
+	return false;
+}
+
+void Member::addMember(Member& m)
+{
+	//if (numOfMaxMembers == numOfMembers) {
+	//	numOfMaxMembers = numOfMaxMembers * 2;
+	//	Member** tmp = new Member * [numOfMaxMembers];
+	//	for (int i = 0; i < numOfMembers; i++)
+	//		tmp[i] = membersArray[i];
+	//	membersArray = tmp;
+	//	tmp = nullptr;
+	//	delete[] tmp;
+	//}
+	memberFriends.push_back(m);
+	//membersArray[numOfMembers] = &m;
+	//numOfMembers++;
+}
+
+Member* Member::addMember(const string name, const Date& dateOfBirth)
+{
+	Member* member = new Member(name, dateOfBirth);
+
+	//if (numOfMaxMembers == numOfMembers) {
+	//	numOfMaxMembers = numOfMaxMembers * 2;
+	//	Member** tmp = new Member * [numOfMaxMembers];
+	//	for (int i = 0; i < numOfMembers; i++)
+	//		tmp[i] = membersArray[i];
+	//	membersArray = tmp;
+	//	tmp = nullptr;
+	//	delete[] tmp;
+	//}
+	memberFriends.push_back(*member);
+	return member;
+	/*membersArray[numOfMembers] = member1;
+	numOfMembers++;
+	return member1;*/
+}
+
+void Member::deleteMember(Member& member)
+{
+	vector<Member>::iterator itr = memberFriends.begin();
+	vector<Member>::iterator itrEnd = memberFriends.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == member.getName())
+		{
+			memberFriends.erase(itr);
+			return;
+		}
+	}
+}
+
+void Member::printAllMembers() const
+{
+
+	vector<Member>::const_iterator itr = memberFriends.begin();
+	vector<Member>::const_iterator itrEnd = memberFriends.end();
+	int numOfMembers = memberFriends.size();
+	int i = 0;
+
+	if (numOfMembers == 0)
+	{
+		cout << "None" << endl;
+		return;
+	}
+
+	for (; itr != itrEnd; ++itr)
+	{
+		cout << "#" << ++i << " " << (*itr).getName() << endl;
+	}
+}
+
+
+Member* Member::getMember(const string name) 
+{
+	vector<Member>::iterator itr = memberFriends.begin();
+	vector<Member>::iterator itrEnd = memberFriends.end();
+
+	Member* theFoundMember = nullptr;
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == name)
+		{
+			theFoundMember = &(*itr);
+			return theFoundMember;
+		}
+	}
+	return theFoundMember;
+}
+
+void Member::showLast10StatusesOfEach() const
+{
+	vector<Member>::const_iterator itr = memberFriends.begin();
+	vector<Member>::const_iterator itrEnd = memberFriends.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		(*itr).printMyLast10Statuses();
+	}
+}
+
+//from statuses array
+void Member::addStatusToArray(Status& s)
+{
+	//if (numOfMaxStatuses == numOfStatuses) {
+	//	numOfMaxStatuses = numOfMaxStatuses * 2;
+	//	Status** tmp = new Status * [numOfMaxStatuses];
+	//	for (int i = 0; i < numOfStatuses; i++)
+	//		tmp[i] = statusArray[i];
+	//	delete[] statusArray;
+	//	statusArray = tmp;
+	//}
+	memberStatuses.push_back(s);
+	//statusArray[numOfStatuses] = &s;
+	//numOfStatuses++;
+}
+
+void Member::printAllStatuses() const
+{
+	vector<Status>::const_iterator itr = memberStatuses.begin();
+	vector<Status>::const_iterator itrEnd = memberStatuses.end();
+
+	int i = 0;
+	cout << "All the statuses:" << endl;
+	for (; itr != itrEnd; ++itr)
+	{
+		cout << "# " << ++i << " ";
+		(*itr).printStatus();
+	}
+}
+
+void Member::print10() const
+{
+	vector<Status*>::const_reverse_iterator  rit = memberStatuses.rbegin();
+	vector<Status*>::const_reverse_iterator ritrEnd = memberStatuses.rend();
+	int size = memberStatuses.size();
+	int currMemberNumOfStatuses = min(size, 10);
+	for (; rit != ritrEnd; ++rit)
+	{
+
+		(*rit)->printStatus();
+		//statusArray[size - k]->printStatus();
+	}
+	cout << endl;
+	/*for (int k = 1; k < currMemberNumOfStatuses+1; k++)
+	{
+		statusArray[size-k]->printStatus();
+	}
+	cout << endl;*/
 }

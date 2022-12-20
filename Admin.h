@@ -7,23 +7,26 @@
 #include "FanPage.h"
 #include "Member.h"
 #include <iostream>
+#include <vector>
 #pragma warning(disable: 4996)
+
+class FanPage;
+class Member;
 
 class Admin
 {
 private:
-	PagesArray fanPages;
-	MembersArray users;
+	std::vector<FanPage> fanPages;
+	std::vector<Member>users;
 	
 public:
 	Admin() = default;
-	Admin(const Admin& other) = delete;
-	const MembersArray& getMembersArray() const;
+	const std::vector<Member>& getMembersArray();
 	Member* getDetailsForMember() const;
 	FanPage* getDetailsForPage() const;
-    const PagesArray& getPagesArray() const;
-	void setPagesArray(PagesArray newFanPages)  { fanPages = newFanPages; }
-	void setMembersArray(MembersArray newUsers) { users = newUsers;       }
+    const std::vector<FanPage>& getPagesArray();
+	void setPagesArray(std::vector<FanPage> newFanPages)  { fanPages = newFanPages; }
+	void setMembersArray(std::vector<Member> newUsers)    { users = newUsers;       }
 	void printMenu();
 	void printAcounts() const;
 	void printAllFriendsOfMemberOrFanPage();
@@ -42,6 +45,22 @@ public:
 	void hardCodedData();
 	Member* getMemberToAction();
 	FanPage* getFanPageToAction();
+	//from members array
+	int getNumOfMembers() { return users.size(); }
+	Member* getMember(const std::string name);
+	bool checkIfNameExist(const std::string name) const;
+	void printAllMembers() const;
+	void showLast10StatusesOfEach() const;
+	void deleteMember(Member& member);
+	void addMember(Member& p);
+	Member* addMember(const std::string name, const Date& dateOfBirth);
+	//from pages array
+	int getNumOfPages() { return fanPages.size(); }
+	void addPage(FanPage& p);
+	FanPage* addPage(const std::string name);
+	void printAllPages() const;
+	FanPage* findPage(std::string name);
+	void deletePage(FanPage& page);
 };
 
 #endif // !__ADMIN_H__
