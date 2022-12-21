@@ -9,7 +9,7 @@ private:
 	int day, month, year;
 
 public:
-	Date(int d, int, int y);
+	Date(int d, int, int y) noexcept(false);
 	bool setDate(int d, int m, int y);
 	const int getDay() const  { return day;  }
 	const int getMonth() const { return month;}

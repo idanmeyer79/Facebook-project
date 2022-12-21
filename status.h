@@ -6,8 +6,6 @@
 
 class Status
 {
-public:
-	static constexpr int LEN_OF_STATUS = 100;
 private:
 	std::string text;
 	std::string date_and_time;

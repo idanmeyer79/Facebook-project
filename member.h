@@ -1,10 +1,8 @@
 #ifndef __MEMBER_H__
 #define __MEMBER_H__
-#include "MembersArray.h"
-#include "StatusesArray.h"
 #include "Date.h"
-#include "PagesArray.h"
 #include "FanPage.h"
+#include"status.h"
 #include <iostream>
 #include<vector>
 #include<list>
@@ -29,7 +27,7 @@ private:
 public:
 
 	Member(const std::string name, const Date& dateOfBirth) noexcept(false);
-	//~Member();
+	~Member();
 	std::list<Member*> getMembersArray()  { return memberFriends; }
 	std::vector<Status> getStatusesArray() { return memberStatuses; }
 	std::list<FanPage*> getPagesArray()   { return memberFanPages; }

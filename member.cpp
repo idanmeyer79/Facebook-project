@@ -14,11 +14,11 @@ Member::Member(const string name, const Date& date) : dateOfBirth(date)
 	//memberFanPages = new PagesArray;
 }
 
-//Member::~Member()
-//{
-//	delete[]memberFriends;
-//	delete[]memberFanPages;
-//}
+Member::~Member()
+{
+	memberStatuses.erase(memberStatuses.begin(), memberStatuses.end());
+	//memberStatuses.clear();
+}
 
 bool Member :: setName(const string name)
 {

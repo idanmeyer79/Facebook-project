@@ -12,10 +12,14 @@ FanPage::FanPage(const string name)
 	pageName= name;
 }
 
-//FanPage:: ~FanPage()
-//{
-//	delete[]fans;
-//}
+FanPage:: ~FanPage()
+{
+
+	statuses.clear();
+
+	//statuses.erase(statuses.begin(), statuses.end());
+	//statuses.clear();
+}
 
 string FanPage::getName() const
 { 

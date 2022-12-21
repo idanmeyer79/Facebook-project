@@ -1,7 +1,5 @@
 #ifndef __ADMIN_H__
 #define __ADMIN_H__
-#include"PagesArray.h"
-#include "MembersArray.h"
 #include "Date.h"
 #include"Status.h"
 #include "FanPage.h"
@@ -9,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #pragma warning(disable: 4996)
+#pragma warning(disable: 4267)
 
 class FanPage;
 class Member;
@@ -21,6 +20,7 @@ private:
 	
 public:
 	Admin() = default;
+	~Admin();
 	const std::vector<Member>& getMembersArray();
 	Member* getDetailsForMember() const;
 	FanPage* getDetailsForPage() const;

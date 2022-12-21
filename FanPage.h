@@ -1,9 +1,7 @@
 #ifndef __PAGE_H__
 #define __PAGE_H__
 #include"Member.h"
-#include"MembersArray.h"
 #include"Status.h"
-#include"StatusesArray.h"
 #include <iostream>
 #include<vector>
 #pragma warning(disable: 4996)
@@ -25,8 +23,8 @@ private:
 	//StatusesArray statuses;
 	
 public:
-	FanPage(const std::string name);
-	//~FanPage();
+	FanPage(const std::string name) noexcept(false);
+	~FanPage();
 	bool setName(const std::string name);
 	std::string getName() const;
 	const int getNumOfFans() const;

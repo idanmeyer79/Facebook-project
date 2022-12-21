@@ -2,6 +2,18 @@
 #include <string>
 #include<vector>
 using namespace std;
+#pragma warning(disable: 4267)
+#pragma warning(disable: 6031)
+
+Admin::~Admin()
+{
+	users.erase(users.begin(), users.end());
+	fanPages.erase(fanPages.begin(), fanPages.end());
+
+	//users.clear();
+	//fanPages.clear();
+}
+
 
 void Admin::printMenu()
 {

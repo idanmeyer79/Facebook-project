@@ -15,8 +15,7 @@ Status::Status(string t) // c'tor with text
 	text = t;
 	time_t curr_time;
 	curr_time = time(NULL);
-	string tm = ctime(&curr_time);
-	this->date_and_time = tm;
+	this->date_and_time = ctime(&curr_time);
 }
 
 //Status::~Status() //d'tor
