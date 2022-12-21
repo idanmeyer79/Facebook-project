@@ -494,30 +494,46 @@ void Admin::hardCodedData()
 	//Member* member1 = users.addMember("Boaz", Date(1, 1, 2020));
 	//Member* member2 = users.addMember("Romina", Date(2, 2, 2000));
 	//Member* member3 = users.addMember("Arie", Date(3, 3, 1997));
+	users[0].addStatus("Hey its Boaz");
+	users[0].addStatus("Boaz 2");
+	users[1].addStatus("Hey its Romina");
+	users[1].addStatus("Romina 2");
+	users[2].addStatus("Hey its Arie");
+	users[2].addStatus("Arie 2");
+	//member1->addStatus("Hey its Boaz");
+	//member1->addStatus("Boaz 2");
+	//member2->addStatus("Hey its Romina");
+	//member2->addStatus("Romina 2");
+	//member3->addStatus("Hey its Arie");
+	//member3->addStatus("Arie 2");
+	fanPages[0].addStatus("welcome to Mondial 2022");
+	fanPages[0].addStatus("Mondial 2022");
+	fanPages[1].addStatus("welcome to re'evim beravcha");
+	fanPages[1].addStatus("re'evim beravcha 2");
+	fanPages[2].addStatus("welcome to keren kalif fans");
+	fanPages[2].addStatus("keren kalif fans 2");
+	//fanPage1->addStatus("welcome to Mondial 2022");
+	//fanPage1->addStatus("Mondial 2022");
+	//fanPage2->addStatus("welcome to re'evim beravcha");
+	//fanPage2->addStatus("re'evim beravcha 2");
+	//fanPage3->addStatus("welcome to keren kalif fans");
+	//fanPage3->addStatus("keren kalif fans 2");
 
-	member1->addStatus("Hey its Boaz");
-	member1->addStatus("Boaz 2");
-	member2->addStatus("Hey its Romina");
-	member2->addStatus("Romina 2");
-	member3->addStatus("Hey its Arie");
-	member3->addStatus("Arie 2");
-	fanPage1->addStatus("welcome to Mondial 2022");
-	fanPage1->addStatus("Mondial 2022");
-	fanPage2->addStatus("welcome to re'evim beravcha");
-	fanPage2->addStatus("re'evim beravcha 2");
-	fanPage3->addStatus("welcome to keren kalif fans");
-	fanPage3->addStatus("keren kalif fans 2");
+	users[0] += users[1];
+	users[0] += users[2];
+	users[0] += fanPages[0];
+	fanPages[1] += users[0];
+	users[2] += fanPages[0];
+	//*member1 += *member2;
+	//*member1 += *member3;
+	//*member1 += *fanPage1;
+	//*fanPage2 += *member1;
+	//*member2 += *fanPage1;
 
-	*member1 += *member2;
-	*member1 += *member3;
-	*member1 += *fanPage1;
-	*fanPage2 += *member1;
-	*member2 += *fanPage1;
-
-	//cout << (*member1 > *member2); T
-	//cout << (*member1 > *fanPage1); F
-	//cout << (*fanPage2 > *member3); F
-	//cout << (*fanPage1 > *fanPage2); T
+	cout << (users[0] > users[1]); //T
+	cout << (users[0] > fanPages[0]); //F
+	cout << (fanPages[1] > users[2]); //F
+	cout << (fanPages[1] > fanPages[2]); //T
 
 	//Status test1("M");
 	//Status test2("m");
