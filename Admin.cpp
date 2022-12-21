@@ -7,8 +7,8 @@ using namespace std;
 
 Admin::~Admin()
 {
-	users.erase(users.begin(), users.end());
-	fanPages.erase(fanPages.begin(), fanPages.end());
+	//users.erase(users.begin(), users.end());
+	//fanPages.erase(fanPages.begin(), fanPages.end());
 
 	//users.clear();
 	//fanPages.clear();
@@ -104,11 +104,11 @@ void Admin::printAcounts() const
 
 void Admin::createMember()
 {
-	Member* member = getDetailsForMember();
-	users.push_back(*member);
+	Member member = getDetailsForMember();
+	users.push_back(member);
 }
 
-Member* Admin::getDetailsForMember() const
+Member Admin::getDetailsForMember() const
 {
 	int day =0 , month =0, year=0;
 	char slash_dummy;
@@ -121,25 +121,47 @@ Member* Admin::getDetailsForMember() const
 		getline(std::cin, name);
 	} while (checkIfNameExist(name));
 
-	Date date(day, month, year);
-	do {
+
+	//Date date(day, month, year);
+	//do {
+	//	cout << "Please enter date of birth - format dd/mm/yyyy" << endl;
+	//	cin >> day >> slash_dummy >> month >> slash_dummy >> year;
+	//	validDate = date.setDate(day, month, year);
+	//} while (!validDate);
+
+	while (!validDate)
+	{
 		cout << "Please enter date of birth - format dd/mm/yyyy" << endl;
 		cin >> day >> slash_dummy >> month >> slash_dummy >> year;
-		validDate = date.setDate(day, month, year);
-	} while (!validDate);
+		try
+		{
+			Date date(day, month, year);
+			validDate = true;
+			Member member(name, date);
+			cout << name << "\033[32m was created :)\033[0m" << endl;
+			return member;
+		}
+	
+		catch (const std::invalid_argument& e) {
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
+		catch (...) {
+			std::cerr << "Unknown error" << std::endl;
+		}
+	}
 
-	Member* member = new Member (name, date);
-	cout << name << "\033[32m was created :)\033[0m" << endl;
-	return member;
 }
 
 void Admin::createFanPage()
 {
-	FanPage* fanPage = getDetailsForPage();
-	fanPages.push_back(*fanPage);
+	FanPage fanPage = getDetailsForPage();
+	fanPages.push_back(fanPage);
 }
 
-FanPage* Admin::getDetailsForPage() const
+FanPage Admin::getDetailsForPage() const
 {
 	string name;
 	getchar(); //clear the buffer 
@@ -149,7 +171,7 @@ FanPage* Admin::getDetailsForPage() const
 		getline(std::cin, name);
 	} while (checkIfNameExist(name));
 
-	FanPage* fanPage = new FanPage(name);
+	FanPage fanPage(name);
 	cout << name << "\033[32m was created :)\033[0m" << endl;
 	return fanPage;
 }
@@ -486,56 +508,83 @@ void Admin::showLast10StatusesOfFriendsOfMember()
 
 void Admin::hardCodedData()
 {
-	FanPage* fanPage1 = new FanPage("mondial");
-	FanPage* fanPage2 = new FanPage("re'evim beravcha");
-	FanPage* fanPage3 = new FanPage("keren kalif fans");
+	FanPage fanPage1("mondial");
+	FanPage fanPage2("re'evim beravcha");
+	FanPage fanPage3("keren kalif fans");
+	//FanPage* fanPage1 = new FanPage("mondial");
+	//FanPage* fanPage2 = new FanPage("re'evim beravcha");
+	//FanPage* fanPage3 = new FanPage("keren kalif fans");
+	/*fanPages.push_back(*fanPage1);
 	fanPages.push_back(*fanPage1);
-	fanPages.push_back(*fanPage2);
-	fanPages.push_back(*fanPage3);
+	fanPages.push_back(*fanPage1);*/
+
+
 	//FanPage* fanPage1 = fanPages.addPage("Mondial 2022");
 	//FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
 	//FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
 
-	Member* member1 = new Member("Boaz", Date(1, 1, 2020));
-	Member* member2 = new Member("Romina", Date(2, 2, 2000));
-	Member* member3 = new Member("Arie", Date(3, 3, 1997));
-	users.push_back(*member1);
-	users.push_back(*member2);
-	users.push_back(*member3);
+	//Member* member1 = new Member("Boaz", Date(1, 1, 2020));
+	//Member* member2 = new Member("Romina", Date(2, 2, 2000));
+	//Member* member3 = new Member("Arie", Date(3, 3, 1997));
+
+	Member member1("Boaz", Date(1, 1, 2020));
+	Member member2("Romina", Date(2, 2, 2000));
+	Member member3("Arie", Date(3, 3, 1997));
+
+	users.push_back(member1);
+	users.push_back(member2);
+	users.push_back(member3);
+	//users.push_back(*member1);
+	//users.push_back(*member2);
+	//users.push_back(*member3);
 
 	//Member* member1 = users.addMember("Boaz", Date(1, 1, 2020));
 	//Member* member2 = users.addMember("Romina", Date(2, 2, 2000));
 	//Member* member3 = users.addMember("Arie", Date(3, 3, 1997));
+
+
 	users[0].addStatus("Hey its Boaz");
 	users[0].addStatus("Boaz 2");
 	users[1].addStatus("Hey its Romina");
 	users[1].addStatus("Romina 2");
 	users[2].addStatus("Hey its Arie");
 	users[2].addStatus("Arie 2");
+
+
 	//member1->addStatus("Hey its Boaz");
 	//member1->addStatus("Boaz 2");
 	//member2->addStatus("Hey its Romina");
 	//member2->addStatus("Romina 2");
 	//member3->addStatus("Hey its Arie");
 	//member3->addStatus("Arie 2");
-	fanPages[0].addStatus("welcome to Mondial 2022");
+
+
+	/*fanPages[0].addStatus("welcome to Mondial 2022");
 	fanPages[0].addStatus("Mondial 2022");
 	fanPages[1].addStatus("welcome to re'evim beravcha");
 	fanPages[1].addStatus("re'evim beravcha 2");
 	fanPages[2].addStatus("welcome to keren kalif fans");
-	fanPages[2].addStatus("keren kalif fans 2");
-	//fanPage1->addStatus("welcome to Mondial 2022");
-	//fanPage1->addStatus("Mondial 2022");
-	//fanPage2->addStatus("welcome to re'evim beravcha");
-	//fanPage2->addStatus("re'evim beravcha 2");
-	//fanPage3->addStatus("welcome to keren kalif fans");
-	//fanPage3->addStatus("keren kalif fans 2");
+	fanPages[2].addStatus("keren kalif fans 2");*/
+
+
+	fanPage1.addStatus("welcome to Mondial 2022");
+	fanPage1.addStatus("Mondial 2022");
+	fanPage2.addStatus("welcome to re'evim beravcha");
+	fanPage2.addStatus("re'evim beravcha 2");
+	fanPage3.addStatus("welcome to keren kalif fans");
+	fanPage3.addStatus("keren kalif fans 2");
+
+	//פוש בק יוצר העתק ולכן הבלוק הזה בסוף
+	fanPages.push_back(fanPage1);
+	fanPages.push_back(fanPage2);
+	fanPages.push_back(fanPage3);
 
 	users[0] += users[1];
 	users[0] += users[2];
 	users[0] += fanPages[0];
 	fanPages[1] += users[0];
 	users[2] += fanPages[0];
+
 	//*member1 += *member2;
 	//*member1 += *member3;
 	//*member1 += *fanPage1;

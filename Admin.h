@@ -22,8 +22,8 @@ public:
 	Admin() = default;
 	~Admin();
 	const std::vector<Member>& getMembersArray();
-	Member* getDetailsForMember() const;
-	FanPage* getDetailsForPage() const;
+	Member getDetailsForMember() const;
+	FanPage getDetailsForPage() const;
     const std::vector<FanPage>& getPagesArray();
 	void setPagesArray(std::vector<FanPage> newFanPages)  { fanPages = newFanPages; }
 	void setMembersArray(std::vector<Member> newUsers)    { users = newUsers;       }

@@ -13,7 +13,7 @@ private:
 public:
 	//Status(const std::string text);
 	Status(std::string text);
-	//~Status();
+	~Status();
 	bool setText(const std::string text);
 	std::string getText() { return text; }
 	std::string getDateAndTime() { return date_and_time; }

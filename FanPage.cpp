@@ -14,8 +14,8 @@ FanPage::FanPage(const string name)
 
 FanPage:: ~FanPage()
 {
-
-	statuses.clear();
+	cout << "in d'tor for: " << pageName << endl;
+	//statuses.clear();
 
 	//statuses.erase(statuses.begin(), statuses.end());
 	//statuses.clear();
@@ -67,8 +67,9 @@ void FanPage::addStatus()//this needs to go
 	string text;
 	cout << "Please enter new status: " << endl;
 	getline(std::cin, text);
-	Status* status = new Status(text);
-	addStatusToArray(*status);
+	//Status* status = new Status(text);
+	Status status(text);
+	addStatusToArray(status);
 }
 
 void FanPage::addStatus(Status& s)
@@ -78,8 +79,8 @@ void FanPage::addStatus(Status& s)
 
 void FanPage::addStatus(const string txt)
 {
-	Status* status = new Status(txt);
-	addStatusToArray(*status);
+	Status status(txt);
+	addStatusToArray(status);
 }
 
 FanPage& FanPage:: operator+=(Member& other)

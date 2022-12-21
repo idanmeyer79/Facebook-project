@@ -18,11 +18,10 @@ Status::Status(string t) // c'tor with text
 	this->date_and_time = ctime(&curr_time);
 }
 
-//Status::~Status() //d'tor
-//{
-//	delete[]text;
-//	delete[]date_and_time;
-//}
+Status::~Status() //d'tor
+{
+	cout << "in d'tor for: " << text << endl;
+}
 
 void Status::printStatus() const
 {

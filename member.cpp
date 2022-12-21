@@ -16,7 +16,8 @@ Member::Member(const string name, const Date& date) : dateOfBirth(date)
 
 Member::~Member()
 {
-	memberStatuses.erase(memberStatuses.begin(), memberStatuses.end());
+	cout << "in d'tor for: " << memberName << endl;
+	//memberStatuses.erase(memberStatuses.begin(), memberStatuses.end());
 	//memberStatuses.clear();
 }
 
@@ -95,14 +96,17 @@ void Member :: addStatus() //this need to go
 	string text;
 	cout << "Please enter new status: " << endl;
 	getline(std::cin, text);
-	Status* status = new Status(text);
-	addStatusToArray(*status);
+	//Status* status = new Status(text);
+	Status status(text);
+	addStatusToArray(status);
 }
 
 void Member::addStatus(const string text)
 {
-	Status* status = new Status(text);
-	addStatusToArray(*status);
+	//Status* status = new Status(text);
+	Status status(text);
+	addStatusToArray(status);
+	//addStatusToArray(*status);
 }
 
 void Member::addStatus(Status& status)
