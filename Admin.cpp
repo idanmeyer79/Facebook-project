@@ -477,6 +477,9 @@ void Admin::hardCodedData()
 	FanPage* fanPage1 = new FanPage("mondial");
 	FanPage* fanPage2 = new FanPage("re'evim beravcha");
 	FanPage* fanPage3 = new FanPage("keren kalif fans");
+	fanPages.push_back(*fanPage1);
+	fanPages.push_back(*fanPage2);
+	fanPages.push_back(*fanPage3);
 	//FanPage* fanPage1 = fanPages.addPage("Mondial 2022");
 	//FanPage* fanPage2 = fanPages.addPage("re'evim beravcha");
 	//FanPage* fanPage3 = fanPages.addPage("keren kalif fans");
@@ -484,6 +487,10 @@ void Admin::hardCodedData()
 	Member* member1 = new Member("Boaz", Date(1, 1, 2020));
 	Member* member2 = new Member("Romina", Date(2, 2, 2000));
 	Member* member3 = new Member("Arie", Date(3, 3, 1997));
+	users.push_back(*member1);
+	users.push_back(*member2);
+	users.push_back(*member3);
+
 	//Member* member1 = users.addMember("Boaz", Date(1, 1, 2020));
 	//Member* member2 = users.addMember("Romina", Date(2, 2, 2000));
 	//Member* member3 = users.addMember("Arie", Date(3, 3, 1997));

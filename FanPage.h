@@ -19,19 +19,19 @@ public:
 
 private:
 	std::string pageName;
-	std::vector<Member> fans;
+	std::vector<Member*> fans;
 	std::vector<Status> statuses;
 	//MembersArray* fans;
 	//StatusesArray statuses;
 	
 public:
 	FanPage(const std::string name);
-	~FanPage();
+	//~FanPage();
 	bool setName(const std::string name);
 	std::string getName() const;
 	const int getNumOfFans() const;
 	std::vector<Status> getStatusesArray() { return statuses; }
-	std::vector<Member> getFansArray()     { return fans; }
+	std::vector<Member*> getFansArray()     { return fans; }
 	void addFan(Member& fan);
 	void printFans() const;
 	void removeFan(Member& fan);

@@ -127,12 +127,12 @@ void FanPage::printAllStatuses() const
 //from members array
 bool FanPage::checkIfNameExist(const string name) const
 {
-	vector<Member>::const_iterator itr = fans.begin();
-	vector<Member>::const_iterator itrEnd = fans.end();
+	vector<Member*>::const_iterator itr = fans.begin();
+	vector<Member*>::const_iterator itrEnd = fans.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if ((*itr).getName() == name)//!strcmp(name, membersArray[i]->getName()))
+		if ((*itr)->getName() == name)//!strcmp(name, membersArray[i]->getName()))
 		{
 			cout << "\033[1;31mName already taken, please enter another name.\033[0m" << endl;
 			return true;
@@ -152,19 +152,19 @@ void FanPage::addMember(Member& m)
 	//	tmp = nullptr;
 	//	delete[] tmp;
 	//}
-	fans.push_back(m);
+	fans.push_back(&m);
 	//membersArray[numOfMembers] = &m;
 	//numOfMembers++;
 }
 
 void FanPage::deleteMember(Member& member)
 {
-	vector<Member>::iterator itr = fans.begin();
-	vector<Member>::iterator itrEnd = fans.end();
+	vector<Member*>::iterator itr = fans.begin();
+	vector<Member*>::iterator itrEnd = fans.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if ((*itr).getName() == member.getName())
+		if ((*itr)->getName() == member.getName())
 		{
 			fans.erase(itr);
 			return;
@@ -175,8 +175,8 @@ void FanPage::deleteMember(Member& member)
 void FanPage::printAllMembers() const
 {
 
-	vector<Member>::const_iterator itr = fans.begin();
-	vector<Member>::const_iterator itrEnd = fans.end();
+	vector<Member*>::const_iterator itr = fans.begin();
+	vector<Member*>::const_iterator itrEnd = fans.end();
 	int numOfMembers = fans.size();
 	int i = 0;
 
@@ -188,7 +188,7 @@ void FanPage::printAllMembers() const
 
 	for (; itr != itrEnd; ++itr)
 	{
-		cout << "#" << ++i << " " << (*itr).getName() << endl;
+		cout << "#" << ++i << " " << (*itr)->getName() << endl;
 	}
 }
 

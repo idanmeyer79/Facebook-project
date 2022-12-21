@@ -7,6 +7,7 @@
 #include "FanPage.h"
 #include <iostream>
 #include<vector>
+#include<list>
 #pragma warning(disable: 4996)
 
 class PagesArray;
@@ -21,17 +22,17 @@ private:
 	//MembersArray* memberFriends;
 	//StatusesArray memberStatuses;
 	std::vector<Status> memberStatuses;
-	std::vector<FanPage> memberFanPages;
-	std::vector<Member> memberFriends;
+	std::list<FanPage*> memberFanPages;
+	std::list<Member*> memberFriends;
 	//PagesArray* memberFanPages;
 
 public:
 
 	Member(const std::string name, const Date& dateOfBirth) noexcept(false);
 	//~Member();
-	std::vector<Member> getMembersArray()  { return memberFriends; }
+	std::list<Member*> getMembersArray()  { return memberFriends; }
 	std::vector<Status> getStatusesArray() { return memberStatuses; }
-	std::vector<FanPage> getPagesArray()   { return memberFanPages; }
+	std::list<FanPage*> getPagesArray()   { return memberFanPages; }
 	std::string getName() const;
 	const Date getDate()const;
 	const int getNumOfFriends() const ;

@@ -45,8 +45,8 @@ const Date Member::getDate() const
 
 void Member::addFriend(Member& member)
 {
-	memberFriends.push_back(member);
-	member.memberFriends.push_back(*this);
+	memberFriends.push_back(&member);
+	member.memberFriends.push_back(this);
 }
 
 Member& Member:: operator+=(Member& other){
@@ -157,12 +157,12 @@ bool Member:: operator>(FanPage& other)
 //from pages array
 void Member::deletePage(FanPage& page)
 {
-	vector<FanPage>::iterator itr = memberFanPages.begin();
-	vector<FanPage>::iterator itrEnd = memberFanPages.end();
+	list<FanPage*>::iterator itr = memberFanPages.begin();
+	list<FanPage*>::iterator itrEnd = memberFanPages.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if ((*itr).getName() == page.getName())
+		if ((*itr)->getName() == page.getName())
 		{
 			memberFanPages.erase(itr);
 			return;
@@ -172,21 +172,21 @@ void Member::deletePage(FanPage& page)
 
 void Member::addPage(FanPage& p)
 {
-	memberFanPages.push_back(p);
+	memberFanPages.push_back(&p);
 }
 
 FanPage* Member::addPage(const string name)
 {
 	FanPage* fanPage = new FanPage(name); //throw
-	memberFanPages.push_back(*fanPage);
+	memberFanPages.push_back(fanPage);
 	return fanPage;
 }
 
 
 void Member::printAllPages() const
 {
-	vector<FanPage>::const_iterator itr = memberFanPages.begin();
-	vector<FanPage>::const_iterator itrEnd = memberFanPages.end();
+	list<FanPage*>::const_iterator itr = memberFanPages.begin();
+	list<FanPage*>::const_iterator itrEnd = memberFanPages.end();
 	int i = 0;
 	int numOfPages = memberFanPages.size();
 
@@ -198,21 +198,21 @@ void Member::printAllPages() const
 
 	for (; itr != itrEnd; ++itr)
 	{
-		cout << "#" << ++i << " " << (*itr).getName() << endl;
+		cout << "#" << ++i << " " << (*itr)->getName() << endl;
 	}
 }
 
 FanPage* Member::findPage(string name)
 {
 	FanPage* theFoundPage = nullptr;
-	vector<FanPage>::iterator itr = memberFanPages.begin();
-	vector<FanPage>::iterator itrEnd = memberFanPages.end();
+	list<FanPage*>::iterator itr = memberFanPages.begin();
+	list<FanPage*>::iterator itrEnd = memberFanPages.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if ((*itr).getName() == name)
+		if ((*itr)->getName() == name)
 		{
-			theFoundPage = &(*itr);
+			theFoundPage = (*itr);
 			return theFoundPage;
 		}
 	}
@@ -222,12 +222,12 @@ FanPage* Member::findPage(string name)
 //from members array
 bool Member::checkIfNameExist(const string name) const
 {
-	vector<Member>::const_iterator itr = memberFriends.begin();
-	vector<Member>::const_iterator itrEnd = memberFriends.end();
+	list<Member*>::const_iterator itr = memberFriends.begin();
+	list<Member*>::const_iterator itrEnd = memberFriends.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if ((*itr).getName() == name)//!strcmp(name, membersArray[i]->getName()))
+		if ((*itr)->getName() == name)//!strcmp(name, membersArray[i]->getName()))
 		{
 			cout << "\033[1;31mName already taken, please enter another name.\033[0m" << endl;
 			return true;
@@ -247,7 +247,7 @@ void Member::addMember(Member& m)
 	//	tmp = nullptr;
 	//	delete[] tmp;
 	//}
-	memberFriends.push_back(m);
+	memberFriends.push_back(&m);
 	//membersArray[numOfMembers] = &m;
 	//numOfMembers++;
 }
@@ -265,7 +265,7 @@ Member* Member::addMember(const string name, const Date& dateOfBirth)
 	//	tmp = nullptr;
 	//	delete[] tmp;
 	//}
-	memberFriends.push_back(*member);
+	memberFriends.push_back(member);
 	return member;
 	/*membersArray[numOfMembers] = member1;
 	numOfMembers++;
@@ -274,12 +274,12 @@ Member* Member::addMember(const string name, const Date& dateOfBirth)
 
 void Member::deleteMember(Member& member)
 {
-	vector<Member>::iterator itr = memberFriends.begin();
-	vector<Member>::iterator itrEnd = memberFriends.end();
+	list<Member*>::iterator itr = memberFriends.begin();
+	list<Member*>::iterator itrEnd = memberFriends.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if ((*itr).getName() == member.getName())
+		if ((*itr)->getName() == member.getName())
 		{
 			memberFriends.erase(itr);
 			return;
@@ -290,8 +290,8 @@ void Member::deleteMember(Member& member)
 void Member::printAllMembers() const
 {
 
-	vector<Member>::const_iterator itr = memberFriends.begin();
-	vector<Member>::const_iterator itrEnd = memberFriends.end();
+	list<Member*>::const_iterator itr = memberFriends.begin();
+	list<Member*>::const_iterator itrEnd = memberFriends.end();
 	int numOfMembers = memberFriends.size();
 	int i = 0;
 
@@ -303,23 +303,23 @@ void Member::printAllMembers() const
 
 	for (; itr != itrEnd; ++itr)
 	{
-		cout << "#" << ++i << " " << (*itr).getName() << endl;
+		cout << "#" << ++i << " " << (*itr)->getName() << endl;
 	}
 }
 
 
 Member* Member::getMember(const string name) 
 {
-	vector<Member>::iterator itr = memberFriends.begin();
-	vector<Member>::iterator itrEnd = memberFriends.end();
+	list<Member*>::iterator itr = memberFriends.begin();
+	list<Member*>::iterator itrEnd = memberFriends.end();
 
 	Member* theFoundMember = nullptr;
 
 	for (; itr != itrEnd; ++itr)
 	{
-		if ((*itr).getName() == name)
+		if ((*itr)->getName() == name)
 		{
-			theFoundMember = &(*itr);
+			theFoundMember = (*itr);
 			return theFoundMember;
 		}
 	}
@@ -328,12 +328,12 @@ Member* Member::getMember(const string name)
 
 void Member::showLast10StatusesOfEach() const
 {
-	vector<Member>::const_iterator itr = memberFriends.begin();
-	vector<Member>::const_iterator itrEnd = memberFriends.end();
+	list<Member*>::const_iterator itr = memberFriends.begin();
+	list<Member*>::const_iterator itrEnd = memberFriends.end();
 
 	for (; itr != itrEnd; ++itr)
 	{
-		(*itr).printMyLast10Statuses();
+		(*itr)->printMyLast10Statuses();
 	}
 }
 
@@ -369,14 +369,14 @@ void Member::printAllStatuses() const
 
 void Member::print10() const
 {
-	vector<Status*>::const_reverse_iterator  rit = memberStatuses.rbegin();
-	vector<Status*>::const_reverse_iterator ritrEnd = memberStatuses.rend();
+	vector<Status>::const_reverse_iterator  rit = memberStatuses.rbegin();
+	vector<Status>::const_reverse_iterator ritrEnd = memberStatuses.rend();
 	int size = memberStatuses.size();
 	int currMemberNumOfStatuses = min(size, 10);
 	for (; rit != ritrEnd; ++rit)
 	{
 
-		(*rit)->printStatus();
+		(*rit).printStatus();
 		//statusArray[size - k]->printStatus();
 	}
 	cout << endl;
