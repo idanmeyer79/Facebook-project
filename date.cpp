@@ -3,6 +3,9 @@ using namespace std;
 
 Date::Date(int d , int m, int y)
 {
+    if (!checkdate(d, m, y))
+        throw;
+
 	day = d;
 	month = m;
 	year = y;
@@ -13,7 +16,7 @@ void Date::show() const
 	cout << day << "/" << month << "/" << year << " ";
 }
 
-bool Date::setDate(int d, int m, int y)
+bool Date::setDate(int d, int m, int y) 
 {
     if (!checkdate(d, m, y))
         return false;
