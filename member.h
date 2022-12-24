@@ -21,11 +21,12 @@ private:
 	//StatusesArray memberStatuses;
 	std::vector<Status> memberStatuses;
 	std::list<FanPage*> memberFanPages;
-	std::list<Member*> memberFriends;
+	std::list<Member*>  memberFriends;
 	//PagesArray* memberFanPages;
 
 public:
 
+	Member(const std::string name, const Date& dateOfBirth, const std::vector<Member>& users) noexcept(false);
 	Member(const std::string name, const Date& dateOfBirth) noexcept(false);
 	~Member();
 	std::list<Member*> getMembersArray()  { return memberFriends; }
@@ -56,7 +57,8 @@ public:
 	FanPage* addPage(const std::string name);
 	void printAllPages() const;
 	FanPage* findPage(std::string name);
-	bool checkIfNameExist(const std::string name) const;
+	bool checkIfMemberNameExist(const std::string name) const;
+	//bool checkIfNameExist(const std::string name) const;
 	void deletePage(FanPage& page);
 	//from members array
 	int getNumOfMembers() { return memberFriends.size(); }
@@ -68,7 +70,7 @@ public:
 	Member* addMember(const std::string name, const Date& dateOfBirth);
 	//from statuses array
 	std::vector<Status> getStatusArray() { return memberStatuses; }
-	void addStatusToArray(Status& s);
+	void addStatusToArray(const Status& s);
 	void printAllStatuses() const;
 	void print10() const;
 

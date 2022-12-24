@@ -6,6 +6,7 @@
 #include "Member.h"
 #include <iostream>
 #include <vector>
+#include <list>
 #pragma warning(disable: 4996)
 #pragma warning(disable: 4267)
 
@@ -15,52 +16,36 @@ class Member;
 class Admin
 {
 private:
-	std::vector<FanPage> fanPages;
-	std::vector<Member>users;
+	std::list<FanPage> fanPages;
+	std::list<Member>  users;
 	
 public:
-	Admin() = default;
-	~Admin();
-	const std::vector<Member>& getMembersArray();
-	Member getDetailsForMember() const;
-	FanPage getDetailsForPage() const;
-    const std::vector<FanPage>& getPagesArray();
-	void setPagesArray(std::vector<FanPage> newFanPages)  { fanPages = newFanPages; }
-	void setMembersArray(std::vector<Member> newUsers)    { users = newUsers;       }
-	void printMenu();
+	const std::list<Member>& getMembersArray();
+	const std::list<Member> getUsers() const              { return users; }
+    const std::list<FanPage>& getPagesArray();
+	void setPagesArray(std::list<FanPage> newFanPages)  { fanPages = newFanPages; }
+	void setMembersArray(std::list<Member> newUsers)    { users = newUsers;       }
 	void printAcounts() const;
-	void printAllFriendsOfMemberOrFanPage();
-	void menu();
-	void createFanPage();
-	void createMember();
-	void addStatusToFanPageOrMember();
-	void showAllStatusesOfMemberOrFanPage();
-	void makeFriendship();
+	void addPageToFacebook(const FanPage& page);
+	void addUserToFacebook(const Member& member);
 	void makeFriendship(Member& member1, Member& member2);
 	void ConnectFanToPage(Member& member, FanPage& page);
-	void ConnectFanToPage();
-	void showLast10StatusesOfFriendsOfMember();
-	void unFriendship();
-	void disConnectFanAndPage();
-	void hardCodedData();
-	Member* getMemberToAction();
-	FanPage* getFanPageToAction();
-	//from members array
+	void unFriendship(Member& member1, Member& member2);
+	void disConnectFanAndPage(Member& member, FanPage& page);
+	void addStatusToPage(FanPage* page, const Status& status);
+	void addStatusToMember(Member* member, const Status& status);
 	int getNumOfMembers() { return users.size(); }
 	Member* getMember(const std::string name);
-	bool checkIfNameExist(const std::string name) const;
+	bool checkIfUserNameExist(const std::string name) const;
+	bool checkIfPageNameExist(const std::string name) const;
 	void printAllMembers() const;
 	void showLast10StatusesOfEach() const;
 	void deleteMember(Member& member);
-	void addMember(Member& p);
-	Member* addMember(const std::string name, const Date& dateOfBirth);
-	//from pages array
 	int getNumOfPages() { return fanPages.size(); }
-	void addPage(FanPage& p);
-	FanPage* addPage(const std::string name);
 	void printAllPages() const;
-	FanPage* findPage(std::string name);
 	void deletePage(FanPage& page);
+
+	friend class FacebookIO;
 };
 
 #endif // !__ADMIN_H__
