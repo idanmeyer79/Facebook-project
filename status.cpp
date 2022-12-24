@@ -10,17 +10,12 @@ using namespace std;
 //	this->date_and_time = tm;
 //}
 
-Status::Status(string t) // c'tor with text
+Status::Status(const string t) // c'tor with text
 {
 	text = t;
 	time_t curr_time;
 	curr_time = time(NULL);
 	this->date_and_time = ctime(&curr_time);
-}
-
-Status::~Status() //d'tor
-{
-	cout << "in d'tor for: " << text << endl;
 }
 
 void Status::printStatus() const

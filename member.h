@@ -17,21 +17,17 @@ class Member
 private:
 	std::string memberName;
 	Date dateOfBirth;
-	//MembersArray* memberFriends;
-	//StatusesArray memberStatuses;
 	std::vector<Status> memberStatuses;
 	std::list<FanPage*> memberFanPages;
 	std::list<Member*>  memberFriends;
-	//PagesArray* memberFanPages;
 
 public:
 
 	Member(const std::string name, const Date& dateOfBirth, const std::vector<Member>& users) noexcept(false);
 	Member(const std::string name, const Date& dateOfBirth) noexcept(false);
-	~Member();
-	std::list<Member*> getMembersArray()  { return memberFriends; }
+	std::list<Member*> getMembersArray()   { return memberFriends;  }
 	std::vector<Status> getStatusesArray() { return memberStatuses; }
-	std::list<FanPage*> getPagesArray()   { return memberFanPages; }
+	std::list<FanPage*> getPagesArray()    { return memberFanPages; }
 	std::string getName() const;
 	const Date getDate()const;
 	const int getNumOfFriends() const ;
@@ -43,9 +39,8 @@ public:
 	void showMyStatuses() const;
 	void Show10MyFriendsLastStatuses()const;
 	void addFriend(Member& member);
-	void addStatus();
-	void addStatus(const std::string text);
-	void addStatus(Status& status);
+	void addStatus(const std::string text); //for hard coded data
+	void addStatus(const Status& status);
 	void unFriend(Member& member);
 	void printMyLast10Statuses()const;
 	void disConnectPage(FanPage& page);
@@ -58,7 +53,6 @@ public:
 	void printAllPages() const;
 	FanPage* findPage(std::string name);
 	bool checkIfMemberNameExist(const std::string name) const;
-	//bool checkIfNameExist(const std::string name) const;
 	void deletePage(FanPage& page);
 	//from members array
 	int getNumOfMembers() { return memberFriends.size(); }
@@ -67,7 +61,6 @@ public:
 	void showLast10StatusesOfEach() const;
 	void deleteMember(Member& member);
 	void addMember(Member& p);
-	Member* addMember(const std::string name, const Date& dateOfBirth);
 	//from statuses array
 	std::vector<Status> getStatusArray() { return memberStatuses; }
 	void addStatusToArray(const Status& s);

@@ -86,22 +86,13 @@ void Member::showFanPages() const
 	printAllPages();
 }
 
-void Member :: addStatus()
-{
-	string text;
-	cout << "Please enter new status: " << endl;
-	getline(std::cin, text);
-	Status status(text);
-	addStatusToArray(status);
-}
-
 void Member::addStatus(const string text)
 {
 	Status status(text);
 	addStatusToArray(status);
 }
 
-void Member::addStatus(Status& status)
+void Member::addStatus(const Status& status)
 {
 	addStatusToArray(status);
 }
@@ -241,12 +232,12 @@ void Member::addMember(Member& m)
 	memberFriends.push_back(&m);
 }
 
-Member* Member::addMember(const string name, const Date& dateOfBirth)
-{
-	Member* member = new Member(name, dateOfBirth);
-	memberFriends.push_back(member);
-	return member;
-}
+//Member* Member::addMember(const string name, const Date& dateOfBirth)
+//{
+//	Member* member = new Member(name, dateOfBirth);
+//	memberFriends.push_back(member);
+//	return member;
+//}
 
 void Member::deleteMember(Member& member)
 {

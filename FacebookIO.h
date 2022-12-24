@@ -21,6 +21,7 @@ public:
     void nameAlreadyTaken()     { std::cout << "\033[1;31mName already taken, please enter another name\033[0m" << std::endl;}
     void noSuchName()           { std::cout << "\033[1;31mThis name is not in the system!\033[0m" << std::endl;}
     void InvalidAction()        { std::cout << "\033[1;31mInvalid Action!\033[0m" << std::endl;}
+    void success()              { std::cout << "\033[32m Action succeeded :)\033[0m " << std::endl; }
     std::string getUserInput();
     Member getDetailsForMember();
     FanPage getDetailsForPage();

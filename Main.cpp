@@ -34,7 +34,6 @@ int main()
 		admin.addUserToFacebook(member2);
 		admin.addUserToFacebook(member3);
 
-
 		fanPage1.addStatus("welcome to Mondial 2022");
 		fanPage1.addStatus("Mondial 2022");
 		fanPage2.addStatus("welcome to re'evim beravcha");
@@ -46,21 +45,6 @@ int main()
 		member1.addStatus("Boaz 2");
 		member2.addStatus("Hey its Romina");
 		member2.addStatus("Romina 2");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
-		member2.addStatus("Hey its Romina");
 		member3.addStatus("Hey its Arie");
 		member3.addStatus("Arie 2");
 		admin.addPageToFacebook(fanPage1);
@@ -81,9 +65,11 @@ int main()
 			switch (action) {
 			case 1:
 				admin.addUserToFacebook(io.getDetailsForMember());
+				io.success();
 				break;
 			case 2:
 				admin.addPageToFacebook(io.getDetailsForPage());
+				io.success();
 				break;
 			case 3:
 			{
@@ -121,6 +107,7 @@ int main()
 				}
 				else
 					io.InvalidAction();
+				io.success();
 				break;
 			}
 			case 4:
@@ -157,8 +144,8 @@ int main()
 				}
 				else
 					io.InvalidAction();
-			}
 				break;
+			}
 			case 5:
 			{
 				getchar();
@@ -191,9 +178,9 @@ int main()
 					io.noSuchName();
 					break;
 				}
-				io.displayMessage("Please Choose the second member from the list: " );
+				io.displayMessage("Please Choose the second member from the list: ");
 				string name2 = io.getUserInput();
-				if (name1==name2)
+				if (name1 == name2)
 				{
 					io.displayMessage("\033[1;31mIts the same member as the first one.\033[0m");
 					break;
@@ -206,8 +193,9 @@ int main()
 				}
 				if ((!member1->checkFriendship(name2)))
 				{
-					admin.makeFriendship(*member1,*member2);
-					cout << name1 << "\033[32m and \033[0m"  << name2 << "\033[32m are friends now :)\033[0m " << endl;
+					admin.makeFriendship(*member1, *member2);
+					//cout << name1 << "\033[32m and \033[0m" << name2 << "\033[32m are friends now :)\033[0m " << endl;
+					io.success();
 				}
 				else
 				{
@@ -216,7 +204,6 @@ int main()
 				}
 				break;
 			}
-				//admin.makeFriendship();
 			case 7:
 			{
 				getchar();
@@ -239,7 +226,7 @@ int main()
 				{
 					member1->showFriends();
 				}
-				io.displayMessage( "Please Choose the member you want to unfriend" );
+				io.displayMessage("Please Choose the member you want to unfriend");
 				string name2 = io.getUserInput();
 				Member* member2 = io.getMember(name2);
 				if ((!member1->checkFriendship(name2)))
@@ -250,9 +237,9 @@ int main()
 				else
 				{
 					admin.unFriendship(*member1, *member2);
+					io.success();
 					break;
 				}
-				//admin.unFriendship();
 				break;
 			}
 			case 8:
@@ -283,8 +270,9 @@ int main()
 					break;
 				}
 				admin.ConnectFanToPage(*member, *page);
+				io.success();
 				break;
-			}				
+			}
 			case 9:
 			{
 				getchar();
@@ -314,8 +302,8 @@ int main()
 				}
 				if (member->checkIfAlreadyFolowing(page->getName()))
 				{
-					admin.disConnectFanAndPage(*member,*page);
-					io.displayMessage("sucsses!");
+					admin.disConnectFanAndPage(*member, *page);
+					io.success();
 					break;
 				}
 				admin.ConnectFanToPage(*member, *page);
@@ -344,7 +332,7 @@ int main()
 					member->showFanPages();
 				}
 				else if (selector == 2)
-				{	
+				{
 					getchar();
 					io.printAllPages();
 					io.displayMessage("Please enter the page's name: ");
@@ -359,12 +347,19 @@ int main()
 					page->printFans();
 					break;
 				}
+				else
+					io.InvalidAction();
 				break;
 			}
+			case 12:
+				break;
+			default:
+				io.InvalidAction();
+				break;
 			cout << endl;
 		}
 		 }while (action != 12);
-		cout << "\033[32mBye Bye :)\033[0m";
+		 io.displayMessage("\033[32mBye Bye :)\033[0m");
 	}
 		_CrtDumpMemoryLeaks();
 }

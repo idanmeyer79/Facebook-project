@@ -14,7 +14,7 @@ string FanPage::getName() const
 
 bool FanPage::setName(const string name) 
 {
-	if (checkIfFanPageNameExist(name))
+	if (checkIfFanExist(name))
 	{
 		return false;
 	}
@@ -48,14 +48,6 @@ void FanPage::showMyStatuses()
 	printAllStatuses();
 }
 
-void FanPage::addStatus()
-{
-	string text;
-	cout << "Please enter new status: " << endl;
-	getline(std::cin, text);
-	Status status(text);
-	addStatusToArray(status);
-}
 
 void FanPage::addStatus(Status& s)
 {
@@ -103,7 +95,7 @@ void FanPage::printAllStatuses() const
 	}
 }
 
-bool FanPage::checkIfFanPageNameExist(const string& name) const
+bool FanPage::checkIfFanExist(const string& name) const
 {
 	list<Member*>::const_iterator itr = fans.begin();
 	list<Member*>::const_iterator itrEnd = fans.end();

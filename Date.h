@@ -15,7 +15,6 @@ public:
 	const int getMonth() const { return month;}
 	const int getYear() const { return year; }
 	void show() const;
-	bool checkdate();
 	bool checkdate(int day, int month, int year);
 };
 
