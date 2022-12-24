@@ -5,13 +5,6 @@
 #pragma warning(disable: 4996)
 using namespace std;
 
-Member::Member(const string name, const Date& date, const std::vector<Member>& users) : dateOfBirth(date)
-{
-	if (checkIfMemberNameExist(name))
-		throw name;
-	memberName = name;
-}
-
 Member::Member(const string name, const Date& date) : dateOfBirth(date)
 {
 	memberName = name;
@@ -165,13 +158,6 @@ void Member::deletePage(FanPage& page)
 void Member::addPage(FanPage& p)
 {
 	memberFanPages.push_back(&p);
-}
-
-FanPage* Member::addPage(const string name)
-{
-	FanPage* fanPage = new FanPage(name); //throw
-	memberFanPages.push_back(fanPage);
-	return fanPage;
 }
 
 

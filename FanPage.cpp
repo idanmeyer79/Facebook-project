@@ -27,11 +27,6 @@ void FanPage::addFan(Member& fan)
 	addMember(fan);
 }
 
-const int FanPage::getNumOfFans() const
-{
-	return fans.size();
-}
-
 void FanPage::removeFan(Member& fan)
 {
 	deleteMember(fan);
@@ -46,12 +41,6 @@ void FanPage::showMyStatuses()
 {
 	cout << pageName << " "<<endl;
 	printAllStatuses();
-}
-
-
-void FanPage::addStatus(Status& s)
-{
-	addStatusToArray(s);
 }
 
 void FanPage::addStatus(const string txt)
