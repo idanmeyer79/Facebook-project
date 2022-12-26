@@ -60,7 +60,6 @@ public:
 	 * @return `true` if the statuses have different text, `false` otherwise.
 	 */
 	bool operator!=(Status& other);
-
 };
 
 #endif // !__STATUS_H__

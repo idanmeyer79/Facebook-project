@@ -15,7 +15,7 @@ const list<Member>& Admin::getMembersArray()
 	return users;
 }
 
-void Admin::printAcounts() const
+void Admin::printAccounts() const
 {
 	cout << "All the members:" << endl;
 	printAllMembers();
@@ -35,7 +35,7 @@ void Admin::addPageToFacebook(const FanPage& page)
 
 void Admin::addStatusToMember(Member* member, const Status& status)
 {
-	member->addStatusToArray(status);
+	member->addStatus(status);
 }
 
 void Admin::addStatusToPage(FanPage* page, const Status& status)

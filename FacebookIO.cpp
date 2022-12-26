@@ -54,7 +54,7 @@ Member FacebookIO::getDetailsForMember()
 	do
 	{
 		cout << "Please enter a name - max 20 letters" << endl;
-		getline(std::cin, name);
+		getline(cin, name);
 		if (admin->checkIfUserNameExist(name))
 			nameAlreadyTaken();
 		else
@@ -69,14 +69,13 @@ Member FacebookIO::getDetailsForMember()
 		try
 		{
 			Date date(day, month, year);
-			cout << name << "\033[32m was created :)\033[0m" << endl;
 			Member member(name, date);
 			return member;
 		}
 
-		catch (const std::invalid_argument& e) {std::cout << "Error: " << e.what() << std::endl;}
-		catch (const std::exception& e) {std::cout << "Error: " << e.what() << std::endl;}
-		catch (...) {std::cout << "Unknown error" << std::endl;}
+		catch (const invalid_argument& e) {cout << "Error: " << e.what() << endl;}
+		catch (const exception& e) {cout << "Error: " << e.what() << endl;}
+		catch (...) {cout << "Unknown error" << endl;}
 	}
 }
 
@@ -89,7 +88,7 @@ FanPage FacebookIO::getDetailsForPage()
 	do
 	{
 		cout << "Please enter a name - max 20 letters" << endl;
-		getline(std::cin, name);
+		getline(cin, name);
 		if (admin->checkIfPageNameExist(name))
 			nameAlreadyTaken();
 		else
@@ -97,7 +96,6 @@ FanPage FacebookIO::getDetailsForPage()
 	} while (!validName);
 
 	FanPage fanPage(name);
-	cout << name << "\033[32m was created :)\033[0m" << endl;
 	return fanPage;
 }
 

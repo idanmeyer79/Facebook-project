@@ -82,17 +82,12 @@ void Member::showFanPages() const
 void Member::addStatus(const string text)
 {
 	Status status(text);
-	addStatusToArray(status);
+	addStatus(status);
 }
 
 void Member::addStatus(const Status& status)
 {
-	addStatusToArray(status);
-}
-
-void Member::addStatusToArray(const Status& s)
-{
-	memberStatuses.push_back(s);
+	memberStatuses.push_back(status);
 }
 
 void Member::showMyStatuses() const
@@ -110,11 +105,6 @@ bool Member::checkIfAlreadyFolowing(const string name)
 {
 	return findPage(name);
 }
-
-//void Member::Show10MyFriendsLastStatuses() const
-//{
-//	showLast10StatusesOfEach();
-//}
 
 void Member::printMyLast10Statuses() const
 {
@@ -137,8 +127,6 @@ bool Member:: operator>(FanPage& other)
 	return getNumOfFriends() > other.getNumOfFans() ? true : false;
 }
 
-
-
 //from pages array
 void Member::deletePage(FanPage& page)
 {
@@ -159,7 +147,6 @@ void Member::addPage(FanPage& p)
 {
 	memberFanPages.push_back(&p);
 }
-
 
 void Member::printAllPages() const
 {
@@ -197,7 +184,7 @@ FanPage* Member::findPage(string name)
 	return theFoundPage;
 }
 
-bool Member::checkIfMemberNameExist(const string name) const
+bool Member::checkIfMemberNameExist(const string& name) const
 {
 	list<Member*>::const_iterator itr = memberFriends.begin();
 	list<Member*>::const_iterator itrEnd = memberFriends.end();
@@ -205,25 +192,10 @@ bool Member::checkIfMemberNameExist(const string name) const
 	for (; itr != itrEnd; ++itr)
 	{
 		if ((*itr)->getName() == name)
-		{
-			cout << "\033[1;31mName already taken, please enter another name.\033[0m" << endl;
 			return true;
-		}
 	}
 	return false;
 }
-
-void Member::addMember(Member& m)
-{
-	memberFriends.push_back(&m);
-}
-
-//Member* Member::addMember(const string name, const Date& dateOfBirth)
-//{
-//	Member* member = new Member(name, dateOfBirth);
-//	memberFriends.push_back(member);
-//	return member;
-//}
 
 void Member::deleteMember(Member& member)
 {
@@ -242,7 +214,6 @@ void Member::deleteMember(Member& member)
 
 void Member::printAllMembers() const
 {
-
 	list<Member*>::const_iterator itr = memberFriends.begin();
 	list<Member*>::const_iterator itrEnd = memberFriends.end();
 	int numOfMembers = memberFriends.size();
@@ -259,7 +230,6 @@ void Member::printAllMembers() const
 		cout << "#" << ++i << " " << (*itr)->getName() << endl;
 	}
 }
-
 
 Member* Member::getMember(const string name) 
 {
@@ -289,8 +259,6 @@ void Member::showLast10StatusesOfEach() const
 		(*itr)->printMyLast10Statuses();
 	}
 }
-
-
 
 void Member::printAllStatuses() const
 {

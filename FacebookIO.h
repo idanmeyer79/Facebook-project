@@ -6,9 +6,6 @@
 #include"FanPage.h"
 #include"member.h"
 
-//class Member;
-//class FanPage;
-
 class FacebookIO 
 {
 private:

@@ -60,7 +60,7 @@ public:
 	/**
 	 * Shows the last 10 statuses of the member's friends.
 	 */
-	void Show10MyFriendsLastStatuses() const;
+	//void Show10MyFriendsLastStatuses() const;
 
 	/**
 	 * Adds a new friend to the list of friends.
@@ -136,7 +136,7 @@ public:
 	 * @param name The name of the member to check for.
 	 * @return `true` if a member with the given name exists, `false` otherwise.
 	 */
-	bool checkIfMemberNameExist(const std::string name) const;
+	bool checkIfMemberNameExist(const std::string& name) const;
 
 	/**
 	* Deletes a fan page from the list of fan pages.
@@ -171,22 +171,7 @@ public:
 	 */
 	void deleteMember(Member& member);
 
-	/**
-	 * Adds a new member to the list of members.
-	 *
-	 * @param p The member to add.
-	 */
-	void addMember(Member& p);
-
-
 	//from statuses array
-
-	/**
-	 * Adds a new status to the vector of statuses.
-	 *
-	 * @param s The status to add.
-	 */
-	void addStatusToArray(const Status& s);
 
 	/**
 	 * Shows all statuses.

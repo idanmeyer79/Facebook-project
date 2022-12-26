@@ -4,7 +4,7 @@ using namespace std;
 Date::Date(int d , int m, int y)
 {
     if (!checkdate(d, m, y))
-        throw std::invalid_argument("\033[1;31mInvalid date\033[0m");
+        throw invalid_argument("\033[1;31mInvalid date\033[0m");
 
 	day = d;
 	month = m;
@@ -16,15 +16,14 @@ void Date::show() const
 	cout << day << "/" << month << "/" << year << " ";
 }
 
-bool Date::setDate(int d, int m, int y) 
+void Date::setDate(int d, int m, int y) 
 {
     if (!checkdate(d, m, y))
-        return false;
+        throw invalid_argument("\033[1;31mInvalid date\033[0m");
 
     day = d;
     month = m;
     year = y;
-    return true;
 }
 
 bool Date:: checkdate(int day, int month , int year)

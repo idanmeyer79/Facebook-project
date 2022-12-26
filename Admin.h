@@ -58,7 +58,7 @@ public:
 	/**
 	 * Prints all members and fan pages.
 	 */
-	void printAcounts() const;
+	void printAccounts() const;
 
 	/**
 	 * Adds a new fan page to the list of fan pages.
