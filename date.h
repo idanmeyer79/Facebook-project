@@ -14,7 +14,7 @@ public:
      * @param y The year.
      * @throws std::invalid_argument If the given day, month, or year is invalid.
      */
-    Date(int d, int, int y) noexcept(false);
+    Date(int d, int m, int y) noexcept(false);
 
     /**
      * Sets the day, month, and year of the `Date` object to the given values.
@@ -24,7 +24,7 @@ public:
      * @param y The new year.
      * @return `true` if the date was successfully set, `false` otherwise.
      */
-    bool setDate(int d, int m, int y);
+    void setDate(int d, int m, int y) noexcept(false);
 
     /**
      * Returns the day of the `Date` object.
