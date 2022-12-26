@@ -140,21 +140,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
-    <ClCompile Include="MembersArray.cpp" />
-    <ClCompile Include="PagesArray.cpp" />
     <ClCompile Include="Date.cpp" />
+    <ClCompile Include="FacebookIO.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="StatusesArray.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="FanPage.cpp" />
     <ClCompile Include="Status.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StatusesArray.h" />
-    <ClInclude Include="MembersArray.h" />
-    <ClInclude Include="PagesArray.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Admin.h" />
+    <ClInclude Include="FacebookIO.h" />
     <ClInclude Include="Member.h" />
     <ClInclude Include="FanPage.h" />
     <ClInclude Include="Status.h" />
