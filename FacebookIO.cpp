@@ -51,16 +51,18 @@ Member FacebookIO::getDetailsForMember()
 	string name;
 	getchar(); //clear the buffer 
 
-	do
+	while (!validName)
 	{
-		cout << "Please enter a name - max 20 letters" << endl;
-		getline(cin, name);
-		if (admin->checkIfUserNameExist(name))
-			nameAlreadyTaken();
-		else
+		try
+		{
+			cout << "Please enter a name - max 20 letters" << endl;
+			name = getNewNameForNewMember();
 			validName = true;
-	} while (!validName);
-
+		}
+		catch (const invalid_argument& e) { cout << "Error: " << e.what() << endl; }
+		catch (const string& e) {nameAlreadyTaken();}
+		catch (...) { cout << "Unknown error" << endl; }
+	}
 
 	while (true)
 	{
@@ -85,15 +87,18 @@ FanPage FacebookIO::getDetailsForPage()
 	bool validName = false;
 	getchar(); //clear the buffer 
 
-	do
+	while (!validName)
 	{
-		cout << "Please enter a name - max 20 letters" << endl;
-		getline(cin, name);
-		if (admin->checkIfPageNameExist(name))
-			nameAlreadyTaken();
-		else
+		try
+		{
+			cout << "Please enter a name - max 20 letters" << endl;
+			name = getNewNameForNewFanPage();
 			validName = true;
-	} while (!validName);
+		}
+		catch (const invalid_argument& e) { cout << "Error: " << e.what() << endl; }
+		catch (const string& e) { nameAlreadyTaken(); }
+		catch (...) { cout << "Unknown error" << endl; }
+	}
 
 	FanPage fanPage(name);
 	return fanPage;
@@ -154,7 +159,6 @@ FanPage* FacebookIO::getPage(const string name)
 
 void FacebookIO::printAllMembers() const
 {
-
 	list<Member>::const_iterator itr = admin->users.begin();
 	list<Member>::const_iterator itrEnd = admin->users.end();
 	int numOfMembers = admin->users.size();
@@ -166,14 +170,11 @@ void FacebookIO::printAllMembers() const
 	}
 
 	for (; itr != itrEnd; ++itr)
-	{
 		cout << "#" << ++i << " " << (*itr).getName() << endl;
-	}
 }
 
 void FacebookIO::printAllPages() const
 {
-
 	list<FanPage>::const_iterator itr = admin->fanPages.begin();
 	list<FanPage>::const_iterator itrEnd = admin->fanPages.end();
 	int numOfMembers = admin->users.size();
@@ -186,9 +187,7 @@ void FacebookIO::printAllPages() const
 	}
 
 	for (; itr != itrEnd; ++itr)
-	{
 		cout << "#" << ++i << " " << (*itr).getName() << endl;
-	}
 }
 
 void FacebookIO::printAllMemberStatuses(const Member& member) const
@@ -199,4 +198,81 @@ void FacebookIO::printAllMemberStatuses(const Member& member) const
 void FacebookIO::printAllPageStatuses(const FanPage& page) const
 {
 	page.printAllStatuses();
+}
+
+string FacebookIO::getNewNameForNewMember()
+{
+	string name;
+	getline(cin, name);
+	if (admin->checkIfUserNameExist(name))
+		throw string(name);
+	if (name.size() > MAX_LEN_OF_NAME)
+		throw invalid_argument("\033[1;31mName is too long\033[0m");
+	return name;
+}
+
+std::string FacebookIO::getNewNameForNewFanPage()
+{
+	string name;
+	getline(cin, name);
+	if (admin->checkIfPageNameExist(name))
+		throw string(name);
+	if (name.size() > MAX_LEN_OF_NAME)
+		throw invalid_argument("\033[1;31mName is too long\033[0m");
+	return name;
+}
+
+Member* FacebookIO::chooseMemberFromList()
+{
+	displayMessage("All the members : ");
+	printAllMembers();
+	displayMessage("Please enter the member's name from the list: ");
+	string name = getUserInput();
+	Member* member = getMember(name);
+	if (!member)
+		throw name;
+	return member;
+}
+
+FanPage* FacebookIO::chooseFanPageFromList()
+{
+	printAllPages();
+	displayMessage("Please enter the page's name from the list: ");
+	string name = getUserInput();
+	FanPage* page = getPage(name);
+	if (!page)
+		throw name;
+	return page;
+}
+
+Member* FacebookIO:: getMemberException()
+{
+	Member* member = nullptr;
+	getchar();
+	while (!member)
+	{
+		try
+		{
+			member = chooseMemberFromList();
+		}
+		catch (const string& e) { noSuchName(); }
+		catch (...) { cout << "Unknown error" << endl; }
+	}
+	return member;
+}
+
+FanPage* FacebookIO::getPageException()
+{
+	FanPage* page = nullptr;
+	getchar();
+	while (!page)
+	{
+		try
+		{
+			page = chooseFanPageFromList();
+		}
+		catch (const string& e) { noSuchName(); }
+		catch (...) { cout << "Unknown error" << endl; }
+	}
+	return page;
 }

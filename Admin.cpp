@@ -71,14 +71,12 @@ bool Admin::checkIfUserNameExist(const string name) const
 	for (; itr != itrEnd; ++itr)
 	{
 		if ((*itr).getName() == name)
-		{
 			return true;
-		}
 	}
 	return false;
 }
 
-bool Admin::checkIfPageNameExist(const string name) const
+bool Admin::checkIfPageNameExist(const string name) const 
 {
 	list<FanPage>::const_iterator itr = fanPages.begin();
 	list<FanPage>::const_iterator itrEnd = fanPages.end();
@@ -86,9 +84,7 @@ bool Admin::checkIfPageNameExist(const string name) const
 	for (; itr != itrEnd; ++itr)
 	{
 		if ((*itr).getName() == name)
-		{
 			return true;
-		}
 	}
 	return false;
 }
@@ -122,9 +118,7 @@ void Admin::printAllMembers() const
 	}
 
 	for (; itr != itrEnd; ++itr)
-	{
 		cout << "#" << ++i << " " << (*itr).getName() << endl;
-	}
 }
 
 Member* Admin::getMember(const string name) 
@@ -151,9 +145,7 @@ void Admin::showLast10StatusesOfEach() const
 	list<Member>::const_iterator itrEnd = users.end();
 
 	for (; itr != itrEnd; ++itr)
-	{
 		(*itr).printMyLast10Statuses();
-	}
 }
 
 void Admin::deletePage(FanPage& page)
@@ -185,7 +177,5 @@ void Admin::printAllPages() const
 	}
 
 	for (; itr != itrEnd; ++itr)
-	{
 		cout << "#" << ++i << " " << (*itr).getName() << endl;
-	}
 }

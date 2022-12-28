@@ -11,6 +11,8 @@ private:
 	std::string date_and_time;
 
 public:
+	static constexpr int MAX_LEN_OF_STATUS = 100;
+
 	/**
 	 * Constructs a new status with the given text.
 	 *

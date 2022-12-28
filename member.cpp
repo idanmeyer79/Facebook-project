@@ -162,9 +162,7 @@ void Member::printAllPages() const
 	}
 
 	for (; itr != itrEnd; ++itr)
-	{
 		cout << "#" << ++i << " " << (*itr)->getName() << endl;
-	}
 }
 
 FanPage* Member::findPage(string name)
@@ -226,9 +224,7 @@ void Member::printAllMembers() const
 	}
 
 	for (; itr != itrEnd; ++itr)
-	{
 		cout << "#" << ++i << " " << (*itr)->getName() << endl;
-	}
 }
 
 Member* Member::getMember(const string name) 
@@ -255,9 +251,7 @@ void Member::showLast10StatusesOfEach() const
 	list<Member*>::const_iterator itrEnd = memberFriends.end();
 
 	for (; itr != itrEnd; ++itr)
-	{
 		(*itr)->printMyLast10Statuses();
-	}
 }
 
 void Member::printAllStatuses() const
@@ -281,8 +275,6 @@ void Member::print10() const
 	int size = memberStatuses.size();
 	int currMemberNumOfStatuses = min(size, 10);
 	for (int i=0; i< currMemberNumOfStatuses; ++rit,i++)
-	{
 		(*rit).printStatus();
-	}
 	cout << endl;
 }

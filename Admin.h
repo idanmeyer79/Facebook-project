@@ -143,7 +143,7 @@ public:
 	* @param name The name of the fan page to check for.
 	* @return `true` if there is a fan page with the given name, `false` otherwise.
 	*/
-	bool checkIfPageNameExist(const std::string name) const;
+	bool checkIfPageNameExist(const std::string name) const noexcept(false);
 
 	/**
 	* Returns whether there is a member with the given name in the list of members.

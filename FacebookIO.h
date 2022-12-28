@@ -11,6 +11,7 @@ class FacebookIO
 private:
     Admin* admin;
 public:
+    static constexpr int MAX_LEN_OF_NAME = 20;
     FacebookIO(Admin* admin)    { this->admin = admin; }
     void nameAlreadyTaken()     { std::cout << "\033[1;31mName already taken, please enter another name\033[0m" << std::endl;}
     void noSuchName()           { std::cout << "\033[1;31mThis name is not in the system!\033[0m" << std::endl;}
@@ -107,9 +108,44 @@ public:
      * @param page The fan page to print the statuses of.
      */
     void printAllPageStatuses(const FanPage& page) const;
+    
+    /**
+     * Generates and returns a new name for a Member object.
+     * @return A string representing the new name for the Member object.
+     */
+    std::string getNewNameForNewMember()noexcept(false);
+
+    /**
+     * Generates and returns a new name for a FanPage object.
+     * @return A string representing the new name for the FanPage object.
+     */
+    std::string getNewNameForNewFanPage()noexcept(false);
+
+    /**
+     * Asks the user to choose a Member object from a list of Member objects.
+     * @return A pointer to the chosen Member object.
+     */
+    Member* chooseMemberFromList()noexcept(false);
+
+    /**
+     * Asks the user to choose a FanPage object from a list of FanPage objects.
+     * @return A pointer to the chosen FanPage object.
+     */
+    FanPage* chooseFanPageFromList() noexcept(false);
+
+    /**
+     * Returns a Member object and handle any exaptions in the proccess.
+     * @return A pointer to the exception Member object.
+     */
+    Member* getMemberException();
+
+    /**
+     * Returns a FanPage object and handle any exaptions in the proccess.
+     * @return A pointer to the exception FanPage object.
+     */
+    FanPage* getPageException();
 
 };
-
 #endif
 
 

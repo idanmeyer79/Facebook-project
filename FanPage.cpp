@@ -134,7 +134,5 @@ void FanPage::printAllMembers() const
 	}
 
 	for (; itr != itrEnd; ++itr)
-	{
 		cout << "#" << ++i << " " << (*itr)->getName() << endl;
-	}
 }
