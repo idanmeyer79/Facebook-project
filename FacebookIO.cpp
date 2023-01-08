@@ -1,7 +1,13 @@
 #include "FacebookIO.h"
 #include"member.h"
+#include "StatusWithVideo.h"
+#include "StatusWithPhoto.h"
 #include <iostream>
 using namespace std;
+
+constexpr int TEXT_STATUS = 1;
+constexpr int PHOTO_STATUS = 2;
+constexpr int VIDEO_STATUS = 1;
 
 void FacebookIO::displayMessage(const string& message) const {
     cout << message << endl;
@@ -106,17 +112,44 @@ FanPage FacebookIO::getDetailsForPage()
 
 Status FacebookIO::getStatusFromUser()
 {
-	string text;
+	int selector = selectTypeOfStatus();
+	getchar();
 	displayMessage("Please enter a new status: ");
-	text=getUserInput();
-	Status status(text);
-	return status;
+	string text = getUserInput();
+
+	if (selector == TEXT_STATUS)
+	{
+		Status status(text);
+		return status;
+	}
+	else if (selector == PHOTO_STATUS)
+	{
+		displayMessage("Please enter a color for the status: ");
+		string color= getUserInput();
+		StatusWithPhoto status(text, color);
+		return status;
+	}
+	else if (selector == VIDEO_STATUS)
+	{
+		displayMessage("Please enter a color for the status: ");
+		string color= getUserInput();
+		StatusWithVideo status (text, color);
+		return status;
+	}
 }
 
 int FacebookIO::selectMemberOrPage()
 {
 	int selector;
 	displayMessage("For a member enter 1, For a Fan page enter 2");
+	cin >> selector;
+	return selector;
+}
+
+int FacebookIO::selectTypeOfStatus()
+{
+	int selector;
+	displayMessage("For a text status enter 1, For a photo and text status enter 2, For a video and text status enter 3");
 	cin >> selector;
 	return selector;
 }

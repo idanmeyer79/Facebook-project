@@ -146,6 +146,8 @@
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="FanPage.cpp" />
     <ClCompile Include="Status.cpp" />
+    <ClCompile Include="StatusWithPhoto.cpp" />
+    <ClCompile Include="StatusWithVideo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
@@ -154,6 +156,8 @@
     <ClInclude Include="Member.h" />
     <ClInclude Include="FanPage.h" />
     <ClInclude Include="Status.h" />
+    <ClInclude Include="StatusWithPhoto.h" />
+    <ClInclude Include="StatusWithVideo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

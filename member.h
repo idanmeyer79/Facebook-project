@@ -17,18 +17,18 @@ class Member
 private:
 	std::string memberName;
 	Date dateOfBirth;
-	std::vector<Status> memberStatuses;
+	std::vector<Status*> memberStatuses;
 	std::list<FanPage*> memberFanPages;
 	std::list<Member*>  memberFriends;
 
 public:
 	Member(const std::string name, const Date& dateOfBirth);
 	std::list<Member*> getMembersArray()   { return memberFriends;  }
-	std::vector<Status> getStatusesArray() { return memberStatuses; }
+	std::vector<Status*> getStatusesArray() { return memberStatuses; }
 	std::list<FanPage*> getPagesArray()    { return memberFanPages; }
 	int getNumOfPages()                    { return memberFanPages.size(); }
 	int getNumOfMembers()                  { return memberFriends.size(); }
-	std::vector<Status> getStatusArray()   { return memberStatuses; }
+	std::vector<Status*> getStatusArray()   { return memberStatuses; }
 	std::string getName() const;
 	const Date getDate()const;
 	const int getNumOfFriends() const ;
@@ -58,11 +58,6 @@ public:
 	void showMyStatuses() const;
 
 	/**
-	 * Shows the last 10 statuses of the member's friends.
-	 */
-	//void Show10MyFriendsLastStatuses() const;
-
-	/**
 	 * Adds a new friend to the list of friends.
 	 * @param member The friend to add.
 	 */
@@ -78,7 +73,7 @@ public:
 	 * Adds a new status to the vector of statuses.
 	 * @param status The status to add.
 	 */
-	void addStatus(const Status& status);
+	void addStatus(Status* status);
 
 	/**
 	* Removes a friend from the list of friends.

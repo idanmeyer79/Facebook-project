@@ -6,7 +6,7 @@
 
 class Status
 {
-private:
+protected:
 	std::string text;
 	std::string date_and_time;
 
@@ -45,7 +45,7 @@ public:
 	/**
 	 * Shows the status.
 	 */
-	void printStatus() const;
+	virtual void printStatus() const;
 
 	/**
 	 * Compares this status to another status based on their text.

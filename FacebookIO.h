@@ -145,6 +145,7 @@ public:
      */
     FanPage* getPageException();
 
+    int selectTypeOfStatus();
 };
 #endif
 

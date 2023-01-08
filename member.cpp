@@ -81,11 +81,11 @@ void Member::showFanPages() const
 
 void Member::addStatus(const string text)
 {
-	Status status(text);
+	Status *status = new Status(text);
 	addStatus(status);
 }
 
-void Member::addStatus(const Status& status)
+void Member::addStatus(Status* status)
 {
 	memberStatuses.push_back(status);
 }
@@ -256,25 +256,25 @@ void Member::showLast10StatusesOfEach() const
 
 void Member::printAllStatuses() const
 {
-	vector<Status>::const_iterator itr = memberStatuses.begin();
-	vector<Status>::const_iterator itrEnd = memberStatuses.end();
+	vector<Status*>::const_iterator itr = memberStatuses.begin();
+	vector<Status*>::const_iterator itrEnd = memberStatuses.end();
 
 	int i = 0;
 	cout << "All the statuses:" << endl;
 	for (; itr != itrEnd; ++itr)
 	{
 		cout << "# " << ++i << " ";
-		(*itr).printStatus();
+		(*itr)->printStatus();
 	}
 }
 
 void Member::print10() const
 {
-	vector<Status>::const_reverse_iterator  rit = memberStatuses.rbegin();
-	vector<Status>::const_reverse_iterator ritrEnd = memberStatuses.rend();
+	vector<Status*>::const_reverse_iterator  rit = memberStatuses.rbegin();
+	vector<Status*>::const_reverse_iterator ritrEnd = memberStatuses.rend();
 	int size = memberStatuses.size();
 	int currMemberNumOfStatuses = min(size, 10);
 	for (int i=0; i< currMemberNumOfStatuses; ++rit,i++)
-		(*rit).printStatus();
+		(*rit)->printStatus();
 	cout << endl;
 }

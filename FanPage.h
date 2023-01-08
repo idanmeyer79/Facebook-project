@@ -15,7 +15,7 @@ class FanPage
 private:
 	std::string          pageName;
 	std::list<Member*>   fans;
-	std::vector<Status>  statuses;
+	std::vector<Status*>  statuses;
 	
 public:
 	/**
@@ -52,7 +52,7 @@ public:
 	 *
 	 * @return A reference to the list of statuses.
 	 */
-	std::vector<Status>& getStatusesArray() { return statuses; }
+	std::vector<Status*>& getStatusesArray() { return statuses; }
 
 	/**
 	 * Returns a reference to the list of fans.
@@ -66,7 +66,7 @@ public:
 	 *
 	 * @return A reference to the list of statuses.
 	 */
-	std::vector<Status>& getStatusArray() { return statuses; }
+	std::vector<Status*>& getStatusArray() { return statuses; }
 
 
 	/**
@@ -98,14 +98,14 @@ public:
 	 *
 	 * @param txt The text of the status to add.
 	 */
-	void addStatus(const std::string txt);
+	void addStatus(std::string txt);
 
 	/**
 	 * Adds a new status to the vector of statuses.
 	 *
 	 * @param s The status to add.
 	 */
-	void addStatusToArray(const Status& s);
+	void addStatusToArray(Status* s);
 
 	/**
 	 * Prints all statuses.

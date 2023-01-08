@@ -45,7 +45,7 @@ void FanPage::showMyStatuses()
 
 void FanPage::addStatus(const string txt)
 {
-	Status status(txt);
+	Status *status = new Status(txt);
 	addStatusToArray(status);
 }
 
@@ -65,22 +65,22 @@ bool FanPage:: operator>(FanPage& other)
 	return getNumOfFans() > other.getNumOfFans()? true : false;
 }
 
-void FanPage::addStatusToArray(const Status& s)
+void FanPage::addStatusToArray(Status* s)
 {
 	statuses.push_back(s);
 }
 
 void FanPage::printAllStatuses() const
 {
-	vector<Status>::const_iterator itr = statuses.begin();
-	vector<Status>::const_iterator itrEnd = statuses.end();
+	vector<Status*>::const_iterator itr = statuses.begin();
+	vector<Status*>::const_iterator itrEnd = statuses.end();
 
 	int i = 0;
 	cout << "All the statuses:" << endl;
 	for (; itr != itrEnd; ++itr)
 	{
 		cout << "# " << ++i << " ";
-		(*itr).printStatus();
+		(*itr)->printStatus();
 	}
 }
 

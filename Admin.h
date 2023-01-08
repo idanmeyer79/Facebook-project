@@ -112,7 +112,7 @@ public:
 	 * @param page The fan page to add the status to.
 	 * @param status The status to add.
 	 */
-	void addStatusToPage(FanPage* page, const Status& status);
+	void addStatusToPage(FanPage* page, Status& status);
 
 	/**
 	 * Adds a new status to the given member.
@@ -120,7 +120,7 @@ public:
 	 * @param member The member to add the status to.
 	 * @param status The status to add.
 	 */
-	void addStatusToMember(Member* member, const Status& status);
+	void addStatusToMember(Member* member, Status& status);
 
 	/**
 	 * Returns the number of members in the list of members.
