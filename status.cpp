@@ -11,7 +11,7 @@ Status::Status(const string t) // c'tor with text
 
 void Status::printStatus() const
 {
-	cout << "The status created at: " << date_and_time << "   The status is: " << text << endl;
+	cout << "The status created at: " << date_and_time << "    The status is: " << text << endl;
 }
 
 bool Status:: setText(const string text)

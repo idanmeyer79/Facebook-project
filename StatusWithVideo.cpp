@@ -10,6 +10,6 @@ StatusWithVideo::StatusWithVideo(std::string text, std::string color) :Status(te
 void StatusWithVideo::printStatus() const
 {
 	Status::printStatus();
-	cout << "this is printed in " << statusColor << endl;
+	cout << "    this is printed in " << statusColor << endl;
 	system("start stam.mp4");
 }

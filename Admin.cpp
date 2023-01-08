@@ -33,14 +33,14 @@ void Admin::addPageToFacebook(const FanPage& page)
 	fanPages.push_back(page);
 }
 
-void Admin::addStatusToMember(Member* member, Status& status)
+void Admin::addStatusToMember(Member* member, Status* status)
 {
-	member->addStatus(&status);
+	member->addStatus(status);
 }
 
-void Admin::addStatusToPage(FanPage* page, Status& status)
+void Admin::addStatusToPage(FanPage* page, Status* status)
 {
-	page->addStatusToArray(&status);
+	page->addStatusToArray(status);
 }
 
 void Admin::makeFriendship(Member& member1, Member& member2)

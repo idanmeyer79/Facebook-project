@@ -9,6 +9,6 @@ StatusWithPhoto::StatusWithPhoto(string text, string color) :Status(text)
 void StatusWithPhoto::printStatus() const
 {
 	Status::printStatus();
-	cout << "this is printed in " << statusColor << endl;
+	cout << "    this is printed in " << statusColor << endl;
 	system("start yosi.jpeg");
 }

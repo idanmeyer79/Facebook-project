@@ -4,7 +4,10 @@
 #include <string>
 #pragma warning(disable: 4996)
 using namespace std;
-
+Member::~Member()
+{
+	freeStatuses();
+}
 Member::Member(const string name, const Date& date) : dateOfBirth(date)
 {
 	memberName = name;
@@ -277,4 +280,13 @@ void Member::print10() const
 	for (int i=0; i< currMemberNumOfStatuses; ++rit,i++)
 		(*rit)->printStatus();
 	cout << endl;
+}
+
+void Member::freeStatuses()
+{
+	for (auto& status : memberStatuses)
+	{
+		delete status;
+	}
+	memberStatuses.clear();
 }

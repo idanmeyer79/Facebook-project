@@ -252,13 +252,13 @@ void addStatusToFanPagesOrMember(Admin& admin,FacebookIO& io)
 	if (selector == MEMBER)
 	{
 		Member* member = io.getMemberException();
-		Status status = io.getStatusFromUser();
+		Status* status = io.getStatusFromUser();
 		admin.addStatusToMember(member, status);
 	}
 	else if (selector == FAN_PAGE)
 	{
 		FanPage* page = io.getPageException();
-		Status status = io.getStatusFromUser();
+		Status *status = io.getStatusFromUser();
 		admin.addStatusToPage(page, status);
 	}
 	else

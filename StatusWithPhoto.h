@@ -9,6 +9,7 @@ class StatusWithPhoto : public Status
 private:
 	std::string statusColor;
 public:
+	virtual ~StatusWithPhoto() {}
 	StatusWithPhoto(std::string text,std::string color);
 	virtual void printStatus() const override;
 };

@@ -23,6 +23,7 @@ private:
 
 public:
 	Member(const std::string name, const Date& dateOfBirth);
+	~Member();
 	std::list<Member*> getMembersArray()   { return memberFriends;  }
 	std::vector<Status*> getStatusesArray() { return memberStatuses; }
 	std::list<FanPage*> getPagesArray()    { return memberFanPages; }
@@ -209,6 +210,7 @@ public:
 	 * @return `true` if this member has more friends than the other member, `false` otherwise.
 	 */
 	bool operator>(Member& other);
+	void freeStatuses();
 
 };
 

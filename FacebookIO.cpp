@@ -7,7 +7,7 @@ using namespace std;
 
 constexpr int TEXT_STATUS = 1;
 constexpr int PHOTO_STATUS = 2;
-constexpr int VIDEO_STATUS = 1;
+constexpr int VIDEO_STATUS = 3;
 
 void FacebookIO::displayMessage(const string& message) const {
     cout << message << endl;
@@ -110,7 +110,7 @@ FanPage FacebookIO::getDetailsForPage()
 	return fanPage;
 }
 
-Status FacebookIO::getStatusFromUser()
+Status* FacebookIO::getStatusFromUser()
 {
 	int selector = selectTypeOfStatus();
 	getchar();
@@ -119,21 +119,21 @@ Status FacebookIO::getStatusFromUser()
 
 	if (selector == TEXT_STATUS)
 	{
-		Status status(text);
+		Status* status= new Status(text);
 		return status;
 	}
 	else if (selector == PHOTO_STATUS)
 	{
 		displayMessage("Please enter a color for the status: ");
 		string color= getUserInput();
-		StatusWithPhoto status(text, color);
+		Status* status = new StatusWithPhoto(text, color);
 		return status;
 	}
 	else if (selector == VIDEO_STATUS)
 	{
 		displayMessage("Please enter a color for the status: ");
 		string color= getUserInput();
-		StatusWithVideo status (text, color);
+		Status* status = new StatusWithVideo (text, color);
 		return status;
 	}
 }
