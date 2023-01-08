@@ -127,6 +127,7 @@ int main()
 	admin.addPageToFacebook(fanPage1);
 	admin.addPageToFacebook(fanPage2);
 	admin.addPageToFacebook(fanPage3);
+
 	//end of hard codeed data//
 
 	FacebookIO io(&admin);
