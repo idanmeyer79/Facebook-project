@@ -56,3 +56,9 @@ bool Date:: checkdate(int day, int month , int year)
 
     return true;
 }
+
+
+std::ostream& operator<< (std::ostream& out, const Date& date) {
+    out << date.day << "/" << date.month << "/" << date.year;
+    return out;
+}

@@ -6,6 +6,7 @@
 class Date 
 {
 public:
+    friend std::ostream& operator<< (std::ostream& out, const Date& date);
     /**
      * Constructs a new `Date` object with the given day, month, and year.
      *
