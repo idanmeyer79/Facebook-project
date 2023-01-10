@@ -12,6 +12,9 @@ public:
 	virtual ~StatusWithPhoto() {}
 	StatusWithPhoto(std::string text,std::string color);
 	virtual void printStatus() const override;
+	friend std::ostream& operator<< (std::ostream& out, const StatusWithPhoto& status);
+
+
 };
 
 #endif //!__STASUS_WITH_PHOTO_H__

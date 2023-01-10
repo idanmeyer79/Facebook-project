@@ -6,7 +6,7 @@
 using namespace std;
 Member::~Member()
 {
-	freeStatuses();
+	//freeStatuses();
 }
 Member::Member(const string name, const Date& date) : dateOfBirth(date)
 {

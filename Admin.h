@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <fstream>
 #pragma warning(disable: 4996)
 #pragma warning(disable: 4267)
 
@@ -20,6 +21,10 @@ private:
 	std::list<Member>  users;
 	
 public:
+	void saveToFileBinary(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName);
+	void saveToFileText(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName);
+	void loadFromFileBinary(std::list<FanPage>& fanPages, std::list<Member>& users, const std::string& fileName);
+
 	/**
 	 * Returns a reference to the list of members.
 	 *

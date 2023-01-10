@@ -13,3 +13,8 @@ void StatusWithVideo::printStatus() const
 	cout << "    this is printed in " << statusColor << endl;
 	system("start stam.mp4");
 }
+
+std::ostream& operator<< (std::ostream& out, const StatusWithVideo& status) {
+	out << status.text << " - " << status.statusColor << " - " << status.date_and_time;
+	return out;
+}

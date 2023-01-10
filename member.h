@@ -24,12 +24,13 @@ private:
 public:
 	Member(const std::string name, const Date& dateOfBirth);
 	~Member();
-	std::list<Member*> getMembersArray()   { return memberFriends;  }
+	std::list<Member*> getMembersArray() const  { return memberFriends;  }
 	std::vector<Status*> getStatusesArray() { return memberStatuses; }
-	std::list<FanPage*> getPagesArray()    { return memberFanPages; }
+	std::list<FanPage*> getPagesArray() const   { return memberFanPages; }
 	int getNumOfPages()                    { return memberFanPages.size(); }
 	int getNumOfMembers()                  { return memberFriends.size(); }
 	std::vector<Status*> getStatusArray()   { return memberStatuses; }
+	std::vector<Status*> getMemberStatuses() const { return memberStatuses; }
 	std::string getName() const;
 	const Date getDate()const;
 	const int getNumOfFriends() const ;
@@ -211,6 +212,8 @@ public:
 	 */
 	bool operator>(Member& other);
 	void freeStatuses();
+
+	bool operator==(const Member& other) const {	return memberName == other.memberName;	}
 
 };
 

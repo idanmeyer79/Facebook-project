@@ -12,6 +12,8 @@ protected:
 
 public:
 	static constexpr int MAX_LEN_OF_STATUS = 100;
+	friend std::ostream& operator<< (std::ostream& out, const Status& status);
+
 
 	/**
 	 * Constructs a new status with the given text.

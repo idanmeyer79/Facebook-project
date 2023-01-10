@@ -244,6 +244,8 @@ void pickAction(FacebookIO& io, Admin& admin)
 	}
 		}while (action != EXIT);
 		io.displayMessage("\033[32mBye Bye :)\033[0m");
+		admin.saveToFileBinary(admin.getPagesArray(),admin.getMembersArray(),"test.txt");
+		admin.saveToFileText(admin.getPagesArray(), admin.getMembersArray(), "FacebookDataTest.txt");
 }
 
 void addStatusToFanPagesOrMember(Admin& admin,FacebookIO& io)

@@ -29,3 +29,10 @@ bool Status::  operator!=(Status& other)
 {
 	return text != other.getText() ? true : false;
 }
+
+
+
+std::ostream& operator<< (std::ostream& out, const Status& status) {
+	out << status.text << " - " << status.date_and_time;
+	return out;
+}

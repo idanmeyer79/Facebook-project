@@ -18,6 +18,19 @@ private:
 	std::vector<Status*>  statuses;
 	
 public:
+	std::list<Member*> getFans() const;
+	std::vector<Status*>  getStatuses() const { return statuses; }
+	int  getNumOfStatuses() const { return statuses.size(); }
+	void addFans(std::list<Member*>   newFans) { fans = newFans; }
+	void addStatuses(std::vector<Status*>   newstatuses) { statuses = newstatuses; }
+
+	//bool operator==(const FanPage& other) const { return pageName == other.pageName; }
+		
+	bool operator==(const FanPage& other) const	{return pageName == other.pageName;	}
+	bool operator==(const FanPage* other) const	{return pageName == other->pageName;	}
+
+
+
 	/**
 	 * Constructs a new fan page with the given name.
 	 *

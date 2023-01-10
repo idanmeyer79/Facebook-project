@@ -12,3 +12,8 @@ void StatusWithPhoto::printStatus() const
 	cout << "    this is printed in " << statusColor << endl;
 	system("start yosi.jpeg");
 }
+
+std::ostream& operator<< (std::ostream& out, const StatusWithPhoto& status) {
+	out << status.text << " - " << status.statusColor <<" - " << status.date_and_time;
+	return out;
+}
