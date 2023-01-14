@@ -2,15 +2,51 @@
 #include <cmath>
 #include <iostream>
 #include <string>
+#include <fstream>
 #pragma warning(disable: 4996)
 using namespace std;
 Member::~Member()
 {
-	//freeStatuses();
+	freeStatuses();
 }
+
 Member::Member(const string name, const Date& date) : dateOfBirth(date)
 {
 	memberName = name;
+}
+
+Member::Member(const Member& other):dateOfBirth(other.dateOfBirth)
+{
+	for (const Status* status : other.memberStatuses)
+	{
+		Status* newStatus = new Status(*status);
+		memberStatuses.push_back(newStatus);
+	}
+	memberFanPages = other.memberFanPages;
+	memberFriends = other.memberFriends;
+	memberName = other.memberName;
+}
+
+Member::Member(std::ifstream& file):dateOfBirth(file)
+{
+	// read memberName from file
+	std::getline(file, memberName);
+	// read memberStatuses from file
+	int statusesCount;
+	string type;
+	Status* status;
+	file >> statusesCount;
+	file.ignore();
+	for (int i = 0; i < statusesCount; ++i) {
+		getline(file, type);
+		if (type == "Status")
+			status = new Status(file);
+		else if (type == "StatusWithPhoto")
+			status = new StatusWithPhoto(file);
+		else
+			status = new StatusWithVideo(file);
+		memberStatuses.push_back(status);
+	}
 }
 
 bool Member :: setName(const string name)
@@ -29,6 +65,19 @@ string Member :: getName() const
 void Member ::setBirthDay(Date& date)
 {
 	dateOfBirth = date;
+}
+
+void Member::saveToFile(std::ofstream& outFile) const
+{
+	//Save the Date of birth
+	outFile << dateOfBirth << '\n';
+	// Save the member name
+	outFile << memberName << '\n';
+	// Save the statuses
+	outFile << memberStatuses.size() << '\n';
+	for (const Status* status : memberStatuses)
+		status->saveToFile(outFile);
+
 }
 
 const Date Member::getDate() const

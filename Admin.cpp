@@ -58,7 +58,7 @@ void Admin::disConnectFanAndPage(Member& member,FanPage& page)
 	member.disConnectPage(page);
 }
 
-void Admin::ConnectFanToPage(Member& member, FanPage& page) 
+void Admin::ConnectFanToPage(Member& member, FanPage& page) const
 {
 	member.followPage(page);
 }
@@ -139,6 +139,24 @@ Member* Admin::getMember(const string name)
 	return theFoundMember;
 }
 
+FanPage* Admin::getPage(const string name)
+{
+	list<FanPage>::iterator itr = fanPages.begin();
+	list<FanPage>::iterator itrEnd = fanPages.end();
+
+	FanPage* theFoundPage = nullptr;
+
+	for (; itr != itrEnd; ++itr)
+	{
+		if ((*itr).getName() == name)
+		{
+			theFoundPage = &(*itr);
+			return theFoundPage;
+		}
+	}
+	return theFoundPage;
+}
+
 void Admin::showLast10StatusesOfEach() const
 {
 	list<Member>::const_iterator itr = users.begin();
@@ -180,87 +198,6 @@ void Admin::printAllPages() const
 		cout << "#" << ++i << " " << (*itr).getName() << endl;
 }
 
-void Admin::saveToFileBinary(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName) {
-	std::ofstream outFile(fileName, std::ios::binary);
-	if (outFile.is_open()) {
-		// Save the number of fan pages and users
-		size_t fanPageCount = fanPages.size();
-		outFile.write(reinterpret_cast<const char*>(&fanPageCount), sizeof(size_t));
-		size_t userCount = users.size();
-		outFile.write(reinterpret_cast<const char*>(&userCount), sizeof(size_t));
-
-		// Save the fan pages
-		for (const FanPage& fanPage : fanPages) {
-			// Save the page name
-			size_t pageNameSize = fanPage.getName().size();
-			outFile.write(reinterpret_cast<const char*>(&pageNameSize), sizeof(size_t));
-			outFile.write(fanPage.getName().c_str(), pageNameSize);
-
-			// Save the fans
-			size_t fanCount = fanPage.getNumOfFans();
-			outFile.write(reinterpret_cast<const char*>(&fanCount), sizeof(size_t));
-			for (const Member* fan : fanPage.getFans()) {
-				size_t fanNameSize = fan->getName().size();
-				outFile.write(reinterpret_cast<const char*>(&fanNameSize), sizeof(size_t));
-				outFile.write(fan->getName().c_str(), fanNameSize);
-			}
-
-			//Save statuses
-			size_t statusCount = fanPage.getNumOfStatuses();
-			outFile.write(reinterpret_cast<const char*>(&statusCount), sizeof(size_t));
-			for (const Status* status : fanPage.getStatuses())
-			{
-				const string Type = typeid(*status).name() + 6;
-				outFile.write(Type.c_str(), Type.size());
-				outFile.write(reinterpret_cast<const char*>(status), sizeof(Status));
-			}
-		}
-
-		// Save the users
-		for (const Member& user : users) {
-			// Save the member name
-			size_t memberNameSize = user.getName().size();
-			outFile.write(reinterpret_cast<const char*>(&memberNameSize), sizeof(size_t));
-			outFile.write(user.getName().c_str(), memberNameSize);
-			//Save the Date of birth
-			Date userDOB = user.getDate();
-			outFile.write(reinterpret_cast<const char*>(&userDOB), sizeof(Date));
-
-
-			// Save the member statuses
-			size_t statusCount = user.getMemberStatuses().size();
-			outFile.write(reinterpret_cast<const char*>(&statusCount), sizeof(size_t));
-			for (const Status* status : user.getMemberStatuses())
-			{
-				const string Type = typeid(*status).name() + 6;
-				outFile.write(Type.c_str(), Type.size());
-				outFile.write(reinterpret_cast<const char*>(status), sizeof(Status));
-			}
-
-			// Save the member fan pages
-			size_t fanPageCount = user.getPagesArray().size();
-			outFile.write(reinterpret_cast<const char*>(&fanPageCount), sizeof(size_t));
-			for (const FanPage* fanPage : user.getPagesArray()) {
-				size_t fanPageNameSize = fanPage->getName().size();
-				outFile.write(reinterpret_cast<const char*>(&fanPageNameSize), sizeof(size_t));
-				outFile.write(fanPage->getName().c_str(), fanPageNameSize);
-			}
-			// Save the member friends
-			size_t friendCount = user.getMembersArray().size();
-			outFile.write(reinterpret_cast<const char*>(&friendCount), sizeof(size_t));
-			for (const Member* userFriend : user.getMembersArray()) {
-				size_t friendNameSize = userFriend->getName().size();
-				outFile.write(reinterpret_cast<const char*>(&friendNameSize), sizeof(size_t));
-				outFile.write(userFriend->getName().c_str(), friendNameSize);
-			}
-		}
-
-		outFile.close();
-	}
-	else {
-		// Error: unable to open file for writing
-	}
-}
 
 void Admin::saveToFileText(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName) {
 	std::ofstream outFile(fileName);
@@ -272,66 +209,90 @@ void Admin::saveToFileText(const std::list<FanPage>& fanPages, const std::list<M
 		// Save the fan pages
 		for (const FanPage& fanPage : fanPages) {
 			// Save the page name
-			outFile << fanPage.getName() << '\n';
-
-			// Save the fans
-			outFile << fanPage.getNumOfFans() << '\n';
-			for (const Member* fan : fanPage.getFans()) {
-				//size_t fanIndex = std::distance(users.begin(), std::find(users.begin(), users.end(), *fan));
-				//outFile << fanIndex << '\n';
-				outFile << fan->getName() << '\n';
-			}
-
-			//Save statuses
-			outFile << fanPage.getNumOfStatuses()<< '\n';
-			for (const Status* status : fanPage.getStatuses())
-			{
-				outFile << typeid(*status).name() + 6 << endl;
-				outFile << *status << '\n';
-			}
+			fanPage.saveToFile(outFile);
 		}
 
 		// Save the users
-		for (const Member& user : users) {
-			// Save the member name
-			outFile << user.getName() << '\n';
-			//Save the Date of birth
-			const Date DOB = user.getDate();
-			outFile << DOB << '\n';
+		for (const Member& user : users) 
+			user.saveToFile(outFile);
 
-			// Save the member statuses
-			outFile << user.getMemberStatuses().size() << '\n';
-			for (const Status* status : user.getMemberStatuses())
-			{
-				outFile << typeid(*status).name() + 6 << endl;
-				outFile << *status << '\n';
+		// Save connections
 
-			}
-
+		for (const Member& user : users) 
+		{
+			
 			// Save the member fan pages
 			outFile << user.getPagesArray().size() << '\n';
 			for (const FanPage* fanPage : user.getPagesArray()) {
-				//size_t fanPageIndex = std::distance(fanPages.begin(), std::find(fanPages.begin(), fanPages.end(), *fanPage));
-				//outFile << fanPageIndex << '\n';
 				outFile << fanPage->getName() << '\n';
-
-
 			}
 
 			// Save the member friends
 			outFile << user.getMembersArray().size() << '\n';
 			for (const Member* userfriend : user.getMembersArray()) {
-				//size_t friendIndex = std::distance(users.begin(), std::find(users.begin(), users.end(), *userfriend));
-				//outFile << friendIndex << '\n';
 				outFile << userfriend->getName() << '\n';
-
 			}
 		}
+
 
 		outFile.close();
 	}
 	else {
 		// Error: unable to open file for writing
 	}
+}
+
+void Admin::loadFromFile(const std::string& fileName)
+{
+	std::ifstream file;
+	file.open(fileName);
+	string memberToConnect, pageToConncet;
+	FanPage* tempPage;
+	Member* tempMember;
+	int numOfPagesToFollow, NumOfFriend;
+	if (file.is_open()) {
+		int numOfUsers, numOfPages;
+        file >> numOfPages;
+        file >> numOfUsers;
+		file.ignore();
+        for (int i = 0; i < numOfPages; i++) {
+			FanPage page(file);
+            fanPages.push_back(page);
+        }
+		for (int i = 0; i < numOfUsers; i++) {
+			Member user(file);
+			users.push_back(user);
+		}
+
+		for (Member& user : users)
+		{
+			file >> numOfPagesToFollow;
+			file.ignore();
+			for (int i = 0; i < numOfPagesToFollow; i++)
+			{
+				getline(file, pageToConncet);
+				if (!user.checkIfAlreadyFolowing(pageToConncet))
+				{
+					tempPage = getPage(pageToConncet);
+					ConnectFanToPage(user, *tempPage);
+				}
+			}
+			file >> numOfPagesToFollow;
+			file.ignore();
+			for (int i = 0; i < numOfPagesToFollow; i++)
+			{
+				getline(file, memberToConnect);
+				if (!user.checkFriendship(memberToConnect))
+				{
+					tempMember = getMember(memberToConnect);
+					makeFriendship(user, *tempMember);
+				}
+			}
+
+		}
+        file.close();
+    } else {
+        cout << "Unable to open file";
+    }
 }
 

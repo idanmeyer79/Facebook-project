@@ -1,4 +1,5 @@
 #include "FanPage.h"
+#include <fstream>
 #include<string>
 using namespace std;
 
@@ -58,6 +59,14 @@ FanPage& FanPage:: operator+=(Member& other)
 bool FanPage:: operator>(Member& other)
 {
 	return getNumOfFans() > other.getNumOfFriends() ? true: false;
+}
+
+void FanPage::saveToFile(std::ofstream& outFile) const
+{
+	outFile << pageName << '\n';
+	outFile << statuses.size() << '\n';
+	for (const Status* status : statuses)
+		status->saveToFile(outFile);
 }
 
 bool FanPage:: operator>(FanPage& other) 
@@ -135,6 +144,26 @@ void FanPage::printAllMembers() const
 
 	for (; itr != itrEnd; ++itr)
 		cout << "#" << ++i << " " << (*itr)->getName() << endl;
+}
+
+FanPage::FanPage(ifstream& file)
+{
+	getline(file, pageName);
+	int statusesCount;
+	string type;
+	Status* status;
+	file >> statusesCount;
+	file.ignore();
+	for (int i = 0; i < statusesCount; ++i) {
+		getline(file,type);
+		if (type=="Status")
+			status = new Status(file);
+		else if(type == "StatusWithPhoto")
+			status = new StatusWithPhoto(file);
+		else
+			status = new StatusWithVideo(file);
+		statuses.push_back(status);
+	}
 }
 
 list<Member*> FanPage::getFans() const

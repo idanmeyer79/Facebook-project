@@ -21,9 +21,8 @@ private:
 	std::list<Member>  users;
 	
 public:
-	void saveToFileBinary(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName);
 	void saveToFileText(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName);
-	void loadFromFileBinary(std::list<FanPage>& fanPages, std::list<Member>& users, const std::string& fileName);
+	void loadFromFile(const std::string& fileName);
 
 	/**
 	 * Returns a reference to the list of members.
@@ -93,7 +92,7 @@ public:
 	 * @param member The member to connect to the fan page.
 	 * @param page The fan page to connect to the member.
 	 */
-	void ConnectFanToPage(Member& member, FanPage& page);
+	void ConnectFanToPage(Member& member, FanPage& page) const;
 
 	/**
 	 * Removes the friendship between the two given members.
@@ -142,6 +141,7 @@ public:
 	 */
 	Member* getMember(const std::string name);
 
+	FanPage* getPage(const std::string name);
 	/**
 	* Returns whether there is a fan page with the given name in the list of fan pages.
 	*
@@ -195,6 +195,7 @@ public:
 	void deletePage(FanPage& page);
 
 	friend class FacebookIO;
+
 };
 
 #endif // !__ADMIN_H__

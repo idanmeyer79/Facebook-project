@@ -5,6 +5,7 @@
 #include"status.h"
 #include <iostream>
 #include<vector>
+#include<fstream>
 #include<list>
 #pragma warning(disable: 4996)
 
@@ -22,6 +23,8 @@ private:
 	std::list<Member*>  memberFriends;
 
 public:
+	Member(std::ifstream& file);
+	Member(const Member& other);
 	Member(const std::string name, const Date& dateOfBirth);
 	~Member();
 	std::list<Member*> getMembersArray() const  { return memberFriends;  }
@@ -36,6 +39,8 @@ public:
 	const int getNumOfFriends() const ;
 	bool setName(const std::string name);
 	void setBirthDay(Date& date);
+	void saveToFile(std::ofstream& file) const;
+
 
 	/**
 	* Adds a new fan page to the list of followed fan pages.
@@ -214,6 +219,8 @@ public:
 	void freeStatuses();
 
 	bool operator==(const Member& other) const {	return memberName == other.memberName;	}
+
+	friend class Admin;
 
 };
 

@@ -9,9 +9,12 @@ class StatusWithVideo : public Status
 private:
 	std::string statusColor;
 public:
+	StatusWithVideo(std::ifstream& file);
 	StatusWithVideo(std::string text, std::string color);
 	virtual void printStatus() const override;
 	friend std::ostream& operator<< (std::ostream& out, const StatusWithVideo& status);
+	virtual void saveToFile(std::ofstream& outFile) const override;
+
 
 
 };

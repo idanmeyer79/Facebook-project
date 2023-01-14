@@ -2,7 +2,10 @@
 #define __PAGE_H__
 #include"Member.h"
 #include"Status.h"
+#include"StatusWithPhoto.h"
+#include"StatusWithVideo.h"
 #include <iostream>
+#include <fstream>
 #include<vector>
 #include<list>
 #pragma warning(disable: 4996)
@@ -18,6 +21,7 @@ private:
 	std::vector<Status*>  statuses;
 	
 public:
+	FanPage(std::ifstream& file);
 	std::list<Member*> getFans() const;
 	std::vector<Status*>  getStatuses() const { return statuses; }
 	int  getNumOfStatuses() const { return statuses.size(); }
@@ -176,6 +180,10 @@ public:
 	 * @return `true` if this fan page has more fans than the member, `false` otherwise.
 	 */
 	bool operator>(Member& other);
+
+	void saveToFile(std::ofstream& outFile) const;
+
+	friend class Admin;
 
 };
 
