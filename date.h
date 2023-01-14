@@ -71,5 +71,4 @@ private:
     int year;
 };
 
-
 #endif //!__DATE_H__
