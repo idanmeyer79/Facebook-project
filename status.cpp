@@ -41,14 +41,13 @@ bool Status::  operator!=(Status& other)
 
 void Status::saveToFile(std::ofstream& outFile) const
 {
-	outFile << typeid(*this).name() + 6 << endl;
+	outFile << typeid(*this).name() + SKIP_CLASS << endl;
 	outFile << date_and_time;
 	outFile << text << endl;
 }
 
-
-
-std::ostream& operator<< (std::ostream& out, const Status& status) {
+std::ostream& operator<< (std::ostream& out, const Status& status)
+{
 	out << status.text << " - " << status.date_and_time;
 	return out;
 }

@@ -201,13 +201,16 @@ void Admin::printAllPages() const
 
 void Admin::saveToFileText(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName) {
 	std::ofstream outFile(fileName);
-	if (outFile.is_open()) {
+
+	if (outFile.is_open())
+	{
 		// Save the number of fan pages and users
 		outFile <<fanPages.size() << '\n';
 		outFile << users.size() << '\n';
 
 		// Save the fan pages
-		for (const FanPage& fanPage : fanPages) {
+		for (const FanPage& fanPage : fanPages)
+		{
 			// Save the page name
 			fanPage.saveToFile(outFile);
 		}
@@ -217,28 +220,23 @@ void Admin::saveToFileText(const std::list<FanPage>& fanPages, const std::list<M
 			user.saveToFile(outFile);
 
 		// Save connections
-
 		for (const Member& user : users) 
 		{
-			
 			// Save the member fan pages
 			outFile << user.getPagesArray().size() << '\n';
-			for (const FanPage* fanPage : user.getPagesArray()) {
+			for (const FanPage* fanPage : user.getPagesArray())
 				outFile << fanPage->getName() << '\n';
-			}
 
 			// Save the member friends
 			outFile << user.getMembersArray().size() << '\n';
-			for (const Member* userfriend : user.getMembersArray()) {
+			for (const Member* userfriend : user.getMembersArray())
 				outFile << userfriend->getName() << '\n';
-			}
 		}
-
-
 		outFile.close();
 	}
-	else {
-		// Error: unable to open file for writing
+	else
+	{
+		throw runtime_error("Error: Unable to open file " + fileName);
 	}
 }
 
@@ -250,20 +248,25 @@ void Admin::loadFromFile(const std::string& fileName)
 	FanPage* tempPage;
 	Member* tempMember;
 	int numOfPagesToFollow, NumOfFriend;
-	if (file.is_open()) {
+
+	if (file.is_open())
+	{
 		int numOfUsers, numOfPages;
         file >> numOfPages;
         file >> numOfUsers;
 		file.ignore();
-        for (int i = 0; i < numOfPages; i++) {
+        for (int i = 0; i < numOfPages; i++)
+		{
 			FanPage page(file);
             fanPages.push_back(page);
         }
-		for (int i = 0; i < numOfUsers; i++) {
+		for (int i = 0; i < numOfUsers; i++)
+		{
 			Member user(file);
 			users.push_back(user);
 		}
 
+		// Load connections
 		for (Member& user : users)
 		{
 			file >> numOfPagesToFollow;
@@ -288,11 +291,9 @@ void Admin::loadFromFile(const std::string& fileName)
 					makeFriendship(user, *tempMember);
 				}
 			}
-
 		}
         file.close();
-    } else {
-        cout << "Unable to open file";
-    }
+	}
+	else
+		throw runtime_error("Error: Unable to open file " + fileName);
 }
-

@@ -25,22 +25,24 @@ private:
 public:
 	Member(std::ifstream& file);
 	Member(const Member& other);
+	Member(Member&& other);
 	Member(const std::string name, const Date& dateOfBirth);
 	~Member();
-	std::list<Member*> getMembersArray() const  { return memberFriends;  }
-	std::vector<Status*> getStatusesArray() { return memberStatuses; }
-	std::list<FanPage*> getPagesArray() const   { return memberFanPages; }
-	int getNumOfPages()                    { return memberFanPages.size(); }
-	int getNumOfMembers()                  { return memberFriends.size(); }
-	std::vector<Status*> getStatusArray()   { return memberStatuses; }
-	std::vector<Status*> getMemberStatuses() const { return memberStatuses; }
+	std::list<Member*> getMembersArray() const     { return memberFriends;  }
+	std::list<FanPage*> getPagesArray() const      { return memberFanPages; }
+	int getNumOfPages()                            { return memberFanPages.size(); }
+	int getNumOfMembers()                          { return memberFriends.size(); }
 	std::string getName() const;
 	const Date getDate()const;
 	const int getNumOfFriends() const ;
 	bool setName(const std::string name);
 	void setBirthDay(Date& date);
-	void saveToFile(std::ofstream& file) const;
 
+	/**
+	@brief Saves the Member object to a file.
+	@param file The output file stream to save the Member object to.
+	*/
+	void saveToFile(std::ofstream& file) const;
 
 	/**
 	* Adds a new fan page to the list of followed fan pages.
@@ -216,12 +218,34 @@ public:
 	 * @return `true` if this member has more friends than the other member, `false` otherwise.
 	 */
 	bool operator>(Member& other);
+
+	/**
+	@brief Frees the memory used by the statuses in the Member object.
+	*/
 	void freeStatuses();
 
-	bool operator==(const Member& other) const {	return memberName == other.memberName;	}
+	/**
+	@brief Overloads the == operator for Member objects.
+	@param other The Member object to compare with.
+	@return true if the memberName of the two Member objects are equal, false otherwise.
+	*/
+	bool operator==(const Member& other) const { return memberName == other.memberName; }
+
+	/**
+	@brief Overloads the = operator for move assignment of Member objects.
+	@param other The Member object to be moved.
+	@return A reference to the modified Member object.
+	*/
+	Member& operator=(Member&& other);
+
+	/**
+	@brief Overloads the = operator for copy assignment of Member objects.
+	@param other The Member object to be copied.
+	@return A reference to the modified Member object.
+	*/
+	Member& operator=(const Member& other);
 
 	friend class Admin;
-
 };
 
 #endif // !__MEMBER_H__

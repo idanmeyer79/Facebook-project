@@ -4,6 +4,8 @@
 #include<iostream>
 #pragma warning(disable: 4996)
 
+constexpr int SKIP_CLASS = 6;
+
 class Status
 {
 protected:
@@ -65,8 +67,11 @@ public:
 	 */
 	bool operator!=(Status& other);
 
+	/**
+	@brief Saves the FanPage object to a file.
+	@param outFile The output file stream to save the FanPage object to.
+	*/
 	virtual void saveToFile(std::ofstream& outFile) const;
-
 };
 
 #endif // !__STATUS_H__

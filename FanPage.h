@@ -25,13 +25,20 @@ public:
 	std::list<Member*> getFans() const;
 	std::vector<Status*>  getStatuses() const { return statuses; }
 	int  getNumOfStatuses() const { return statuses.size(); }
-	void addFans(std::list<Member*>   newFans) { fans = newFans; }
-	void addStatuses(std::vector<Status*>   newstatuses) { statuses = newstatuses; }
 
-	//bool operator==(const FanPage& other) const { return pageName == other.pageName; }
-		
-	bool operator==(const FanPage& other) const	{return pageName == other.pageName;	}
-	bool operator==(const FanPage* other) const	{return pageName == other->pageName;	}
+	/**
+	@brief Overloads the == operator for FanPage objects.
+	@param other The FanPage object to compare with.
+	@return true if the pageName of the two FanPage objects are equal, false otherwise.
+	*/
+	bool operator==(const FanPage& other) const { return pageName == other.pageName; }
+	/**
+	@brief Overloads the == operator for pointers to FanPage objects.
+	@param other The pointer to the FanPage object to compare with.
+	@return true if the pageName of the two FanPage objects are equal, false otherwise.
+	*/
+	bool operator==(const FanPage* other) const { return pageName == other->pageName; }
+
 
 
 
@@ -84,7 +91,6 @@ public:
 	 * @return A reference to the list of statuses.
 	 */
 	std::vector<Status*>& getStatusArray() { return statuses; }
-
 
 	/**
 	 * Adds a new fan to the list of fans.
@@ -156,7 +162,6 @@ public:
 	 */
 	void addMember(Member& p);
 
-	
 	/**
 	 * Adds a new fan to the list of fans and returns a reference to this fan page.
 	 *
@@ -184,7 +189,6 @@ public:
 	void saveToFile(std::ofstream& outFile) const;
 
 	friend class Admin;
-
 };
 
 #endif // !__PAGE_H__

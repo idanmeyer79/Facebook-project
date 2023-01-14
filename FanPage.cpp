@@ -86,10 +86,15 @@ void FanPage::printAllStatuses() const
 
 	int i = 0;
 	cout << "All the statuses:" << endl;
-	for (; itr != itrEnd; ++itr)
+	if (statuses.size() == 0)
+		cout << "None" << endl;
+	else
 	{
-		cout << "# " << ++i << " ";
-		(*itr)->printStatus();
+		for (; itr != itrEnd; ++itr)
+		{
+			cout << "# " << ++i << " ";
+			(*itr)->printStatus();
+		}
 	}
 }
 

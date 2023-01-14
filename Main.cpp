@@ -93,43 +93,16 @@ void removeFanFromFanPage(Admin& admin, FacebookIO& io) noexcept(false);
  */
 void showAllFriendsOfMemberOrFansOfFanPage(Admin& admin, FacebookIO& io) noexcept(false);
 
-
 int main()
 {
 	Admin admin;
-	//hardcoded data//
-	/*FanPage fanPage1("mondial");
-	FanPage fanPage2("re'evim beravcha");
-	FanPage fanPage3("keren kalif fans");
-	Member member1("Boaz", Date(1, 1, 2020));
-	Member member2("Romina", Date(2, 2, 2000));
-	Member member3("Arie", Date(3, 3, 1997));
-	member1 += member2;
-	member1 += member3;
-	member1 += fanPage1;
-	fanPage2 += member1;
-	member2 += fanPage1;
-	fanPage1.addStatus("welcome to Mondial 2022");
-	fanPage1.addStatus("Mondial 2022");
-	fanPage2.addStatus("welcome to re'evim beravcha");
-	fanPage2.addStatus("re'evim beravcha 2");
-	fanPage3.addStatus("welcome to keren kalif fans");
-	fanPage3.addStatus("keren kalif fans 2");
-	member1.addStatus("Hey its Boaz");
-	member1.addStatus("Boaz 2");
-	member2.addStatus("Hey its Romina");
-	member2.addStatus("Romina 2");
-	member3.addStatus("Hey its Arie");
-	member3.addStatus("Arie 2");
-	admin.addUserToFacebook(member1);
-	admin.addUserToFacebook(member2);
-	admin.addUserToFacebook(member3);
-	admin.addPageToFacebook(fanPage1);
-	admin.addPageToFacebook(fanPage2);
-	admin.addPageToFacebook(fanPage3);*/
+	try 
+	{
+		admin.loadFromFile("FacebookDataTest.txt");
+	}
+	catch (const runtime_error& e) {cout << e.what() << endl;}
+	catch (...) {cout << "unknown error can not read file" << endl;}
 
-	//end of hard codeed data//
-	admin.loadFromFile("FacebookDataTest.txt");
 	FacebookIO io(&admin);
 	io.wellcome();
 	pickAction(io, admin);
@@ -143,7 +116,8 @@ void pickAction(FacebookIO& io, Admin& admin)
 		io.printMenu();
 		std::cin.sync();
 		cin >> action;
-		switch (action) {
+		switch (action)
+		{
 		case ADD_MEMBER:
 			admin.addUserToFacebook(io.getDetailsForMember());
 			io.success();
@@ -244,7 +218,13 @@ void pickAction(FacebookIO& io, Admin& admin)
 	}
 		}while (action != EXIT);
 		io.displayMessage("\033[32mBye Bye :)\033[0m");
+
+	try
+	{
 		admin.saveToFileText(admin.getPagesArray(), admin.getMembersArray(), "FacebookDataTest.txt");
+	}
+	catch (const runtime_error& e) {cout << e.what() << endl;}
+	catch (...) {cout << "unknown error can not save to file" << endl;}
 }
 
 void addStatusToFanPagesOrMember(Admin& admin,FacebookIO& io)

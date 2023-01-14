@@ -21,8 +21,21 @@ private:
 	std::list<Member>  users;
 	
 public:
-	void saveToFileText(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName);
-	void loadFromFile(const std::string& fileName);
+	/**
+	@brief Saves the given lists of fan pages and users to a text file with the specified file name.
+	@param fanPages A list of FanPage objects to be saved to the file.
+	@param users A list of Member objects to be saved to the file.
+	@param fileName The name of the file to be created or overwritten.
+	@throws std::runtime_error If there is an error opening or writing to the file.
+	*/
+
+	void saveToFileText(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName) noexcept(false);
+	/**
+	@brief Loads fan pages and users from a text file with the specified file name.
+	@param fileName The name of the file to be read.
+	@throws std::runtime_error If there is an error opening or reading from the file.
+	*/
+	void loadFromFile(const std::string& fileName) noexcept(false);
 
 	/**
 	 * Returns a reference to the list of members.
@@ -176,13 +189,6 @@ public:
 	void deleteMember(Member& member);
 
 	/**
-	 * Returns the number of fan pages in the list of fan pages.
-	 *
-	 * @return The number of fan pages.
-	 */
-	int getNumOfPages();
-
-	/**
 	 * Prints the names of all fan pages in the list of fan pages.
 	 */
 	void printAllPages() const;
@@ -195,7 +201,6 @@ public:
 	void deletePage(FanPage& page);
 
 	friend class FacebookIO;
-
 };
 
 #endif // !__ADMIN_H__

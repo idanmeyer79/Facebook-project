@@ -9,11 +9,13 @@ constexpr int TEXT_STATUS = 1;
 constexpr int PHOTO_STATUS = 2;
 constexpr int VIDEO_STATUS = 3;
 
-void FacebookIO::displayMessage(const string& message) const {
+void FacebookIO::displayMessage(const string& message) const
+{
     cout << message << endl;
 }
 
-string FacebookIO::getUserInput() {
+string FacebookIO::getUserInput()
+{
     string input;
     getline(cin, input);
     return input;

@@ -5,6 +5,7 @@
 #include <fstream>
 #pragma warning(disable: 4996)
 using namespace std;
+
 Member::~Member()
 {
 	freeStatuses();
@@ -19,12 +20,60 @@ Member::Member(const Member& other):dateOfBirth(other.dateOfBirth)
 {
 	for (const Status* status : other.memberStatuses)
 	{
-		Status* newStatus = new Status(*status);
-		memberStatuses.push_back(newStatus);
+		string type = typeid(*status).name() + SKIP_CLASS;
+		if (type == "Status")
+		{
+			Status* newStatus = new Status(*status);
+			memberStatuses.push_back(newStatus);
+		}
+		else if (type == "StatusWithPhoto")
+		{
+			Status* newStatus = new StatusWithPhoto(*((StatusWithPhoto*)(status)));
+			memberStatuses.push_back(newStatus);
+		}
+		else
+		{
+			Status* newStatus = new StatusWithVideo(*((StatusWithVideo*)(status)));
+			memberStatuses.push_back(newStatus);
+		}
 	}
 	memberFanPages = other.memberFanPages;
 	memberFriends = other.memberFriends;
 	memberName = other.memberName;
+}
+
+Member::Member(Member&& other):dateOfBirth(other.dateOfBirth)
+{
+	memberFanPages = move(other.memberFanPages);
+	memberFriends = move(other.memberFriends);
+	memberName = move(other.memberName);
+	memberStatuses = move(other.memberStatuses);
+}
+
+Member& Member::operator=(Member&& other)
+{
+	if (this != &other)
+	{
+		dateOfBirth = move(other.dateOfBirth);
+		memberFanPages = move(other.memberFanPages);
+		memberFriends = move(other.memberFriends);
+		memberName = move(other.memberName);
+		memberStatuses = move(other.memberStatuses);
+	}
+	return *this;
+}
+
+Member& Member::operator=(const Member& other)
+{
+	if (this != &other)
+	{
+		dateOfBirth = other.dateOfBirth;
+		memberFanPages = other.memberFanPages;
+		memberFriends = other.memberFriends;
+		memberName = other.memberName;
+		memberStatuses = other.memberStatuses;
+	}
+	return *this;
 }
 
 Member::Member(std::ifstream& file):dateOfBirth(file)
@@ -37,7 +86,8 @@ Member::Member(std::ifstream& file):dateOfBirth(file)
 	Status* status;
 	file >> statusesCount;
 	file.ignore();
-	for (int i = 0; i < statusesCount; ++i) {
+	for (int i = 0; i < statusesCount; ++i)
+	{
 		getline(file, type);
 		if (type == "Status")
 			status = new Status(file);
@@ -77,7 +127,6 @@ void Member::saveToFile(std::ofstream& outFile) const
 	outFile << memberStatuses.size() << '\n';
 	for (const Status* status : memberStatuses)
 		status->saveToFile(outFile);
-
 }
 
 const Date Member::getDate() const
@@ -91,12 +140,14 @@ void Member::addFriend(Member& member)
 	member.memberFriends.push_back(this);
 }
 
-Member& Member:: operator+=(Member& other){
+Member& Member:: operator+=(Member& other)
+{
 	addFriend(other);
 	return *this;
 }
 
-Member& Member:: operator+=(FanPage& other){
+Member& Member:: operator+=(FanPage& other)
+{
 	this->followPage(other);
 	return *this;
 }
@@ -313,10 +364,15 @@ void Member::printAllStatuses() const
 
 	int i = 0;
 	cout << "All the statuses:" << endl;
-	for (; itr != itrEnd; ++itr)
+	if (memberStatuses.size() == 0)
+		cout << "None" << endl;
+	else
 	{
-		cout << "# " << ++i << " ";
-		(*itr)->printStatus();
+		for (; itr != itrEnd; ++itr)
+		{
+			cout << "# " << ++i << " ";
+			(*itr)->printStatus();
+		}
 	}
 }
 
