@@ -1,11 +1,14 @@
 #ifndef __DATE_H__
 #define __DATE_H__
 #include <iostream>
+#include<fstream>
 #pragma warning(disable: 4996)
 
 class Date 
 {
 public:
+    Date(std::ifstream& file);
+
     friend std::ostream& operator<< (std::ostream& out, const Date& date);
     /**
      * Constructs a new `Date` object with the given day, month, and year.
