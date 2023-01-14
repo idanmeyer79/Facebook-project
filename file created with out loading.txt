@@ -1,0 +1,66 @@
+3
+3
+mondial
+2
+Status
+Fri Jan 13 14:25:25 2023
+welcome to Mondial 2022
+Status
+Fri Jan 13 14:25:25 2023
+Mondial 2022
+re'evim beravcha
+2
+Status
+Fri Jan 13 14:25:25 2023
+welcome to re'evim beravcha
+Status
+Fri Jan 13 14:25:25 2023
+re'evim beravcha 2
+keren kalif fans
+2
+Status
+Fri Jan 13 14:25:25 2023
+welcome to keren kalif fans
+Status
+Fri Jan 13 14:25:25 2023
+keren kalif fans 2
+1/1/2020
+Boaz
+2
+Status
+Fri Jan 13 14:25:25 2023
+Hey its Boaz
+Status
+Fri Jan 13 14:25:25 2023
+Boaz 2
+2/2/2000
+Romina
+2
+Status
+Fri Jan 13 14:25:25 2023
+Hey its Romina
+Status
+Fri Jan 13 14:25:25 2023
+Romina 2
+3/3/1997
+Arie
+2
+Status
+Fri Jan 13 14:25:25 2023
+Hey its Arie
+Status
+Fri Jan 13 14:25:25 2023
+Arie 2
+2
+mondial
+re'evim beravcha
+2
+Romina
+Arie
+1
+mondial
+1
+Boaz
+0
+1
+Boaz

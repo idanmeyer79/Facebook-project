@@ -1,5 +1,14 @@
 #include "Status.h"
+#include <fstream>
+#include<string>
 using namespace std;
+
+Status::Status(ifstream& file)
+{
+	getline(file, date_and_time);
+	date_and_time.push_back('\n');
+	getline(file, text);
+}
 
 Status::Status(const string t) // c'tor with text
 {
@@ -11,7 +20,7 @@ Status::Status(const string t) // c'tor with text
 
 void Status::printStatus() const
 {
-	cout << "The status created at: " << date_and_time << "   The status is: " << text << endl;
+	cout << "The status created at: " << date_and_time << "    The status is: " << text << endl;
 }
 
 bool Status:: setText(const string text)
@@ -28,4 +37,18 @@ bool Status:: operator==(Status& other)
 bool Status::  operator!=(Status& other)
 {
 	return text != other.getText() ? true : false;
+}
+
+void Status::saveToFile(std::ofstream& outFile) const
+{
+	outFile << typeid(*this).name() + 6 << endl;
+	outFile << date_and_time;
+	outFile << text << endl;
+}
+
+
+
+std::ostream& operator<< (std::ostream& out, const Status& status) {
+	out << status.text << " - " << status.date_and_time;
+	return out;
 }

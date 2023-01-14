@@ -1,5 +1,20 @@
 #include "Date.h"
+#include<string>
+#include<iostream>
+#include<fstream>
+#include<sstream>
+
+
 using namespace std;
+
+Date::Date(ifstream& file)
+{
+    char delimiter;
+    string dateString;
+    getline(file, dateString);
+    stringstream ss(dateString);
+    ss >> day >> delimiter >> month >> delimiter >> year;
+}
 
 Date::Date(int d , int m, int y)
 {
@@ -55,4 +70,10 @@ bool Date:: checkdate(int day, int month , int year)
     }   
 
     return true;
+}
+
+
+std::ostream& operator<< (std::ostream& out, const Date& date) {
+    out << date.day << "/" << date.month << "/" << date.year;
+    return out;
 }

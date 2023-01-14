@@ -5,6 +5,7 @@
 #include"status.h"
 #include <iostream>
 #include<vector>
+#include<fstream>
 #include<list>
 #pragma warning(disable: 4996)
 
@@ -17,23 +18,29 @@ class Member
 private:
 	std::string memberName;
 	Date dateOfBirth;
-	std::vector<Status> memberStatuses;
+	std::vector<Status*> memberStatuses;
 	std::list<FanPage*> memberFanPages;
 	std::list<Member*>  memberFriends;
 
 public:
+	Member(std::ifstream& file);
+	Member(const Member& other);
 	Member(const std::string name, const Date& dateOfBirth);
-	std::list<Member*> getMembersArray()   { return memberFriends;  }
-	std::vector<Status> getStatusesArray() { return memberStatuses; }
-	std::list<FanPage*> getPagesArray()    { return memberFanPages; }
+	~Member();
+	std::list<Member*> getMembersArray() const  { return memberFriends;  }
+	std::vector<Status*> getStatusesArray() { return memberStatuses; }
+	std::list<FanPage*> getPagesArray() const   { return memberFanPages; }
 	int getNumOfPages()                    { return memberFanPages.size(); }
 	int getNumOfMembers()                  { return memberFriends.size(); }
-	std::vector<Status> getStatusArray()   { return memberStatuses; }
+	std::vector<Status*> getStatusArray()   { return memberStatuses; }
+	std::vector<Status*> getMemberStatuses() const { return memberStatuses; }
 	std::string getName() const;
 	const Date getDate()const;
 	const int getNumOfFriends() const ;
 	bool setName(const std::string name);
 	void setBirthDay(Date& date);
+	void saveToFile(std::ofstream& file) const;
+
 
 	/**
 	* Adds a new fan page to the list of followed fan pages.
@@ -58,11 +65,6 @@ public:
 	void showMyStatuses() const;
 
 	/**
-	 * Shows the last 10 statuses of the member's friends.
-	 */
-	//void Show10MyFriendsLastStatuses() const;
-
-	/**
 	 * Adds a new friend to the list of friends.
 	 * @param member The friend to add.
 	 */
@@ -78,7 +80,7 @@ public:
 	 * Adds a new status to the vector of statuses.
 	 * @param status The status to add.
 	 */
-	void addStatus(const Status& status);
+	void addStatus(Status* status);
 
 	/**
 	* Removes a friend from the list of friends.
@@ -214,6 +216,11 @@ public:
 	 * @return `true` if this member has more friends than the other member, `false` otherwise.
 	 */
 	bool operator>(Member& other);
+	void freeStatuses();
+
+	bool operator==(const Member& other) const {	return memberName == other.memberName;	}
+
+	friend class Admin;
 
 };
 

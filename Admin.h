@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <fstream>
 #pragma warning(disable: 4996)
 #pragma warning(disable: 4267)
 
@@ -20,6 +21,9 @@ private:
 	std::list<Member>  users;
 	
 public:
+	void saveToFileText(const std::list<FanPage>& fanPages, const std::list<Member>& users, const std::string& fileName);
+	void loadFromFile(const std::string& fileName);
+
 	/**
 	 * Returns a reference to the list of members.
 	 *
@@ -88,7 +92,7 @@ public:
 	 * @param member The member to connect to the fan page.
 	 * @param page The fan page to connect to the member.
 	 */
-	void ConnectFanToPage(Member& member, FanPage& page);
+	void ConnectFanToPage(Member& member, FanPage& page) const;
 
 	/**
 	 * Removes the friendship between the two given members.
@@ -112,7 +116,7 @@ public:
 	 * @param page The fan page to add the status to.
 	 * @param status The status to add.
 	 */
-	void addStatusToPage(FanPage* page, const Status& status);
+	void addStatusToPage(FanPage* page, Status* status);
 
 	/**
 	 * Adds a new status to the given member.
@@ -120,7 +124,7 @@ public:
 	 * @param member The member to add the status to.
 	 * @param status The status to add.
 	 */
-	void addStatusToMember(Member* member, const Status& status);
+	void addStatusToMember(Member* member, Status* status);
 
 	/**
 	 * Returns the number of members in the list of members.
@@ -137,6 +141,7 @@ public:
 	 */
 	Member* getMember(const std::string name);
 
+	FanPage* getPage(const std::string name);
 	/**
 	* Returns whether there is a fan page with the given name in the list of fan pages.
 	*
@@ -190,6 +195,7 @@ public:
 	void deletePage(FanPage& page);
 
 	friend class FacebookIO;
+
 };
 
 #endif // !__ADMIN_H__

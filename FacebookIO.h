@@ -16,7 +16,7 @@ public:
     void nameAlreadyTaken()     { std::cout << "\033[1;31mName already taken, please enter another name\033[0m" << std::endl;}
     void noSuchName()           { std::cout << "\033[1;31mThis name is not in the system!\033[0m" << std::endl;}
     void InvalidAction()        { std::cout << "\033[1;31mInvalid Action!\033[0m" << std::endl;}
-    void success()              { std::cout << "\033[32m Action succeeded :)\033[0m " << std::endl; }
+    void success()              { std::cout << "\033[32mAction succeeded :)\033[0m " << std::endl; }
     /**
      * Prompts the user for input and returns the input as a string.
      *
@@ -60,7 +60,7 @@ public:
      *
      * @return The new status.
      */
-    Status getStatusFromUser();
+    Status* getStatusFromUser();
 
     /**
      * Prompts the user to select a member or a fan page, and returns their selection as an integer.
@@ -145,6 +145,7 @@ public:
      */
     FanPage* getPageException();
 
+    int selectTypeOfStatus();
 };
 #endif
 

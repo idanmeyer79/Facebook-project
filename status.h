@@ -6,12 +6,14 @@
 
 class Status
 {
-private:
+protected:
 	std::string text;
 	std::string date_and_time;
 
 public:
 	static constexpr int MAX_LEN_OF_STATUS = 100;
+	friend std::ostream& operator<< (std::ostream& out, const Status& status);
+	Status(std::ifstream& file);
 
 	/**
 	 * Constructs a new status with the given text.
@@ -45,7 +47,7 @@ public:
 	/**
 	 * Shows the status.
 	 */
-	void printStatus() const;
+	virtual void printStatus() const;
 
 	/**
 	 * Compares this status to another status based on their text.
@@ -62,6 +64,9 @@ public:
 	 * @return `true` if the statuses have different text, `false` otherwise.
 	 */
 	bool operator!=(Status& other);
+
+	virtual void saveToFile(std::ofstream& outFile) const;
+
 };
 
 #endif // !__STATUS_H__

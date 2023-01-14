@@ -98,7 +98,7 @@ int main()
 {
 	Admin admin;
 	//hardcoded data//
-	FanPage fanPage1("mondial");
+	/*FanPage fanPage1("mondial");
 	FanPage fanPage2("re'evim beravcha");
 	FanPage fanPage3("keren kalif fans");
 	Member member1("Boaz", Date(1, 1, 2020));
@@ -126,9 +126,10 @@ int main()
 	admin.addUserToFacebook(member3);
 	admin.addPageToFacebook(fanPage1);
 	admin.addPageToFacebook(fanPage2);
-	admin.addPageToFacebook(fanPage3);
-	//end of hard codeed data//
+	admin.addPageToFacebook(fanPage3);*/
 
+	//end of hard codeed data//
+	admin.loadFromFile("FacebookDataTest.txt");
 	FacebookIO io(&admin);
 	io.wellcome();
 	pickAction(io, admin);
@@ -243,6 +244,7 @@ void pickAction(FacebookIO& io, Admin& admin)
 	}
 		}while (action != EXIT);
 		io.displayMessage("\033[32mBye Bye :)\033[0m");
+		admin.saveToFileText(admin.getPagesArray(), admin.getMembersArray(), "FacebookDataTest.txt");
 }
 
 void addStatusToFanPagesOrMember(Admin& admin,FacebookIO& io)
@@ -252,13 +254,13 @@ void addStatusToFanPagesOrMember(Admin& admin,FacebookIO& io)
 	if (selector == MEMBER)
 	{
 		Member* member = io.getMemberException();
-		Status status = io.getStatusFromUser();
+		Status* status = io.getStatusFromUser();
 		admin.addStatusToMember(member, status);
 	}
 	else if (selector == FAN_PAGE)
 	{
 		FanPage* page = io.getPageException();
-		Status status = io.getStatusFromUser();
+		Status *status = io.getStatusFromUser();
 		admin.addStatusToPage(page, status);
 	}
 	else

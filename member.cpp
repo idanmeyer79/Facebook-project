@@ -2,12 +2,51 @@
 #include <cmath>
 #include <iostream>
 #include <string>
+#include <fstream>
 #pragma warning(disable: 4996)
 using namespace std;
+Member::~Member()
+{
+	freeStatuses();
+}
 
 Member::Member(const string name, const Date& date) : dateOfBirth(date)
 {
 	memberName = name;
+}
+
+Member::Member(const Member& other):dateOfBirth(other.dateOfBirth)
+{
+	for (const Status* status : other.memberStatuses)
+	{
+		Status* newStatus = new Status(*status);
+		memberStatuses.push_back(newStatus);
+	}
+	memberFanPages = other.memberFanPages;
+	memberFriends = other.memberFriends;
+	memberName = other.memberName;
+}
+
+Member::Member(std::ifstream& file):dateOfBirth(file)
+{
+	// read memberName from file
+	std::getline(file, memberName);
+	// read memberStatuses from file
+	int statusesCount;
+	string type;
+	Status* status;
+	file >> statusesCount;
+	file.ignore();
+	for (int i = 0; i < statusesCount; ++i) {
+		getline(file, type);
+		if (type == "Status")
+			status = new Status(file);
+		else if (type == "StatusWithPhoto")
+			status = new StatusWithPhoto(file);
+		else
+			status = new StatusWithVideo(file);
+		memberStatuses.push_back(status);
+	}
 }
 
 bool Member :: setName(const string name)
@@ -26,6 +65,19 @@ string Member :: getName() const
 void Member ::setBirthDay(Date& date)
 {
 	dateOfBirth = date;
+}
+
+void Member::saveToFile(std::ofstream& outFile) const
+{
+	//Save the Date of birth
+	outFile << dateOfBirth << '\n';
+	// Save the member name
+	outFile << memberName << '\n';
+	// Save the statuses
+	outFile << memberStatuses.size() << '\n';
+	for (const Status* status : memberStatuses)
+		status->saveToFile(outFile);
+
 }
 
 const Date Member::getDate() const
@@ -81,11 +133,11 @@ void Member::showFanPages() const
 
 void Member::addStatus(const string text)
 {
-	Status status(text);
+	Status *status = new Status(text);
 	addStatus(status);
 }
 
-void Member::addStatus(const Status& status)
+void Member::addStatus(Status* status)
 {
 	memberStatuses.push_back(status);
 }
@@ -256,25 +308,34 @@ void Member::showLast10StatusesOfEach() const
 
 void Member::printAllStatuses() const
 {
-	vector<Status>::const_iterator itr = memberStatuses.begin();
-	vector<Status>::const_iterator itrEnd = memberStatuses.end();
+	vector<Status*>::const_iterator itr = memberStatuses.begin();
+	vector<Status*>::const_iterator itrEnd = memberStatuses.end();
 
 	int i = 0;
 	cout << "All the statuses:" << endl;
 	for (; itr != itrEnd; ++itr)
 	{
 		cout << "# " << ++i << " ";
-		(*itr).printStatus();
+		(*itr)->printStatus();
 	}
 }
 
 void Member::print10() const
 {
-	vector<Status>::const_reverse_iterator  rit = memberStatuses.rbegin();
-	vector<Status>::const_reverse_iterator ritrEnd = memberStatuses.rend();
+	vector<Status*>::const_reverse_iterator  rit = memberStatuses.rbegin();
+	vector<Status*>::const_reverse_iterator ritrEnd = memberStatuses.rend();
 	int size = memberStatuses.size();
 	int currMemberNumOfStatuses = min(size, 10);
 	for (int i=0; i< currMemberNumOfStatuses; ++rit,i++)
-		(*rit).printStatus();
+		(*rit)->printStatus();
 	cout << endl;
+}
+
+void Member::freeStatuses()
+{
+	for (auto& status : memberStatuses)
+	{
+		delete status;
+	}
+	memberStatuses.clear();
 }
